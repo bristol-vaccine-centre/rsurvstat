@@ -23,7 +23,8 @@ Imports:
     xml2,
     stringr,
     tibble,
-    httr2
+    httr2,
+    curl
 Depends: 
     R (>= 2.10)
 LazyData: true
