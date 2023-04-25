@@ -111,4 +111,9 @@ diseases = list(
   `Zika` = "Zikavirus-Erkrankung"
 )
 
+diseases = lapply(diseases, function(x) {
+  Encoding(x) <- "latin1"
+  iconv(x, "latin1", "UTF-8")
+})
+
 usethis::use_data(diseases, overwrite = TRUE)
