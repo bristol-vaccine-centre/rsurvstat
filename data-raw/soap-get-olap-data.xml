@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:sur="http://tools.rki.de/SurvStat/" xmlns:rki="http://schemas.datacontract.org/2004/07/Rki.SurvStat.WebService.Contracts.Mdx">
+   <soap:Header xmlns:wsa="http://www.w3.org/2005/08/addressing">
+      <wsa:To>https://tools.rki.de/SurvStat/SurvStatWebService.svc</wsa:To>
+      <wsa:Action>http://tools.rki.de/SurvStat/SurvStatWebService/GetOlapData</wsa:Action>
+   </soap:Header>
+   <soap:Body>
+      <sur:GetOlapData>
+         <sur:request>
+            <!-- Single year age groups -->
+            <rki:ColumnHierarchy>[AlterPerson80].[AgeGroupName8]</rki:ColumnHierarchy>
+            <rki:Cube>SurvStat</rki:Cube>
+            <rki:HierarchyFilters>
+               <rki:KeyValueOfFilterCollectionKeyFilterMemberCollectionb2rWaiIW>
+                  <rki:Key>
+                     <rki:DimensionId>[PathogenOut].[KategorieNz]</rki:DimensionId>
+                     <rki:HierarchyId>[PathogenOut].[KategorieNz].[Krankheit DE]</rki:HierarchyId>
+                  </rki:Key>
+                  <rki:Value>
+                     <!-- The disease -->
+                     <rki:string>[KategorieNz].[Krankheit DE].&amp;[{{disease}}]</rki:string>
+                  </rki:Value>
+               </rki:KeyValueOfFilterCollectionKeyFilterMemberCollectionb2rWaiIW>
+               <rki:KeyValueOfFilterCollectionKeyFilterMemberCollectionb2rWaiIW>
+                  <rki:Key>
+                     <rki:DimensionId>[Datenstand].[Publikation]</rki:DimensionId>
+                     <rki:HierarchyId>[Datenstand].[Publikation].[Publikation]</rki:HierarchyId>
+                  </rki:Key>
+                  <rki:Value>
+                     <!-- This gives the current data set as the publication -->
+                     <rki:string>[Datenstand].[Publikation].&amp;[-1]</rki:string>
+                  </rki:Value>
+               </rki:KeyValueOfFilterCollectionKeyFilterMemberCollectionb2rWaiIW>
+            </rki:HierarchyFilters>
+            <rki:IncludeNullColumns>true</rki:IncludeNullColumns>
+            <rki:IncludeNullRows>true</rki:IncludeNullRows>
+            <rki:IncludeTotalColumn>false</rki:IncludeTotalColumn>
+            <rki:IncludeTotalRow>false</rki:IncludeTotalRow>
+            <rki:Language>German</rki:Language>
+            <rki:Measures>Count</rki:Measures>
+            <rki:RowHierarchy>[ReportingDate].[YearWeek]</rki:RowHierarchy>
+         </sur:request>
+      </sur:GetOlapData>
+   </soap:Body>
+</soap:Envelope>

@@ -1,0 +1,45 @@
+---
+title: "Getting started"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting started}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+library(ggplot2)
+library(rsurvstat)
+```
+
+Get some RSV data:
+
+```{r}
+tmp = rsurvstat::get_timeseries(rsurvstat::diseases$RSV)
+```
+
+Re-band age groups and plot
+
+```{r}
+
+first = tmp %>% dplyr::filter(count > 0) %>% dplyr::pull(date) %>% min() %>% as.Date("1970-01-01")
+
+tmp2 = tmp %>% 
+  dplyr::filter(!is.na(age) & !is.na(date) & date >= first) %>% 
+  dplyr::mutate(ageCat = dplyr::case_when(
+     age < 18 ~ "<18",
+     age < 35 ~ "18-34",
+     age < 65 ~ "35-64",
+     TRUE ~ "65+",
+  )) %>%
+  dplyr::group_by(dplyr::across(c(-age,-count))) %>%
+  dplyr::summarise(count = sum(count))
+
+
+ggplot(tmp2, aes(x=date, y=count)) + geom_line() + facet_wrap(~ageCat)
+  
+```
