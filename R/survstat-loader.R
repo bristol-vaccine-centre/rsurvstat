@@ -8,26 +8,21 @@
 
 .do_soap_curl = function(request, quiet = FALSE) {
   if(!quiet) message("Making survstat request...",appendLF = FALSE)
-  headerFields =
-    c(Accept = "text/xml",
+  req = httr2::request("https://tools.rki.de/SurvStat/SurvStatWebService.svc") %>%
+    httr2::req_headers(
+      Accept = "text/xml",
       Accept = "multipart/*",
-      'Content-Type' = "application/soap+xml;charset=utf-8",
-      Action = '"http://tools.rki.de/SurvStat/SurvStatWebService/GetOlapData"')
-
-  h = RCurl::basicTextGatherer()
-  h$reset()
-  RCurl::curlPerform(url = "https://tools.rki.de/SurvStat/SurvStatWebService.svc",
-            httpheader = headerFields,
-            postfields = request,
-            writefunction = h$update,
-            verbose = FALSE
-  )
+      Action = '"http://tools.rki.de/SurvStat/SurvStatWebService/GetOlapData"'
+    ) %>%
+    httr2::req_body_raw(body = request, type = "application/soap+xml;charset=utf-8")
+  resp = req %>% httr2::req_perform()
+  
   if(!quiet) message("Data downloaded.")
-  return(h$value())
+  resp %>% httr2::resp_body_xml() %>% return()
 }
 
 .process_result = function(response) {
-  response = xml2::as_list(xml2::as_xml_document(response))
+  response = xml2::as_list(response)
   
   # data
   tmp = response$Envelope$Body$GetOlapDataResponse$GetOlapDataResult$QueryResults
