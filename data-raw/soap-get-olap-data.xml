@@ -37,7 +37,7 @@
             <rki:IncludeTotalColumn>false</rki:IncludeTotalColumn>
             <rki:IncludeTotalRow>false</rki:IncludeTotalRow>
             <rki:Language>German</rki:Language>
-            <rki:Measures>Count</rki:Measures>
+            <rki:Measures>{{measure}}</rki:Measures>
             <rki:RowHierarchy>[ReportingDate].[YearWeek]</rki:RowHierarchy>
          </sur:request>
       </sur:GetOlapData>

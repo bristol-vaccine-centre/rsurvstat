@@ -19,18 +19,17 @@ library(rsurvstat)
 Get some RSV data:
 
 ```{r}
-tmp = rsurvstat::get_timeseries(rsurvstat::diseases$RSV)
+tmp = rsurvstat::get_timeseries(rsurvstat::diseases$`COVID-19`, "Count")
 ```
 
 Re-band age groups and plot
 
 ```{r}
 
-first = tmp %>% dplyr::filter(count > 0) %>% dplyr::pull(date) %>% min() %>% as.Date("1970-01-01")
-
 tmp2 = tmp %>% 
-  dplyr::filter(!is.na(age) & !is.na(date) & date >= first) %>% 
+  dplyr::filter(!is.na(date)) %>% 
   dplyr::mutate(ageCat = dplyr::case_when(
+     is.na(age) ~ "Unknown",
      age < 18 ~ "<18",
      age < 35 ~ "18-34",
      age < 65 ~ "35-64",

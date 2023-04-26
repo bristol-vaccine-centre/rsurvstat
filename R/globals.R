@@ -1,1 +1,1 @@
-utils::globalVariables(c("age","caption","diseases", "elapsed_week", "name", "value", "week", "year"))
+utils::globalVariables(c("age", "diseases", "elapsed_week", "value", "week", "year", ":=" ))

@@ -4,16 +4,27 @@
 \alias{get_timeseries}
 \title{Extract age stratified case count of disease positive cases.}
 \usage{
-get_timeseries(disease = diseases$`COVID-19`, quiet = FALSE)
+get_timeseries(
+  disease = diseases$`COVID-19`,
+  measure = c("Count", "Incidence"),
+  quiet = FALSE,
+  trim_zeros = c("leading", "both", "none")
+)
 }
 \arguments{
 \item{disease}{the disease of interest, see \code{rsurvstat::diseases}}
 
+\item{measure}{one of "Count" or "Incidence"}
+
 \item{quiet}{suppress loading messages}
+
+\item{trim_zeros}{get rid of zero counts. Either "both" (from start and end),
+"leading" (from start only - the default) or "none".}
 }
 \value{
 a data frame with age, elapsed_week (weeks since 2020-12-31), date
-(start of week date approximate) and count columns
+(start of week date approximate) and one of count, incidence or population
+columns
 }
 \description{
 N.b. its not possible to differentiate between missing data and zero counts
