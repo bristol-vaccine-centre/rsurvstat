@@ -19,12 +19,6 @@
     ) %>%
     httr2::req_body_raw(body = request, type = "application/soap+xml;charset=utf-8")
   
-  if ("ssl_op_all" %in% names(curl::curl_options())) {
-    # attempt to detect and fix error:0A000126:SSL routines::unexpected eof while reading
-    req = req %>%
-      httr2::req_options(ssl_op_all = TRUE)
-  }
-  
   resp = tryCatch(
     req %>% httr2::req_perform(),
     error = function(e) stop("SSL problem: ", curl::curl_version(), e)
