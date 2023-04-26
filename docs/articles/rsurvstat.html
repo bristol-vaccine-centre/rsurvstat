@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rsurvstat</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.3</span>
       </span>
     </div>
 
@@ -76,29 +76,18 @@
 
     
     
-<p>Get some RSV data:</p>
+<p>Get some data:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">tmp</span> <span class="op">=</span> <span class="fu">rsurvstat</span><span class="fu">::</span><span class="fu"><a href="../reference/get_timeseries.html">get_timeseries</a></span><span class="op">(</span><span class="fu">rsurvstat</span><span class="fu">::</span><span class="va"><a href="../reference/diseases.html">diseases</a></span><span class="op">$</span><span class="va">`COVID-19`</span>, <span class="st">"Count"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">tmp</span> <span class="op">=</span> <span class="fu">rsurvstat</span><span class="fu">::</span><span class="fu"><a href="../reference/get_timeseries.html">get_timeseries</a></span><span class="op">(</span></span>
+<span>  <span class="fu">rsurvstat</span><span class="fu">::</span><span class="va"><a href="../reference/diseases.html">diseases</a></span><span class="op">$</span><span class="va">`Pneumococcus, invasive`</span>, </span>
+<span>  <span class="st">"Incidence"</span>, </span>
+<span>  age_group <span class="op">=</span> <span class="va">age_groups</span><span class="op">$</span><span class="va">children_fine</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Making survstat request...Data downloaded.</span></span></code></pre></div>
 <p>Re-band age groups and plot</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
-<span><span class="va">tmp2</span> <span class="op">=</span> <span class="va">tmp</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>ageCat <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html" class="external-link">case_when</a></span><span class="op">(</span></span>
-<span>     <span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">age</span><span class="op">)</span> <span class="op">~</span> <span class="st">"Unknown"</span>,</span>
-<span>     <span class="va">age</span> <span class="op">&lt;</span> <span class="fl">18</span> <span class="op">~</span> <span class="st">"&lt;18"</span>,</span>
-<span>     <span class="va">age</span> <span class="op">&lt;</span> <span class="fl">35</span> <span class="op">~</span> <span class="st">"18-34"</span>,</span>
-<span>     <span class="va">age</span> <span class="op">&lt;</span> <span class="fl">65</span> <span class="op">~</span> <span class="st">"35-64"</span>,</span>
-<span>     <span class="cn">TRUE</span> <span class="op">~</span> <span class="st">"65+"</span>,</span>
-<span>  <span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="va">age</span>,<span class="op">-</span><span class="va">count</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>count <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">count</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; `summarise()` has grouped output by 'elapsed_week', 'date'. You can override</span></span>
-<span><span class="co">#&gt; using the `.groups` argument.</span></span>
-<span></span>
-<span></span>
-<span><span class="fu">ggplot</span><span class="op">(</span><span class="va">tmp2</span>, <span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">date</span>, y<span class="op">=</span><span class="va">count</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu">facet_wrap</span><span class="op">(</span><span class="op">~</span><span class="va">ageCat</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">tmp2</span> <span class="op">=</span> <span class="va">tmp</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span><span class="va">tmp2</span>, <span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">date</span>, y<span class="op">=</span><span class="va">incidence</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu">facet_wrap</span><span class="op">(</span><span class="op">~</span><span class="va">age_cat</span><span class="op">)</span></span></code></pre></div>
 <p><img src="rsurvstat_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
   </div>
 

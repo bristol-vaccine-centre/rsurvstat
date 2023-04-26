@@ -7,6 +7,7 @@
 get_timeseries(
   disease = diseases$`COVID-19`,
   measure = c("Count", "Incidence"),
+  age_group = age_groups$single_year,
   quiet = FALSE,
   trim_zeros = c("leading", "both", "none")
 )
@@ -16,13 +17,15 @@ get_timeseries(
 
 \item{measure}{one of "Count" or "Incidence"}
 
+\item{age_group}{the age_group of interest, see \code{rsurvstat::age_groups}}
+
 \item{quiet}{suppress loading messages}
 
 \item{trim_zeros}{get rid of zero counts. Either "both" (from start and end),
 "leading" (from start only - the default) or "none".}
 }
 \value{
-a data frame with age, elapsed_week (weeks since 2020-12-31), date
+a data frame with age_cat (ordered factor), age_start, age_end, elapsed_week (weeks since 2020-12-31), date
 (start of week date approximate) and one of count, incidence or population
 columns
 }
@@ -31,5 +34,5 @@ N.b. its not possible to differentiate between missing data and zero counts
 in the source dataset.
 }
 \examples{
-get_timeseries(diseases$`COVID-19`)
+get_timeseries(diseases$`COVID-19`, measure = "Count", age_group = age_groups$zero_fifteen_sixty)
 }

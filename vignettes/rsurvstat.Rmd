@@ -16,29 +16,20 @@ library(ggplot2)
 library(rsurvstat)
 ```
 
-Get some RSV data:
+Get some data:
 
 ```{r}
-tmp = rsurvstat::get_timeseries(rsurvstat::diseases$`COVID-19`, "Count")
+tmp = rsurvstat::get_timeseries(
+  rsurvstat::diseases$`Pneumococcus, invasive`, 
+  "Incidence", 
+  age_group = age_groups$children_fine)
 ```
 
 Re-band age groups and plot
 
 ```{r}
 
-tmp2 = tmp %>% 
-  dplyr::filter(!is.na(date)) %>% 
-  dplyr::mutate(ageCat = dplyr::case_when(
-     is.na(age) ~ "Unknown",
-     age < 18 ~ "<18",
-     age < 35 ~ "18-34",
-     age < 65 ~ "35-64",
-     TRUE ~ "65+",
-  )) %>%
-  dplyr::group_by(dplyr::across(c(-age,-count))) %>%
-  dplyr::summarise(count = sum(count))
-
-
-ggplot(tmp2, aes(x=date, y=count)) + geom_line() + facet_wrap(~ageCat)
+tmp2 = tmp %>% dplyr::filter(!is.na(date))
+ggplot(tmp2, aes(x=date, y=incidence)) + geom_line() + facet_wrap(~age_cat)
   
 ```
