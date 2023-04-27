@@ -4,6 +4,12 @@
 \name{diseases}
 \alias{diseases}
 \title{SurvStat disease list}
+\format{
+An object of class \code{list} of length 108.
+}
+\usage{
+diseases
+}
 \description{
 SurvStat disease list
 }

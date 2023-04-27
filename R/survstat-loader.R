@@ -1,4 +1,8 @@
 .get_template = function(disease, measure, age_group) {
+   
+  # Encoding(disease) <- "UTF-8"
+  # disease = iconv(disease, "UTF-8", "latin1")
+  
   body = template %>% stringr::str_replace(
     stringr::fixed("{{disease}}"), disease
   ) %>% stringr::str_replace(

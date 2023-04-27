@@ -4,6 +4,12 @@
 \name{age_groups}
 \alias{age_groups}
 \title{SurvStat age group list}
+\format{
+An object of class \code{list} of length 8.
+}
+\usage{
+age_groups
+}
 \description{
 \itemize{
 \item single_year

@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rsurvstat</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.4</span>
       </span>
     </div>
 
@@ -79,9 +79,9 @@
 <p>Get some data:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tmp</span> <span class="op">=</span> <span class="fu">rsurvstat</span><span class="fu">::</span><span class="fu"><a href="../reference/get_timeseries.html">get_timeseries</a></span><span class="op">(</span></span>
-<span>  <span class="fu">rsurvstat</span><span class="fu">::</span><span class="va"><a href="../reference/diseases.html">diseases</a></span><span class="op">$</span><span class="va">`Pneumococcus, invasive`</span>, </span>
+<span>  <span class="va">diseases</span><span class="op">$</span><span class="va">Adenovirus</span>, </span>
 <span>  <span class="st">"Incidence"</span>, </span>
-<span>  age_group <span class="op">=</span> <span class="va">age_groups</span><span class="op">$</span><span class="va">children_fine</span><span class="op">)</span></span>
+<span>  age_group <span class="op">=</span> <span class="va">age_groups</span><span class="op">$</span><span class="va">zero_fifteen</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Making survstat request...Data downloaded.</span></span></code></pre></div>
 <p>Re-band age groups and plot</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">

@@ -20,9 +20,9 @@ Get some data:
 
 ```{r}
 tmp = rsurvstat::get_timeseries(
-  rsurvstat::diseases$`Pneumococcus, invasive`, 
+  diseases$Adenovirus, 
   "Incidence", 
-  age_group = age_groups$children_fine)
+  age_group = age_groups$zero_fifteen)
 ```
 
 Re-band age groups and plot
