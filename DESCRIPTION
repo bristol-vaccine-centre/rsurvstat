@@ -1,4 +1,4 @@
-Package: rsurvstat_kt
+Package: rsurvstat
 Title: Download Timeseries from SurvStat (Robert Koch Institute)
 Version: 0.0.4
 Authors@R: 
