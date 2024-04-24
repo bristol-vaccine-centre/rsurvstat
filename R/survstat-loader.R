@@ -25,7 +25,7 @@
   
   resp = tryCatch(
     req %>% httr2::req_perform(),
-    error = function(e) stop("SSL problem: ", curl::curl_version(), e)
+    error = function(e) stop("SSL problem: ", curl::curl_version()$version, e)
   )
   
   if(!quiet) message("Data downloaded.")
