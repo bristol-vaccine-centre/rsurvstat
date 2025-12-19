@@ -841,7 +841,7 @@
          <!--Optional:-->
          <sur:request>
             <rki:Cube>SurvStat</rki:Cube>
-            <rki:Language>English</rki:Language>
+            <rki:Language>German</rki:Language>
          </sur:request>
       </sur:GetAllMeasures>
    </soap:Body>
