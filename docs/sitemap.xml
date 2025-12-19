@@ -1,39 +1,32 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>/articles/rsurvstat.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/age_groups.html</loc>
-  </url>
-  <url>
-    <loc>/reference/diseases.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_timeseries.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/pipe.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://bristol-vaccine-centre.github.io/rsurvstat/404.html</loc></url>
+<url><loc>https://bristol-vaccine-centre.github.io/rsurvstat/LICENSE-text.html</loc></url>
+<url><loc>https://bristol-vaccine-centre.github.io/rsurvstat/LICENSE.html</loc></url>
+<url><loc>https://bristol-vaccine-centre.github.io/rsurvstat/articles/index.html</loc></url>
+<url><loc>https://bristol-vaccine-centre.github.io/rsurvstat/articles/rsurvstat.html</loc></url>
+<url><loc>https://bristol-vaccine-centre.github.io/rsurvstat/authors.html</loc></url>
+<url><loc>https://bristol-vaccine-centre.github.io/rsurvstat/index.html</loc></url>
+<url><loc>https://bristol-vaccine-centre.github.io/rsurvstat/reference/BerlinMap.html</loc></url>
+<url><loc>https://bristol-vaccine-centre.github.io/rsurvstat/reference/CountyKey71Map.html</loc></url>
+<url><loc>https://bristol-vaccine-centre.github.io/rsurvstat/reference/FedStateKey71Map.html</loc></url>
+<url><loc>https://bristol-vaccine-centre.github.io/rsurvstat/reference/NutsKey71Map.html</loc></url>
+<url><loc>https://bristol-vaccine-centre.github.io/rsurvstat/reference/age_groups.html</loc></url>
+<url><loc>https://bristol-vaccine-centre.github.io/rsurvstat/reference/cash-.survstat_option.html</loc></url>
+<url><loc>https://bristol-vaccine-centre.github.io/rsurvstat/reference/commands.html</loc></url>
+<url><loc>https://bristol-vaccine-centre.github.io/rsurvstat/reference/cubes.html</loc></url>
+<url><loc>https://bristol-vaccine-centre.github.io/rsurvstat/reference/diseases.html</loc></url>
+<url><loc>https://bristol-vaccine-centre.github.io/rsurvstat/reference/dot-DollarNames.survstat_option.html</loc></url>
+<url><loc>https://bristol-vaccine-centre.github.io/rsurvstat/reference/dot-check_curl.html</loc></url>
+<url><loc>https://bristol-vaccine-centre.github.io/rsurvstat/reference/dot-df_to_list_of_lists.html</loc></url>
+<url><loc>https://bristol-vaccine-centre.github.io/rsurvstat/reference/dot-list_of_lists_to_df.html</loc></url>
+<url><loc>https://bristol-vaccine-centre.github.io/rsurvstat/reference/dot-transpose.html</loc></url>
+<url><loc>https://bristol-vaccine-centre.github.io/rsurvstat/reference/dot-tree.html</loc></url>
+<url><loc>https://bristol-vaccine-centre.github.io/rsurvstat/reference/fit_population.html</loc></url>
+<url><loc>https://bristol-vaccine-centre.github.io/rsurvstat/reference/get_timeseries.html</loc></url>
+<url><loc>https://bristol-vaccine-centre.github.io/rsurvstat/reference/index.html</loc></url>
+<url><loc>https://bristol-vaccine-centre.github.io/rsurvstat/reference/languages.html</loc></url>
+<url><loc>https://bristol-vaccine-centre.github.io/rsurvstat/reference/pipe.html</loc></url>
+<url><loc>https://bristol-vaccine-centre.github.io/rsurvstat/reference/rappdirs_user_cache_dir.html</loc></url>
+<url><loc>https://bristol-vaccine-centre.github.io/rsurvstat/reference/set_cache_settings.html</loc></url>
 </urlset>
+

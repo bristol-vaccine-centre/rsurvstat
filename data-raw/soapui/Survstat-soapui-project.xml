@@ -1,0 +1,1018 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="6fb88127-033a-4bd9-be0a-d58f687d635e" activeEnvironment="Default" name="Survstat" resourceRoot="" soapui-version="5.9.1" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="1ccfa28c-d30f-4a1b-a60e-2a965fe3b704" wsaVersion="200508" name="WSHttpBinding_SurvStatWebService" type="wsdl" bindingName="{http://tools.rki.de/SurvStat/}WSHttpBinding_SurvStatWebService" soapVersion="1_2" anonymous="optional" definition="https://tools.rki.de/SurvStat/SurvStatWebService.svc?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="https://tools.rki.de/SurvStat/SurvStatWebService.svc?wsdl"><con:part><con:url>https://tools.rki.de/SurvStat/SurvStatWebService.svc?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="SurvStatWebService" targetNamespace="http://tools.rki.de/SurvStat/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://tools.rki.de/SurvStat/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+  <wsp:Policy wsu:Id="WSHttpBinding_SurvStatWebService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <sp:HttpsToken RequireClientCertificate="false"/>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256/>
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict/>
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing/>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tools.rki.de/SurvStat/Imports">
+      <xsd:import schemaLocation="https://tools.rki.de/SurvStat/SurvStatWebService.svc?xsd=xsd0" namespace="http://tools.rki.de/SurvStat/"/>
+      <xsd:import schemaLocation="https://tools.rki.de/SurvStat/SurvStatWebService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System"/>
+      <xsd:import schemaLocation="https://tools.rki.de/SurvStat/SurvStatWebService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/"/>
+      <xsd:import schemaLocation="https://tools.rki.de/SurvStat/SurvStatWebService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Rki.SurvStat.WebService.Contracts.Mdx"/>
+      <xsd:import schemaLocation="https://tools.rki.de/SurvStat/SurvStatWebService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Rki.SurvStat.WebService.Contracts.Exceptions"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="SurvStatWebService_GetAllHierarchies_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllHierarchies"/>
+  </wsdl:message>
+  <wsdl:message name="SurvStatWebService_GetAllHierarchies_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllHierarchiesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="SurvStatWebService_GetAllHierarchies_ArgumentNullExceptionFault_FaultMessage">
+    <wsdl:part name="detail" element="q1:ArgumentNullException" xmlns:q1="http://schemas.datacontract.org/2004/07/System"/>
+  </wsdl:message>
+  <wsdl:message name="SurvStatWebService_GetAllHierarchyMembers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllHierarchyMembers"/>
+  </wsdl:message>
+  <wsdl:message name="SurvStatWebService_GetAllHierarchyMembers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllHierarchyMembersResponse"/>
+  </wsdl:message>
+  <wsdl:message name="SurvStatWebService_GetAllHierarchyMembers_ArgumentNullExceptionFault_FaultMessage">
+    <wsdl:part name="detail" element="q2:ArgumentNullException" xmlns:q2="http://schemas.datacontract.org/2004/07/System"/>
+  </wsdl:message>
+  <wsdl:message name="SurvStatWebService_GetAllHierarchyExistsMembers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllHierarchyExistsMembers"/>
+  </wsdl:message>
+  <wsdl:message name="SurvStatWebService_GetAllHierarchyExistsMembers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllHierarchyExistsMembersResponse"/>
+  </wsdl:message>
+  <wsdl:message name="SurvStatWebService_GetAllHierarchyExistsMembers_ArgumentNullExceptionFault_FaultMessage">
+    <wsdl:part name="detail" element="q3:ArgumentNullException" xmlns:q3="http://schemas.datacontract.org/2004/07/System"/>
+  </wsdl:message>
+  <wsdl:message name="SurvStatWebService_GetAllMeasures_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllMeasures"/>
+  </wsdl:message>
+  <wsdl:message name="SurvStatWebService_GetAllMeasures_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllMeasuresResponse"/>
+  </wsdl:message>
+  <wsdl:message name="SurvStatWebService_GetAllMeasures_ArgumentNullExceptionFault_FaultMessage">
+    <wsdl:part name="detail" element="q4:ArgumentNullException" xmlns:q4="http://schemas.datacontract.org/2004/07/System"/>
+  </wsdl:message>
+  <wsdl:message name="SurvStatWebService_GetOlapData_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOlapData"/>
+  </wsdl:message>
+  <wsdl:message name="SurvStatWebService_GetOlapData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOlapDataResponse"/>
+  </wsdl:message>
+  <wsdl:message name="SurvStatWebService_GetOlapData_ArgumentNullExceptionFault_FaultMessage">
+    <wsdl:part name="detail" element="q5:ArgumentNullException" xmlns:q5="http://schemas.datacontract.org/2004/07/System"/>
+  </wsdl:message>
+  <wsdl:message name="SurvStatWebService_GetOlapData_DataOverflowExceptionFault_FaultMessage">
+    <wsdl:part name="detail" element="q6:DataOverflowException" xmlns:q6="http://schemas.datacontract.org/2004/07/Rki.SurvStat.WebService.Contracts.Exceptions"/>
+  </wsdl:message>
+  <wsdl:message name="SurvStatWebService_GetCubeInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCubeInfo"/>
+  </wsdl:message>
+  <wsdl:message name="SurvStatWebService_GetCubeInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCubeInfoResponse"/>
+  </wsdl:message>
+  <wsdl:message name="SurvStatWebService_GetCubeInfo_ArgumentNullExceptionFault_FaultMessage">
+    <wsdl:part name="detail" element="q7:ArgumentNullException" xmlns:q7="http://schemas.datacontract.org/2004/07/System"/>
+  </wsdl:message>
+  <wsdl:message name="SurvStatWebService_GetOlapResultData_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOlapResultData"/>
+  </wsdl:message>
+  <wsdl:message name="SurvStatWebService_GetOlapResultData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOlapResultDataResponse"/>
+  </wsdl:message>
+  <wsdl:message name="SurvStatWebService_GetOlapResultData_ArgumentNullExceptionFault_FaultMessage">
+    <wsdl:part name="detail" element="q8:ArgumentNullException" xmlns:q8="http://schemas.datacontract.org/2004/07/System"/>
+  </wsdl:message>
+  <wsdl:message name="SurvStatWebService_GetAllDimensions_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllDimensions"/>
+  </wsdl:message>
+  <wsdl:message name="SurvStatWebService_GetAllDimensions_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllDimensionsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="SurvStatWebService_GetAllDimensions_ArgumentNullExceptionFault_FaultMessage">
+    <wsdl:part name="detail" element="q9:ArgumentNullException" xmlns:q9="http://schemas.datacontract.org/2004/07/System"/>
+  </wsdl:message>
+  <wsdl:portType name="SurvStatWebService">
+    <wsdl:operation name="GetAllHierarchies">
+      <wsdl:input wsaw:Action="http://tools.rki.de/SurvStat/SurvStatWebService/GetAllHierarchies" message="tns:SurvStatWebService_GetAllHierarchies_InputMessage"/>
+      <wsdl:output wsaw:Action="http://tools.rki.de/SurvStat/SurvStatWebService/GetAllHierarchiesResponse" message="tns:SurvStatWebService_GetAllHierarchies_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://tools.rki.de/SurvStat/SurvStatWebService/GetAllHierarchiesArgumentNullExceptionFault" name="ArgumentNullExceptionFault" message="tns:SurvStatWebService_GetAllHierarchies_ArgumentNullExceptionFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllHierarchyMembers">
+      <wsdl:input wsaw:Action="http://tools.rki.de/SurvStat/SurvStatWebService/GetAllHierarchyMembers" message="tns:SurvStatWebService_GetAllHierarchyMembers_InputMessage"/>
+      <wsdl:output wsaw:Action="http://tools.rki.de/SurvStat/SurvStatWebService/GetAllHierarchyMembersResponse" message="tns:SurvStatWebService_GetAllHierarchyMembers_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://tools.rki.de/SurvStat/SurvStatWebService/GetAllHierarchyMembersArgumentNullExceptionFault" name="ArgumentNullExceptionFault" message="tns:SurvStatWebService_GetAllHierarchyMembers_ArgumentNullExceptionFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllHierarchyExistsMembers">
+      <wsdl:input wsaw:Action="http://tools.rki.de/SurvStat/SurvStatWebService/GetAllHierarchyExistsMembers" message="tns:SurvStatWebService_GetAllHierarchyExistsMembers_InputMessage"/>
+      <wsdl:output wsaw:Action="http://tools.rki.de/SurvStat/SurvStatWebService/GetAllHierarchyExistsMembersResponse" message="tns:SurvStatWebService_GetAllHierarchyExistsMembers_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://tools.rki.de/SurvStat/SurvStatWebService/GetAllHierarchyExistsMembersArgumentNullExceptionFault" name="ArgumentNullExceptionFault" message="tns:SurvStatWebService_GetAllHierarchyExistsMembers_ArgumentNullExceptionFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllMeasures">
+      <wsdl:input wsaw:Action="http://tools.rki.de/SurvStat/SurvStatWebService/GetAllMeasures" message="tns:SurvStatWebService_GetAllMeasures_InputMessage"/>
+      <wsdl:output wsaw:Action="http://tools.rki.de/SurvStat/SurvStatWebService/GetAllMeasuresResponse" message="tns:SurvStatWebService_GetAllMeasures_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://tools.rki.de/SurvStat/SurvStatWebService/GetAllMeasuresArgumentNullExceptionFault" name="ArgumentNullExceptionFault" message="tns:SurvStatWebService_GetAllMeasures_ArgumentNullExceptionFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetOlapData">
+      <wsdl:input wsaw:Action="http://tools.rki.de/SurvStat/SurvStatWebService/GetOlapData" message="tns:SurvStatWebService_GetOlapData_InputMessage"/>
+      <wsdl:output wsaw:Action="http://tools.rki.de/SurvStat/SurvStatWebService/GetOlapDataResponse" message="tns:SurvStatWebService_GetOlapData_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://tools.rki.de/SurvStat/SurvStatWebService/GetOlapDataArgumentNullExceptionFault" name="ArgumentNullExceptionFault" message="tns:SurvStatWebService_GetOlapData_ArgumentNullExceptionFault_FaultMessage"/>
+      <wsdl:fault wsaw:Action="http://tools.rki.de/SurvStat/SurvStatWebService/GetOlapDataDataOverflowExceptionFault" name="DataOverflowExceptionFault" message="tns:SurvStatWebService_GetOlapData_DataOverflowExceptionFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetCubeInfo">
+      <wsdl:input wsaw:Action="http://tools.rki.de/SurvStat/SurvStatWebService/GetCubeInfo" message="tns:SurvStatWebService_GetCubeInfo_InputMessage"/>
+      <wsdl:output wsaw:Action="http://tools.rki.de/SurvStat/SurvStatWebService/GetCubeInfoResponse" message="tns:SurvStatWebService_GetCubeInfo_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://tools.rki.de/SurvStat/SurvStatWebService/GetCubeInfoArgumentNullExceptionFault" name="ArgumentNullExceptionFault" message="tns:SurvStatWebService_GetCubeInfo_ArgumentNullExceptionFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetOlapResultData">
+      <wsdl:input wsaw:Action="http://tools.rki.de/SurvStat/SurvStatWebService/GetOlapResultData" message="tns:SurvStatWebService_GetOlapResultData_InputMessage"/>
+      <wsdl:output wsaw:Action="http://tools.rki.de/SurvStat/SurvStatWebService/GetOlapResultDataResponse" message="tns:SurvStatWebService_GetOlapResultData_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://tools.rki.de/SurvStat/SurvStatWebService/GetOlapResultDataArgumentNullExceptionFault" name="ArgumentNullExceptionFault" message="tns:SurvStatWebService_GetOlapResultData_ArgumentNullExceptionFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllDimensions">
+      <wsdl:input wsaw:Action="http://tools.rki.de/SurvStat/SurvStatWebService/GetAllDimensions" message="tns:SurvStatWebService_GetAllDimensions_InputMessage"/>
+      <wsdl:output wsaw:Action="http://tools.rki.de/SurvStat/SurvStatWebService/GetAllDimensionsResponse" message="tns:SurvStatWebService_GetAllDimensions_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://tools.rki.de/SurvStat/SurvStatWebService/GetAllDimensionsArgumentNullExceptionFault" name="ArgumentNullExceptionFault" message="tns:SurvStatWebService_GetAllDimensions_ArgumentNullExceptionFault_FaultMessage"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSHttpBinding_SurvStatWebService" type="tns:SurvStatWebService">
+    <wsp:PolicyReference URI="#WSHttpBinding_SurvStatWebService_policy"/>
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="GetAllHierarchies">
+      <soap12:operation soapAction="http://tools.rki.de/SurvStat/SurvStatWebService/GetAllHierarchies" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ArgumentNullExceptionFault">
+        <soap12:fault name="ArgumentNullExceptionFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllHierarchyMembers">
+      <soap12:operation soapAction="http://tools.rki.de/SurvStat/SurvStatWebService/GetAllHierarchyMembers" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ArgumentNullExceptionFault">
+        <soap12:fault name="ArgumentNullExceptionFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllHierarchyExistsMembers">
+      <soap12:operation soapAction="http://tools.rki.de/SurvStat/SurvStatWebService/GetAllHierarchyExistsMembers" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ArgumentNullExceptionFault">
+        <soap12:fault name="ArgumentNullExceptionFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllMeasures">
+      <soap12:operation soapAction="http://tools.rki.de/SurvStat/SurvStatWebService/GetAllMeasures" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ArgumentNullExceptionFault">
+        <soap12:fault name="ArgumentNullExceptionFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetOlapData">
+      <soap12:operation soapAction="http://tools.rki.de/SurvStat/SurvStatWebService/GetOlapData" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ArgumentNullExceptionFault">
+        <soap12:fault name="ArgumentNullExceptionFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="DataOverflowExceptionFault">
+        <soap12:fault name="DataOverflowExceptionFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetCubeInfo">
+      <soap12:operation soapAction="http://tools.rki.de/SurvStat/SurvStatWebService/GetCubeInfo" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ArgumentNullExceptionFault">
+        <soap12:fault name="ArgumentNullExceptionFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetOlapResultData">
+      <soap12:operation soapAction="http://tools.rki.de/SurvStat/SurvStatWebService/GetOlapResultData" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ArgumentNullExceptionFault">
+        <soap12:fault name="ArgumentNullExceptionFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllDimensions">
+      <soap12:operation soapAction="http://tools.rki.de/SurvStat/SurvStatWebService/GetAllDimensions" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ArgumentNullExceptionFault">
+        <soap12:fault name="ArgumentNullExceptionFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SurvStatWebService">
+    <wsdl:port name="WSHttpBinding_SurvStatWebService" binding="tns:WSHttpBinding_SurvStatWebService">
+      <soap12:address location="https://tools.rki.de/SurvStat/SurvStatWebService.svc"/>
+      <wsa10:EndpointReference>
+        <wsa10:Address>https://tools.rki.de/SurvStat/SurvStatWebService.svc</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Dns>SurvStatWebService</Dns>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>https://tools.rki.de/SurvStat/SurvStatWebService.svc?xsd=xsd0</con:url><con:content><![CDATA[<xs:schema elementFormDefault="qualified" targetNamespace="http://tools.rki.de/SurvStat/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://tools.rki.de/SurvStat/">
+  <xs:import schemaLocation="https://tools.rki.de/SurvStat/SurvStatWebService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Rki.SurvStat.WebService.Contracts.Mdx"/>
+  <xs:element name="GetAllHierarchies">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="request" nillable="true" type="q1:HierarchyCollectionRequest" xmlns:q1="http://schemas.datacontract.org/2004/07/Rki.SurvStat.WebService.Contracts.Mdx"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllHierarchiesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetAllHierarchiesResult" nillable="true" type="q2:HierarchyCollectionResponse" xmlns:q2="http://schemas.datacontract.org/2004/07/Rki.SurvStat.WebService.Contracts.Mdx"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllHierarchyMembers">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="request" nillable="true" type="q3:HierarchyMemberCollectionRequest" xmlns:q3="http://schemas.datacontract.org/2004/07/Rki.SurvStat.WebService.Contracts.Mdx"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllHierarchyMembersResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetAllHierarchyMembersResult" nillable="true" type="q4:HierarchyMemberCollectionResponse" xmlns:q4="http://schemas.datacontract.org/2004/07/Rki.SurvStat.WebService.Contracts.Mdx"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllHierarchyExistsMembers">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="request" nillable="true" type="q5:HierarchyExistsMemberCollectionRequest" xmlns:q5="http://schemas.datacontract.org/2004/07/Rki.SurvStat.WebService.Contracts.Mdx"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllHierarchyExistsMembersResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetAllHierarchyExistsMembersResult" nillable="true" type="q6:HierarchyMemberCollectionResponse" xmlns:q6="http://schemas.datacontract.org/2004/07/Rki.SurvStat.WebService.Contracts.Mdx"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllMeasures">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="request" nillable="true" type="q7:MeasureCollectionRequest" xmlns:q7="http://schemas.datacontract.org/2004/07/Rki.SurvStat.WebService.Contracts.Mdx"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllMeasuresResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetAllMeasuresResult" nillable="true" type="q8:MeasureCollectionResponse" xmlns:q8="http://schemas.datacontract.org/2004/07/Rki.SurvStat.WebService.Contracts.Mdx"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOlapData">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="request" nillable="true" type="q9:OlapDataRequest" xmlns:q9="http://schemas.datacontract.org/2004/07/Rki.SurvStat.WebService.Contracts.Mdx"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOlapDataResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetOlapDataResult" nillable="true" type="q10:OlapDataResponse" xmlns:q10="http://schemas.datacontract.org/2004/07/Rki.SurvStat.WebService.Contracts.Mdx"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCubeInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="request" nillable="true" type="q11:CubeInfoRequest" xmlns:q11="http://schemas.datacontract.org/2004/07/Rki.SurvStat.WebService.Contracts.Mdx"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCubeInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetCubeInfoResult" nillable="true" type="q12:CubeInfoResponse" xmlns:q12="http://schemas.datacontract.org/2004/07/Rki.SurvStat.WebService.Contracts.Mdx"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOlapResultData">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="request" nillable="true" type="q13:OlapResultDataRequest" xmlns:q13="http://schemas.datacontract.org/2004/07/Rki.SurvStat.WebService.Contracts.Mdx"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOlapResultDataResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetOlapResultDataResult" nillable="true" type="q14:OlapResultDataResponse" xmlns:q14="http://schemas.datacontract.org/2004/07/Rki.SurvStat.WebService.Contracts.Mdx"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllDimensions">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="request" nillable="true" type="q15:DimensionCollectionRequest" xmlns:q15="http://schemas.datacontract.org/2004/07/Rki.SurvStat.WebService.Contracts.Mdx"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllDimensionsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetAllDimensionsResult" nillable="true" type="q16:DimensionCollectionResponse" xmlns:q16="http://schemas.datacontract.org/2004/07/Rki.SurvStat.WebService.Contracts.Mdx"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>https://tools.rki.de/SurvStat/SurvStatWebService.svc?xsd=xsd2</con:url><con:content><![CDATA[<xs:schema elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Rki.SurvStat.WebService.Contracts.Mdx" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.datacontract.org/2004/07/Rki.SurvStat.WebService.Contracts.Mdx">
+  <xs:import schemaLocation="https://tools.rki.de/SurvStat/SurvStatWebService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/"/>
+  <xs:complexType name="HierarchyCollectionRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cube" type="tns:CubeInfo"/>
+      <xs:element minOccurs="0" name="Language" type="tns:LanguageSimple"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="HierarchyCollectionRequest" nillable="true" type="tns:HierarchyCollectionRequest"/>
+  <xs:simpleType name="CubeInfo">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None"/>
+      <xs:enumeration value="SurvStat"/>
+      <xs:enumeration value="EvSurv"/>
+      <xs:enumeration value="SurvStat73">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="CubeInfo" nillable="true" type="tns:CubeInfo"/>
+  <xs:simpleType name="LanguageSimple">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None"/>
+      <xs:enumeration value="German">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1031</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="English">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2057</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="LanguageSimple" nillable="true" type="tns:LanguageSimple"/>
+  <xs:complexType name="HierarchyCollectionResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Hierarchies" nillable="true" type="tns:HierarchyCollection"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="HierarchyCollectionResponse" nillable="true" type="tns:HierarchyCollectionResponse"/>
+  <xs:complexType name="HierarchyCollection">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Hierarchy" nillable="true" type="tns:Hierarchy"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="HierarchyCollection" nillable="true" type="tns:HierarchyCollection"/>
+  <xs:complexType name="Hierarchy">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Caption" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="ChildHierarchies" nillable="true" type="tns:HierarchyCollection"/>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="Group" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="Id" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="SelectDefault" nillable="true" type="tns:HierarchyMemberCollection"/>
+      <xs:element minOccurs="0" name="SelectMax" type="xs:int"/>
+      <xs:element minOccurs="0" name="SelectMin" type="xs:int"/>
+      <xs:element minOccurs="0" name="ShapeFile" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="Sort" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Hierarchy" nillable="true" type="tns:Hierarchy"/>
+  <xs:complexType name="HierarchyMemberCollection">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="HierarchyMember" nillable="true" type="tns:HierarchyMember"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="HierarchyMemberCollection" nillable="true" type="tns:HierarchyMemberCollection"/>
+  <xs:complexType name="HierarchyMember">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Caption" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="Id" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="HierarchyMember" nillable="true" type="tns:HierarchyMember"/>
+  <xs:complexType name="HierarchyMemberCollectionRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cube" type="tns:CubeInfo"/>
+      <xs:element minOccurs="0" name="HierarchyId" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="Language" type="tns:LanguageSimple"/>
+      <xs:element minOccurs="0" name="ParentMembers" nillable="true" type="tns:FilterMemberCollection"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="HierarchyMemberCollectionRequest" nillable="true" type="tns:HierarchyMemberCollectionRequest"/>
+  <xs:complexType name="FilterMemberCollection">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FilterMemberCollection" nillable="true" type="tns:FilterMemberCollection"/>
+  <xs:complexType name="HierarchyMemberCollectionResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="HierarchyMembers" nillable="true" type="tns:HierarchyMemberCollection"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="HierarchyMemberCollectionResponse" nillable="true" type="tns:HierarchyMemberCollectionResponse"/>
+  <xs:complexType name="HierarchyExistsMemberCollectionRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cube" type="tns:CubeInfo"/>
+      <xs:element minOccurs="0" name="HierarchyFilters" nillable="true" type="tns:FilterCollection"/>
+      <xs:element minOccurs="0" name="HierarchyId" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="Language" type="tns:LanguageSimple"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="HierarchyExistsMemberCollectionRequest" nillable="true" type="tns:HierarchyExistsMemberCollectionRequest"/>
+  <xs:complexType name="FilterCollection">
+    <xs:annotation>
+      <xs:appinfo>
+        <IsDictionary xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsDictionary>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="KeyValueOfFilterCollectionKeyFilterMemberCollectionb2rWaiIW">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Key" nillable="true" type="tns:FilterCollectionKey"/>
+            <xs:element name="Value" nillable="true" type="tns:FilterMemberCollection"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FilterCollection" nillable="true" type="tns:FilterCollection"/>
+  <xs:complexType name="FilterCollectionKey">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DimensionId" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="HierarchyId" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FilterCollectionKey" nillable="true" type="tns:FilterCollectionKey"/>
+  <xs:complexType name="MeasureCollectionRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cube" type="tns:CubeInfo"/>
+      <xs:element minOccurs="0" name="Language" type="tns:LanguageSimple"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MeasureCollectionRequest" nillable="true" type="tns:MeasureCollectionRequest"/>
+  <xs:complexType name="MeasureCollectionResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Measures" nillable="true" type="tns:MeasureCollection"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MeasureCollectionResponse" nillable="true" type="tns:MeasureCollectionResponse"/>
+  <xs:complexType name="MeasureCollection">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Measure" nillable="true" type="tns:Measure"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MeasureCollection" nillable="true" type="tns:MeasureCollection"/>
+  <xs:complexType name="Measure">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Caption" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="Id" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Measure" nillable="true" type="tns:Measure"/>
+  <xs:complexType name="OlapDataRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ColumnHierarchy" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="Cube" type="tns:CubeInfo"/>
+      <xs:element minOccurs="0" name="DataStatus" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="HierarchyFilters" nillable="true" type="tns:FilterCollection"/>
+      <xs:element minOccurs="0" name="IncludeNullColumns" type="xs:boolean"/>
+      <xs:element minOccurs="0" name="IncludeNullRows" type="xs:boolean"/>
+      <xs:element minOccurs="0" name="IncludeTotalColumn" type="xs:boolean"/>
+      <xs:element minOccurs="0" name="IncludeTotalRow" type="xs:boolean"/>
+      <xs:element minOccurs="0" name="Language" type="tns:LanguageSimple"/>
+      <xs:element minOccurs="0" name="Measures" type="tns:ReturnMeasures"/>
+      <xs:element minOccurs="0" name="RowHierarchy" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OlapDataRequest" nillable="true" type="tns:OlapDataRequest"/>
+  <xs:simpleType name="ReturnMeasures">
+    <xs:list>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Count">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Incidence">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Population">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:list>
+  </xs:simpleType>
+  <xs:element name="ReturnMeasures" nillable="true" type="tns:ReturnMeasures"/>
+  <xs:complexType name="OlapDataResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Columns" nillable="true" type="tns:QueryResultColumnCollection"/>
+      <xs:element minOccurs="0" name="QueryResults" nillable="true" type="tns:QueryResultCollection"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OlapDataResponse" nillable="true" type="tns:OlapDataResponse"/>
+  <xs:complexType name="QueryResultColumnCollection">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="QueryResultColumn" nillable="true" type="tns:QueryResultColumn"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QueryResultColumnCollection" nillable="true" type="tns:QueryResultColumnCollection"/>
+  <xs:complexType name="QueryResultColumn">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Caption" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="ColumnName" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QueryResultColumn" nillable="true" type="tns:QueryResultColumn"/>
+  <xs:complexType name="QueryResultCollection">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="QueryResultRow" nillable="true" type="tns:QueryResultRow"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QueryResultCollection" nillable="true" type="tns:QueryResultCollection"/>
+  <xs:complexType name="QueryResultRow">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Caption" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="RowName" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="Values" nillable="true" type="tns:QueryResultRowValues"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QueryResultRow" nillable="true" type="tns:QueryResultRow"/>
+  <xs:complexType name="QueryResultRowValues">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QueryResultRowValues" nillable="true" type="tns:QueryResultRowValues"/>
+  <xs:complexType name="CubeInfoRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cube" type="tns:CubeInfo"/>
+      <xs:element minOccurs="0" name="Language" type="tns:LanguageSimple"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CubeInfoRequest" nillable="true" type="tns:CubeInfoRequest"/>
+  <xs:complexType name="CubeInfoResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="LastDataUpdate" type="xs:dateTime"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CubeInfoResponse" nillable="true" type="tns:CubeInfoResponse"/>
+  <xs:complexType name="OlapResultDataRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ColumnHierarchy" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="Cube" type="tns:CubeInfo"/>
+      <xs:element minOccurs="0" name="HierarchyFilters" nillable="true" type="tns:FilterCollection"/>
+      <xs:element minOccurs="0" name="IncludeNullColumns" type="xs:boolean"/>
+      <xs:element minOccurs="0" name="IncludeNullRows" type="xs:boolean"/>
+      <xs:element minOccurs="0" name="IncludeTotalColumn" type="xs:boolean"/>
+      <xs:element minOccurs="0" name="IncludeTotalRow" type="xs:boolean"/>
+      <xs:element minOccurs="0" name="Language" type="tns:LanguageSimple"/>
+      <xs:element minOccurs="0" name="Measure" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="RowHierarchy" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OlapResultDataRequest" nillable="true" type="tns:OlapResultDataRequest"/>
+  <xs:complexType name="OlapResultDataResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Columns" nillable="true" type="tns:QueryResultColumnCollection"/>
+      <xs:element minOccurs="0" name="QueryResults" nillable="true" type="tns:QueryResultCollection"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OlapResultDataResponse" nillable="true" type="tns:OlapResultDataResponse"/>
+  <xs:complexType name="DimensionCollectionRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cube" type="tns:CubeInfo"/>
+      <xs:element minOccurs="0" name="Language" type="tns:LanguageSimple"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DimensionCollectionRequest" nillable="true" type="tns:DimensionCollectionRequest"/>
+  <xs:complexType name="DimensionCollectionResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Dimensions" nillable="true" type="tns:DimensionCollection"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DimensionCollectionResponse" nillable="true" type="tns:DimensionCollectionResponse"/>
+  <xs:complexType name="DimensionCollection">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Dimension" nillable="true" type="tns:Dimension"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DimensionCollection" nillable="true" type="tns:DimensionCollection"/>
+  <xs:complexType name="Dimension">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Caption" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="Group" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="Hierarchies" nillable="true" type="tns:HierarchyCollection"/>
+      <xs:element minOccurs="0" name="Id" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="Sort" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Dimension" nillable="true" type="tns:Dimension"/>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>https://tools.rki.de/SurvStat/SurvStatWebService.svc?xsd=xsd1</con:url><con:content><![CDATA[<xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/">
+  <xs:element name="anyType" nillable="true" type="xs:anyType"/>
+  <xs:element name="anyURI" nillable="true" type="xs:anyURI"/>
+  <xs:element name="base64Binary" nillable="true" type="xs:base64Binary"/>
+  <xs:element name="boolean" nillable="true" type="xs:boolean"/>
+  <xs:element name="byte" nillable="true" type="xs:byte"/>
+  <xs:element name="dateTime" nillable="true" type="xs:dateTime"/>
+  <xs:element name="decimal" nillable="true" type="xs:decimal"/>
+  <xs:element name="double" nillable="true" type="xs:double"/>
+  <xs:element name="float" nillable="true" type="xs:float"/>
+  <xs:element name="int" nillable="true" type="xs:int"/>
+  <xs:element name="long" nillable="true" type="xs:long"/>
+  <xs:element name="QName" nillable="true" type="xs:QName"/>
+  <xs:element name="short" nillable="true" type="xs:short"/>
+  <xs:element name="string" nillable="true" type="xs:string"/>
+  <xs:element name="unsignedByte" nillable="true" type="xs:unsignedByte"/>
+  <xs:element name="unsignedInt" nillable="true" type="xs:unsignedInt"/>
+  <xs:element name="unsignedLong" nillable="true" type="xs:unsignedLong"/>
+  <xs:element name="unsignedShort" nillable="true" type="xs:unsignedShort"/>
+  <xs:element name="char" nillable="true" type="tns:char"/>
+  <xs:simpleType name="char">
+    <xs:restriction base="xs:int"/>
+  </xs:simpleType>
+  <xs:element name="duration" nillable="true" type="tns:duration"/>
+  <xs:simpleType name="duration">
+    <xs:restriction base="xs:duration">
+      <xs:pattern value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?"/>
+      <xs:minInclusive value="-P10675199DT2H48M5.4775808S"/>
+      <xs:maxInclusive value="P10675199DT2H48M5.4775807S"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="guid" nillable="true" type="tns:guid"/>
+  <xs:simpleType name="guid">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:attribute name="FactoryType" type="xs:QName"/>
+  <xs:attribute name="Id" type="xs:ID"/>
+  <xs:attribute name="Ref" type="xs:IDREF"/>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>https://tools.rki.de/SurvStat/SurvStatWebService.svc?xsd=xsd3</con:url><con:content><![CDATA[<xs:schema elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/System" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.datacontract.org/2004/07/System" xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/">
+  <xs:import schemaLocation="https://tools.rki.de/SurvStat/SurvStatWebService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/"/>
+  <xs:complexType name="ArgumentNullException">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ArgumentException"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ArgumentNullException" nillable="true" type="tns:ArgumentNullException"/>
+  <xs:complexType name="ArgumentException">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:SystemException"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ArgumentException" nillable="true" type="tns:ArgumentException"/>
+  <xs:complexType name="SystemException">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Exception"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="SystemException" nillable="true" type="tns:SystemException"/>
+  <xs:complexType name="Exception">
+    <xs:sequence>
+      <xs:any minOccurs="0" maxOccurs="unbounded" namespace="##local" processContents="skip"/>
+    </xs:sequence>
+    <xs:attribute ref="ser:FactoryType"/>
+  </xs:complexType>
+  <xs:element name="Exception" nillable="true" type="tns:Exception"/>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>https://tools.rki.de/SurvStat/SurvStatWebService.svc?xsd=xsd4</con:url><con:content><![CDATA[<xs:schema elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Rki.SurvStat.WebService.Contracts.Exceptions" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.datacontract.org/2004/07/Rki.SurvStat.WebService.Contracts.Exceptions">
+  <xs:complexType name="DataOverflowException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cells" type="xs:int"/>
+      <xs:element minOccurs="0" name="Columns" type="xs:int"/>
+      <xs:element minOccurs="0" name="MaxCells" type="xs:int"/>
+      <xs:element minOccurs="0" name="Rows" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DataOverflowException" nillable="true" type="tns:DataOverflowException"/>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>https://tools.rki.de/SurvStat/SurvStatWebService.svc</con:endpoint></con:endpoints><con:operation id="b6baa209-96c0-4d9e-abb8-416c9c7761be" isOneWay="false" action="http://tools.rki.de/SurvStat/SurvStatWebService/GetAllDimensions" name="GetAllDimensions" bindingOperationName="GetAllDimensions" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="7c79f04f-75ad-4f6f-a241-518508e76e7a" name="Dimensions73" useWsAddressing="true"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://tools.rki.de/SurvStat/SurvStatWebService.svc</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:sur="http://tools.rki.de/SurvStat/" xmlns:rki="http://schemas.datacontract.org/2004/07/Rki.SurvStat.WebService.Contracts.Mdx">
+   <soap:Header xmlns:wsa="http://www.w3.org/2005/08/addressing">
+      <wsa:To>https://tools.rki.de/SurvStat/SurvStatWebService.svc</wsa:To>
+      <wsa:Action>http://tools.rki.de/SurvStat/SurvStatWebService/GetAllDimensions</wsa:Action>
+   </soap:Header>
+   <soap:Body>
+      <sur:GetAllDimensions>
+         <sur:request>
+            <rki:Cube>EvSurv</rki:Cube>
+            <rki:Language>English</rki:Language>
+         </sur:request>
+      </sur:GetAllDimensions>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tools.rki.de/SurvStat/SurvStatWebService/GetAllDimensions"/><con:wsrmConfig version="1.2"/></con:call><con:call id="4db60462-f860-4522-9e9b-155700851969" name="Dimensions" useWsAddressing="true"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://tools.rki.de/SurvStat/SurvStatWebService.svc</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:sur="http://tools.rki.de/SurvStat/" xmlns:rki="http://schemas.datacontract.org/2004/07/Rki.SurvStat.WebService.Contracts.Mdx">
+   <soap:Header xmlns:wsa="http://www.w3.org/2005/08/addressing">
+      <wsa:To>https://tools.rki.de/SurvStat/SurvStatWebService.svc</wsa:To><wsa:Action>http://tools.rki.de/SurvStat/SurvStatWebService/GetAllDimensions</wsa:Action></soap:Header>
+   <soap:Body>
+      <sur:GetAllDimensions>
+         <!--Optional:-->
+         <sur:request>
+            <!--Optional:-->
+            <rki:Cube>SurvStat</rki:Cube>
+            <!--Optional:-->
+            <rki:Language>English</rki:Language>
+         </sur:request>
+      </sur:GetAllDimensions>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tools.rki.de/SurvStat/SurvStatWebService/GetAllDimensions"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="572931ac-02ca-494b-a672-0c86c491a8d9" isOneWay="false" action="http://tools.rki.de/SurvStat/SurvStatWebService/GetAllHierarchies" name="GetAllHierarchies" bindingOperationName="GetAllHierarchies" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="776f00a7-65eb-497d-abc9-d467d437f05d" name="Request 1" useWsAddressing="true"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://tools.rki.de/SurvStat/SurvStatWebService.svc</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:sur="http://tools.rki.de/SurvStat/" xmlns:rki="http://schemas.datacontract.org/2004/07/Rki.SurvStat.WebService.Contracts.Mdx">
+   <soap:Header xmlns:wsa="http://www.w3.org/2005/08/addressing">
+   <wsa:To>https://tools.rki.de/SurvStat/SurvStatWebService.svc</wsa:To><wsa:Action>http://tools.rki.de/SurvStat/SurvStatWebService/GetAllHierarchies</wsa:Action></soap:Header>
+   <soap:Body>
+      <sur:GetAllHierarchies>
+         <!--Optional:-->
+         <sur:request>
+            <!--Optional:-->
+            <rki:Cube>SurvStat</rki:Cube>
+            <!--Optional:-->
+            <rki:Language>English</rki:Language>
+         </sur:request>
+      </sur:GetAllHierarchies>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tools.rki.de/SurvStat/SurvStatWebService/GetAllHierarchies"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="42dc9e4f-8fa9-433d-9292-5b940e432b75" isOneWay="false" action="http://tools.rki.de/SurvStat/SurvStatWebService/GetAllHierarchyExistsMembers" name="GetAllHierarchyExistsMembers" bindingOperationName="GetAllHierarchyExistsMembers" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="57894104-baf6-4f5f-a912-17ac08269d87" name="Request 1" useWsAddressing="true"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://tools.rki.de/SurvStat/SurvStatWebService.svc</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tools.rki.de/SurvStat/SurvStatWebService/GetAllHierarchyExistsMembers" addDefaultTo="true"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="f8e3d61c-1866-4e23-9d7b-79b73dc2ac0a" isOneWay="false" action="http://tools.rki.de/SurvStat/SurvStatWebService/GetAllHierarchyMembers" name="GetAllHierarchyMembers" bindingOperationName="GetAllHierarchyMembers" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="79a29109-5c05-4419-8578-bdd72f96ccd5" name="Request 1" useWsAddressing="true"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://tools.rki.de/SurvStat/SurvStatWebService.svc</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:sur="http://tools.rki.de/SurvStat/" xmlns:rki="http://schemas.datacontract.org/2004/07/Rki.SurvStat.WebService.Contracts.Mdx">
+   <soap:Header xmlns:wsa="http://www.w3.org/2005/08/addressing">
+   <wsa:To>https://tools.rki.de/SurvStat/SurvStatWebService.svc</wsa:To><wsa:Action>http://tools.rki.de/SurvStat/SurvStatWebService/GetAllHierarchyMembers</wsa:Action></soap:Header>
+   <soap:Body>
+      <sur:GetAllHierarchyMembers>
+         <!--Optional:-->
+         <sur:request>
+            <!--Optional:-->
+            <rki:Cube>EvSurv</rki:Cube>
+            <!--Optional:-->
+            <rki:Language>English</rki:Language>
+            <!--Optional:-->
+         </sur:request>
+      </sur:GetAllHierarchyMembers>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tools.rki.de/SurvStat/SurvStatWebService/GetAllHierarchyMembers" addDefaultAction="true" addDefaultTo="true"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="a039553d-5742-4491-a1a3-c0c5f25a1b06" isOneWay="false" action="http://tools.rki.de/SurvStat/SurvStatWebService/GetAllMeasures" name="GetAllMeasures" bindingOperationName="GetAllMeasures" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="b28f329a-4a6c-453c-845a-96d1a50d9c99" name="Measures" useWsAddressing="true"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://tools.rki.de/SurvStat/SurvStatWebService.svc</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:sur="http://tools.rki.de/SurvStat/" xmlns:rki="http://schemas.datacontract.org/2004/07/Rki.SurvStat.WebService.Contracts.Mdx">
+   <soap:Header xmlns:wsa="http://www.w3.org/2005/08/addressing">
+      <wsa:To>https://tools.rki.de/SurvStat/SurvStatWebService.svc</wsa:To>
+      <wsa:Action>http://tools.rki.de/SurvStat/SurvStatWebService/GetAllMeasures</wsa:Action>
+   </soap:Header>
+   <soap:Body>
+      <sur:GetAllMeasures>
+         <!--Optional:-->
+         <sur:request>
+            <rki:Cube>SurvStat</rki:Cube>
+            <rki:Language>English</rki:Language>
+         </sur:request>
+      </sur:GetAllMeasures>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tools.rki.de/SurvStat/SurvStatWebService/GetAllMeasures"/><con:wsrmConfig version="1.2"/></con:call><con:call id="839bd4cb-258a-4f7c-824a-92204b356fab" name="MeasuresEv" useWsAddressing="true"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://tools.rki.de/SurvStat/SurvStatWebService.svc</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:sur="http://tools.rki.de/SurvStat/" xmlns:rki="http://schemas.datacontract.org/2004/07/Rki.SurvStat.WebService.Contracts.Mdx">
+   <soap:Header xmlns:wsa="http://www.w3.org/2005/08/addressing">
+      <wsa:To>https://tools.rki.de/SurvStat/SurvStatWebService.svc</wsa:To><wsa:Action>http://tools.rki.de/SurvStat/SurvStatWebService/GetAllMeasures</wsa:Action></soap:Header>
+   <soap:Body>
+      <sur:GetAllMeasures>
+         <!--Optional:-->
+         <sur:request>
+            <!--Optional:-->
+            <rki:Cube>SurvStat73</rki:Cube>
+            <!--Optional:-->
+            <rki:Language>English</rki:Language>
+         </sur:request>
+      </sur:GetAllMeasures>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tools.rki.de/SurvStat/SurvStatWebService/GetAllMeasures"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="69f463fb-ed7e-4a86-9728-58c333b2a049" isOneWay="false" action="http://tools.rki.de/SurvStat/SurvStatWebService/GetCubeInfo" name="GetCubeInfo" bindingOperationName="GetCubeInfo" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="2af5b142-bdd1-49b9-b4a4-21a52ed87afc" name="Request 1" useWsAddressing="true"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://tools.rki.de/SurvStat/SurvStatWebService.svc</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:sur="http://tools.rki.de/SurvStat/" xmlns:rki="http://schemas.datacontract.org/2004/07/Rki.SurvStat.WebService.Contracts.Mdx">
+   <soap:Header xmlns:wsa="http://www.w3.org/2005/08/addressing">
+      <wsa:To>https://tools.rki.de/SurvStat/SurvStatWebService.svc</wsa:To><wsa:Action>http://tools.rki.de/SurvStat/SurvStatWebService/GetCubeInfo</wsa:Action></soap:Header>
+   <soap:Body>
+      <sur:GetCubeInfo>
+         <!--Optional:-->
+         <sur:request>
+            <!--Optional:-->
+            <rki:Cube>SurvStat</rki:Cube>
+            <!--Optional:-->
+            <rki:Language>English</rki:Language>
+         </sur:request>
+      </sur:GetCubeInfo>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tools.rki.de/SurvStat/SurvStatWebService/GetCubeInfo"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="79acd47d-db43-4e38-80ce-5753a3845416" isOneWay="false" action="http://tools.rki.de/SurvStat/SurvStatWebService/GetOlapData" name="GetOlapData" bindingOperationName="GetOlapData" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="08a7ed36-3297-4191-a8d7-1e56e1bb80aa" name="Request 1" useWsAddressing="true"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://tools.rki.de/SurvStat/SurvStatWebService.svc</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:sur="http://tools.rki.de/SurvStat/" xmlns:rki="http://schemas.datacontract.org/2004/07/Rki.SurvStat.WebService.Contracts.Mdx">
+   <soap:Header/>
+   <soap:Body>
+      <sur:GetOlapData>
+         <!--Optional:-->
+         <sur:request>
+            <!--Optional:-->
+            <rki:ColumnHierarchy>?</rki:ColumnHierarchy>
+            <!--Optional:-->
+            <rki:Cube>?</rki:Cube>
+            <!--Optional:-->
+            <rki:DataStatus>?</rki:DataStatus>
+            <!--Optional:-->
+            <rki:HierarchyFilters>
+               <!--Zero or more repetitions:-->
+               <rki:KeyValueOfFilterCollectionKeyFilterMemberCollectionb2rWaiIW>
+                  <rki:Key>
+                     <!--Optional:-->
+                     <rki:DimensionId>?</rki:DimensionId>
+                     <!--Optional:-->
+                     <rki:HierarchyId>?</rki:HierarchyId>
+                  </rki:Key>
+                  <rki:Value>
+                     <!--Zero or more repetitions:-->
+                     <rki:string>?</rki:string>
+                  </rki:Value>
+               </rki:KeyValueOfFilterCollectionKeyFilterMemberCollectionb2rWaiIW>
+            </rki:HierarchyFilters>
+            <!--Optional:-->
+            <rki:IncludeNullColumns>?</rki:IncludeNullColumns>
+            <!--Optional:-->
+            <rki:IncludeNullRows>?</rki:IncludeNullRows>
+            <!--Optional:-->
+            <rki:IncludeTotalColumn>?</rki:IncludeTotalColumn>
+            <!--Optional:-->
+            <rki:IncludeTotalRow>?</rki:IncludeTotalRow>
+            <!--Optional:-->
+            <rki:Language>?</rki:Language>
+            <!--Optional:-->
+            <rki:Measures>?</rki:Measures>
+            <!--Optional:-->
+            <rki:RowHierarchy>?</rki:RowHierarchy>
+         </sur:request>
+      </sur:GetOlapData>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tools.rki.de/SurvStat/SurvStatWebService/GetOlapData"/><con:wsrmConfig version="1.2"/></con:call><con:call id="6d4d37f2-e402-4047-b9ff-5c97db80c727" name="Request 2" useWsAddressing="true"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://tools.rki.de/SurvStat/SurvStatWebService.svc</con:endpoint><con:request><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:sur="http://tools.rki.de/SurvStat/" xmlns:rki="http://schemas.datacontract.org/2004/07/Rki.SurvStat.WebService.Contracts.Mdx">
+   <soap:Header xmlns:wsa="http://www.w3.org/2005/08/addressing">
+      <wsa:To>https://tools.rki.de/SurvStat/SurvStatWebService.svc</wsa:To>
+      <wsa:Action>http://tools.rki.de/SurvStat/SurvStatWebService/GetOlapData</wsa:Action>
+   </soap:Header>
+   <soap:Body>
+      <sur:GetOlapData>
+         <sur:request>
+            <!-- Single year age groups -->
+            <rki:ColumnHierarchy>[PathogenOut].[KategorieNz].[Pathogen1 Nz]</rki:ColumnHierarchy>
+            <rki:Cube>SurvStat</rki:Cube>
+            <rki:HierarchyFilters>
+               <rki:KeyValueOfFilterCollectionKeyFilterMemberCollectionb2rWaiIW>
+                  <rki:Key>
+                     <rki:DimensionId>[PathogenOut].[KategorieNz]</rki:DimensionId>
+                     <rki:HierarchyId>[PathogenOut].[KategorieNz].[Krankheit DE]</rki:HierarchyId>
+                  </rki:Key>
+                  <rki:Value>
+                     <!-- The disease -->
+                     <rki:string>[KategorieNz].[Krankheit DE].&amp;[Pneumokokken (Meldepflicht gemäß IfSG)]</rki:string>
+                  </rki:Value>
+               </rki:KeyValueOfFilterCollectionKeyFilterMemberCollectionb2rWaiIW>
+               <rki:KeyValueOfFilterCollectionKeyFilterMemberCollectionb2rWaiIW>
+                  <rki:Key>
+                     <rki:DimensionId>[Datenstand].[Publikation]</rki:DimensionId>
+                     <rki:HierarchyId>[Datenstand].[Publikation].[Publikation]</rki:HierarchyId>
+                  </rki:Key>
+                  <rki:Value>
+                     <!-- This gives the current data set as the publication -->
+                     <rki:string>[Datenstand].[Publikation].&amp;[-1]</rki:string>
+                  </rki:Value>
+               </rki:KeyValueOfFilterCollectionKeyFilterMemberCollectionb2rWaiIW>
+               <rki:KeyValueOfFilterCollectionKeyFilterMemberCollectionb2rWaiIW>
+                  <rki:Key>
+                     <rki:DimensionId>[ReportingDate]</rki:DimensionId>
+                     <rki:HierarchyId>[ReportingDate].[WeekYear]</rki:HierarchyId>
+                  </rki:Key>
+                  <rki:Value>
+                     <!-- This gives the current data set as the publication -->
+                     <rki:string>[ReportingDate].[WeekYear].&amp;[2025]</rki:string>
+                  </rki:Value>
+               </rki:KeyValueOfFilterCollectionKeyFilterMemberCollectionb2rWaiIW>
+            </rki:HierarchyFilters>
+            <rki:IncludeNullColumns>true</rki:IncludeNullColumns>
+            <rki:IncludeNullRows>true</rki:IncludeNullRows>
+            <rki:IncludeTotalColumn>false</rki:IncludeTotalColumn>
+            <rki:IncludeTotalRow>false</rki:IncludeTotalRow>
+            <rki:Language>German</rki:Language>
+            <rki:Measures>Count</rki:Measures>
+            <rki:RowHierarchy>[ReportingDate].[YearWeek]</rki:RowHierarchy>
+         </sur:request>
+      </sur:GetOlapData>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tools.rki.de/SurvStat/SurvStatWebService/GetOlapData"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="9a035cf3-3724-470f-955b-3b4816a66910" isOneWay="false" action="http://tools.rki.de/SurvStat/SurvStatWebService/GetOlapResultData" name="GetOlapResultData" bindingOperationName="GetOlapResultData" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="e2bc39ee-9c6c-454a-8c9f-5b297561bd74" name="Request 1" useWsAddressing="true"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://tools.rki.de/SurvStat/SurvStatWebService.svc</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:sur="http://tools.rki.de/SurvStat/" xmlns:rki="http://schemas.datacontract.org/2004/07/Rki.SurvStat.WebService.Contracts.Mdx">
+   <soap:Header/>
+   <soap:Body>
+      <sur:GetOlapResultData>
+         <!--Optional:-->
+         <sur:request>
+            <!--Optional:-->
+            <rki:ColumnHierarchy>?</rki:ColumnHierarchy>
+            <!--Optional:-->
+            <rki:Cube>?</rki:Cube>
+            <!--Optional:-->
+            <rki:HierarchyFilters>
+               <!--Zero or more repetitions:-->
+               <rki:KeyValueOfFilterCollectionKeyFilterMemberCollectionb2rWaiIW>
+                  <rki:Key>
+                     <!--Optional:-->
+                     <rki:DimensionId>?</rki:DimensionId>
+                     <!--Optional:-->
+                     <rki:HierarchyId>?</rki:HierarchyId>
+                  </rki:Key>
+                  <rki:Value>
+                     <!--Zero or more repetitions:-->
+                     <rki:string>?</rki:string>
+                  </rki:Value>
+               </rki:KeyValueOfFilterCollectionKeyFilterMemberCollectionb2rWaiIW>
+            </rki:HierarchyFilters>
+            <!--Optional:-->
+            <rki:IncludeNullColumns>?</rki:IncludeNullColumns>
+            <!--Optional:-->
+            <rki:IncludeNullRows>?</rki:IncludeNullRows>
+            <!--Optional:-->
+            <rki:IncludeTotalColumn>?</rki:IncludeTotalColumn>
+            <!--Optional:-->
+            <rki:IncludeTotalRow>?</rki:IncludeTotalRow>
+            <!--Optional:-->
+            <rki:Language>?</rki:Language>
+            <!--Optional:-->
+            <rki:Measure>?</rki:Measure>
+            <!--Optional:-->
+            <rki:RowHierarchy>?</rki:RowHierarchy>
+         </sur:request>
+      </sur:GetOlapResultData>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tools.rki.de/SurvStat/SurvStatWebService/GetOlapResultData"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>

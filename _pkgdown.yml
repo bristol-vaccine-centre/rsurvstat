@@ -1,0 +1,16 @@
+url: https://bristol-vaccine-centre.github.io/rsurvstat/
+template:
+  bootstrap: 5
+reference:
+- title: SurvStat functions
+- contents:
+  - has_concept("survstat")
+- title: Data
+- contents:
+  - has_concept("data")
+- title: Caching
+- contents:
+  - has_concept("cache")
+- title: Others
+- contents:
+  - lacks_concepts(c("survstat","data","cache"))

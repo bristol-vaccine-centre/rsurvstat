@@ -5,7 +5,7 @@
 \alias{diseases}
 \title{SurvStat disease list}
 \format{
-An object of class \code{list} of length 108.
+An object of class \code{list} of length 121.
 }
 \usage{
 diseases

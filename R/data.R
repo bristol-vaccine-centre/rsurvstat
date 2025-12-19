@@ -6,32 +6,47 @@
 #' @keywords data
 #' @export
 diseases = list(
-  Acinetobacter = "Acinetobacter-Infektion oder \u2013Kolonisation",      
+  Acinetobacter = "Acinetobacter-Infektion oder \u2013Kolonisation",
   Adenovirus = "Adenovirus (andere Form, Meldepflichtig gem\u00e4\u00df Landesmeldeverordnung)",
-  Mpox = "Affenpocken", Amoebiasis = "Amoebiasis", Arbovirus = "Arbovirus-Erkrankung",
-  Astrovirus = "Astrovirus-Infektion", "Lyme Disease" = "Borreliose",
-  Botulism = "Botulismus", Brucellosis = "Brucellose",
+  Mpox = "Affenpocken",
+  Amoebiasis = "Amoebiasis",
+  Arbovirus = "Arbovirus-Erkrankung",
+  Astrovirus = "Astrovirus-Infektion",
+  "Lyme Disease" = "Borreliose",
+  Botulism = "Botulismus",
+  Bornavirus = "Bornavirus",
+  Brucellosis = "Brucellose",
+  "Candida auris (invasive)" = "Candida auris, invasive Infektion",
   Campylobacter = "Campylobacter-Enteritis",
   Chickungunya = "Chikungunya-Fieber",
   "Chlamydia Trachomatis" = "Chlamydia-trachomatis-Infektion",
   Cholera = "Cholera",
   CJD = "CJK",
   "Clostridium difficile / mild" = "Clostridium difficile, nicht schwerer Verlauf",
-  "Clostridium difficile / moderate" = "Clostridium difficile, schwerer Verlauf", 
-  "COVID-19" = "COVID-19", Cytomegalovirus = "Cytomegalie",
-  Dengue = "Denguefieber", Diptheria = "Diphtherie",
+  "Clostridium difficile / moderate" = "Clostridium difficile, schwerer Verlauf",
+  "COVID-19" = "COVID-19",
+  Cytomegalovirus = "Cytomegalie",
+  Dengue = "Denguefieber",
+  Diptheria = "Diphtherie",
   "E. Coli, enteritis" = "E.-coli-Enteritis",
-  Ebola = "Ebolafieber", Echinococcosis = "Echinokokkose",
+  Ebola = "Ebolafieber",
+  Echinococcosis = "Echinokokkose",
   "E. Coli, enterohemorrhagic" = "EHEC-Erkrankung",
   "Enterobacteria colonisation" = "Enterobacteriaceae-Infektion oder \u2013Kolonisation",
-  Enterovirus = "Enterovirus", "Varicella, congenital" = "Fetales (kongenitales) Varizellensyndrom",
-  Typhoid = "Fleckfieber", "Tick bourne encephalitis" = "FSME (Fr\u00fchsommer-Meningoenzephalitis)",
-  "Gas gangrene" = "Gasbrand", "Yellow fever" = "Gelbfieber",
-  Giardia = "Giardiasis", Gonorrhoea = "Gonorrhoe",
+  Enterovirus = "Enterovirus",
+  "Varicella, congenital" = "Fetales (kongenitales) Varizellensyndrom",
+  Typhoid = "Fleckfieber",
+  "Tick bourne encephalitis" = "FSME (Fr\u00fchsommer-Meningoenzephalitis)",
+  "Gas gangrene" = "Gasbrand",
+  "Yellow fever" = "Gelbfieber",
+  Giardia = "Giardiasis",
+  Gonorrhoea = "Gonorrhoe",
   "Group B Streptococcus" = "Gruppe-B-Streptokokken",
   "Haemophilus influenza, invasive" = "Haemophilus influenzae, invasive Erkrankung",
   "Hand foot mouth disease" = "Hand-Fu\u00df-Mund-Krankheit",
-  Hantavirus = "Hantavirus-Erkrankung", "Hepatitis A" = "Hepatitis A",
+  Hantavirus = "Hantavirus-Erkrankung",
+  "Hepatitis (general)" = "Hepatitis (allgemein)",
+  "Hepatitis A" = "Hepatitis A",
   "Hepatitis B" = "Hepatitis B",
   "Hepatitis C" = "Hepatitis C",
   "Hepatitis D" = "Hepatitis D",
@@ -46,14 +61,15 @@ diseases = list(
   "Keratoconjunctivitis (state)" = "Keratokunjunktivitis (Meldepflicht gem\u00e4\u00df Landesmeldeverordnung)",
   "Whooping cough (IfSG)" = "Keuchhusten (Meldepflicht gem\u00e4\u00df IfSG)",
   "Whooping cough (state)" = "Keuchhusten (Meldepflicht gem\u00e4\u00df Landesmeldeverordnung)",
-  "Head lice" = "Kopflausbefall", Scabies = "Kr\u00e4tzmilbenbefall",
-  Cryptosporidiosis = "Kryptosporidiose", "Lassa fever" = "Lassafieber",
+  "Head lice" = "Kopflausbefall",
+  Scabies = "Kr\u00e4tzmilbenbefall",
+  Cryptosporidiosis = "Kryptosporidiose",
+  "Lassa fever" = "Lassafieber",
   "Relapsing fever" = "L\u00e4user\u00fcckfallfieber",
   Legionalla = "Legionellose",
   Leprousy = "Lepra",
   Leptospirosis = "Leptospirose",
   Listeriosis = "Listeriose",
-  Malaria = "Malaria",
   "Marburg virus" = "Marburgfieber",
   Measles = "Masern",
   "Meningitis (other)" = "Meningitis, andere",
@@ -68,14 +84,17 @@ diseases = list(
   Parainfluenze = "Parainfluenza",
   Paratyphus = "Paratyphus",
   Plague = "Pest",
-  "Pneumococcus, invasive" = "Pneumokokken, invasive Erkrankung",
+  "Pneumococcus (IfSG)" = "Pneumokokken (Meldepflicht gem\u00e4\u00df IfSG)",
+  "Pneumococcus (state)" = "Pneumokokken (Meldepflicht gem\u00e4\u00df Landesverordnung)",
   Smallpox = "Pocken",
-  Poliomyelitis = "Poliomyelitis", "Q-fever" = "Q-Fieber",
-  Ringworm = "Ringelr\u00f6teln", "Rotavirus gastroenteritis" = "Rotavirus-Gastroenteritis",
+  Poliomyelitis = "Poliomyelitis",
+  "Q-fever" = "Q-Fieber",
+  Ringworm = "Ringelr\u00f6teln",
+  "Rotavirus gastroenteritis" = "Rotavirus-Gastroenteritis",
   "Rubella (state)" = "R\u00f6teln (Meldepflicht gem\u00e4\u00df Landesmeldeverordnung)",
   "Rubella, congenital" = "R\u00f6teln, konnatal",
   Rubella = "R\u00f6teln, postnatal",
-  "RSV (IfSG)" = "RSV (Meldepflicht gem\u00e4\u00df IfSG)", 
+  "RSV (IfSG)" = "RSV (Meldepflicht gem\u00e4\u00df IfSG)",
   "RSV (state)" = "RSV (Meldepflicht gem\u00e4\u00df Landesmeldeverordnung)",
   Salmonellosis = "Salmonellose",
   SARS = "SARS",
@@ -98,10 +117,36 @@ diseases = list(
   Chickenpox = "Windpocken",
   "Chickenpox (state)" = "Windpocken (Meldepflicht gem\u00e4\u00df Landesmeldeverordnung)",
   Yersinia = "Yersiniose",
-  Zika = "Zikavirus-Erkrankung"
+  Zika = "Zikavirus-Erkrankung",
+  "Malaria (IfSG)" = "Malaria (\\u00a77(3) IfSG)",
+  "Malaria (state)" = "Malaria, L\\u00e4nderverordnung",
+  "MERS" = "Middle East Respiratory Syndrome",
+  "Mpox" = "Mpox",
+  "Orthopox" = "Orthopocken",
+  "Subacute Sclerosing Panencephalitis" = "Subakute Sklerosierende Panenzephalitis",
+  "Typhus/Paratyphus" = "Typhus/Paratyphus",
+  "Vibria" = "Vibrionen",
+  "West Nile Virus" = "West-Nil-Virus"
 )
 
-  
+
+# stringi::stri_escape_unicode(c(
+#   "Bornavirus",
+#   "Candida auris, invasive Infektion",
+#   "Hepatitis (allgemein)",
+#   "Malaria (§7(3) IfSG)",
+#   "Malaria, Länderverordnung",
+#   "Middle East Respiratory Syndrome",
+#   "Mpox",
+#   "Orthopocken",
+#   "Pneumokokken (Meldepflicht gemäß Landesverordnung)",
+#   "Subakute Sklerosierende Panenzephalitis",
+#   "Typhus/Paratyphus",
+#   "Vibrionen",
+#   "West-Nil-Virus"
+# )) %>%
+#   clipr::write_clip()
+
 #   list(
 #   `Acinetobacter` = "Acinetobacter-Infektion oder –Kolonisation",
 #   `Adenovirus` = "Adenovirus (andere Form, Meldepflichtig gemäß Landesmeldeverordnung)",
@@ -213,17 +258,16 @@ diseases = list(
 #   `Zika` = "Zikavirus-Erkrankung"
 # )
 
-
 #' SurvStat age group list
 #'
-#' * single_year 
+#' * single_year
 #' * children_coarse: from 0, 15, 20, 25, 30, 40, 50, 60, 70, 80 years
 #' * children_medium: from 0, 5, 10, 15, 20, 25, 30, 40, 50, 60, 70, 80 years
 #' * children_fine: from 0, 1, 2, 3, 4, 5, 10, 15, 20, 25, 30, 40, 50, 60, 70, 80 years
 #' * five_year: from 0, 1, 5, 10, 15, 20, … , 75, 80 years
-#' * zero_fifteen: from 0, 15+
-#' * zero_fifteen_sixty: from 0, 15, 60+
-#' * zero_one_4_20_40_60_80: from 0, 15, 60+
+#' * zero_fifteen: from 0, 15+ years
+#' * zero_fifteen_sixty: from 0, 15, 60+ years
+#' * zero_one_4_20_40_60_80: from 0, 4, 20, 40, 60, 80+ years
 #'
 #' @name age_groups
 #' @docType data
@@ -236,9 +280,176 @@ age_groups = list(
   children_medium = "[AlterPerson80].[AgeGroupName2]", #from 0, 5, 10, 15, 20, 25, 30, 40, 50, 60, 70, 80 years
   children_fine = "[AlterPerson80].[AgeGroupName1]", #from 0, 1, 2, 3, 4, 5, 10, 15, 20, 25, 30, 40, 50, 60, 70, 80 years
   five_year = "[AlterPerson80].[AgeGroupName6]", #from 0, 1, 5, 10, 15, 20, … , 75, 80 years
-  zero_fifteen  = "[AlterPerson80].[AgeGroupName4]", #from 0, 15+
-  zero_fifteen_sixty  = "[AlterPerson80].[AgeGroupName5]", #from 0, 15, 60+
+  zero_fifteen = "[AlterPerson80].[AgeGroupName4]", #from 0, 15+
+  zero_fifteen_sixty = "[AlterPerson80].[AgeGroupName5]", #from 0, 15, 60+
   zero_one_4_20_40_60_80 = "[AlterPerson80].[AgeGroupName7]" #from 0, 15, 60+
 )
 
 
+#' Data sources in the SurvStat service
+#'
+#' @name cubes
+#' @docType data
+#' @references \url{https://survstat.rki.de/Content/Query/Create.aspx}
+#' @keywords data
+cubes = list(
+  survstat = "SurvStat",
+  survstat73 = "SurvStat73",
+  evstat = "EvStat"
+)
+
+#' Languages supported by the SurvStat service
+#'
+#' @name languages
+#' @docType data
+#' @references \url{https://survstat.rki.de/Content/Query/Create.aspx}
+#' @keywords data
+languages = list(
+  german = "German",
+  english = "English"
+)
+
+#' Commands supported by the SurvStat service
+#'
+#' @name commands
+#' @docType data
+#' @references \url{https://survstat.rki.de/Content/Query/Create.aspx}
+#' @keywords data
+commands = list(
+  dimensions = "GetAllDimensions",
+  hierarchies = "GetAllHierarchies",
+  existing_members = "GetAllHierarchyExistsMembers",
+  members = "GetAllHierarchyMembers",
+  measures = "GetAllMeasures",
+  cube_info = "GetCubeInfo",
+  olap_data = "GetOlapData",
+  olap_result_data = "GetOlapResultData"
+)
+
+#' Return measures supported by the SurvStat service
+#'
+#' Not all services support all 3 methods.
+#'
+#' @name commands
+#' @docType data
+#' @references \url{https://survstat.rki.de/Content/Query/Create.aspx}
+#' @keywords data
+return_measures = list(
+  count = "Count",
+  incidence = "Incidence",
+  population = "Population"
+)
+
+#' Geographical resolution options
+#'
+#' The 3 different resolution levels of the geospatial data
+#'
+#' @name commands
+#' @docType data
+#' @references \url{https://survstat.rki.de/Content/Query/Create.aspx}
+#' @keywords data
+geography_resolution = list(
+  state = "[DeutschlandNodes].[Kreise71Web].[FedStateKey71]",
+  nuts = "[DeutschlandNodes].[Kreise71Web].[NutsKey71]",
+  county = "[DeutschlandNodes].[Kreise71Web].[CountyKey71]"
+)
+
+## BerlinMap definition ----
+
+#' A Berlin outline map dataset
+#'
+#' @usage data(BerlinMap)
+#'
+#' @format
+#' A `sf` dataframe containing the following columns:
+#'
+#' * Name (character) - the Name column
+#'
+#' 1 rows
+#'
+#' @docType data
+#' @keywords datasets
+#' @name BerlinMap
+NULL
+
+## BerlinMap definition ends
+
+## FedStateKey71Map definition ----
+
+#' The FedStateKey71Map dataset.
+#'
+#' This matches the `FedStateKey71` dimension in SurvStat. This is the 16
+#' federal states in Germany.
+#'
+#' @usage data(FedStateKey71Map)
+#'
+#' @format
+#' A `sf` dataframe containing the following columns:
+#'
+#' * Id - the full hierarchical value Id column
+#' * ComponentId - the ComponentId column
+#' * HierarchyId - the Id of the Hierarchy that this value applies to
+#' * Name - A description of the item
+#'
+#' 16 rows
+#'
+#' @docType data
+#' @keywords datasets
+#' @name FedStateKey71Map
+NULL
+
+## FedStateKey71Map definition ends
+## NutsKey71Map definition ----
+
+#' The NutsKey71Map dataset
+#'
+#' This matches the `NutsKey71` dimension in SurvStat. This is the 38 NUTS2
+#' level administrative regions in Germany.
+#'
+#' @usage data(NutsKey71Map)
+#'
+#' @format
+#' A `sf` dataframe containing the following columns:
+#'
+#' * Id - the full hierarchical value Id column
+#' * ComponentId - the ComponentId column
+#' * HierarchyId - the Id of the Hierarchy that this value applies to
+#' * Name - A description of the item
+#'
+#' 38 rows
+#'
+#' @docType data
+#' @keywords datasets
+#' @name NutsKey71Map
+NULL
+
+## NutsKey71Map definition ends
+## CountyKey71Map definition ----
+
+#' The CountyKey71Map dataset
+#'
+#' This matches the `CountyKey71` dimension in SurvStat. This is the 400
+#' "Stadtkreis" or "Landkreise" administrative regions in Germany, plus 12
+#' Berlin boroughs ("Bezirke") which replace the Berlin Kriese (Id: `11000`).
+#' The boroughs have sequential `Id`s from `[11001]` to `[11012]`
+#'
+#' @usage data(CountyKey71Map)
+#'
+#' @format
+#' A `sf` dataframe containing the following columns:
+#'
+#' * Id - the full hierarchical value Id column
+#' * ComponentId - the ComponentId column
+#' * HierarchyId - the Id of the Hierarchy that this value applies to
+#' * Name - A description of the item
+#'
+#' Any grouping allowed.
+#'
+#' 411 rows
+#'
+#' @docType data
+#' @keywords datasets
+#' @name CountyKey71Map
+NULL
+
+## CountyKey71Map definition ends

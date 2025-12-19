@@ -1,6 +1,6 @@
 Package: rsurvstat
 Title: Download Timeseries from SurvStat (Robert Koch Institute)
-Version: 0.0.5
+Version: 0.1.0
 Authors@R: 
     person(given = "Robert",
            family = "Challen",
@@ -10,12 +10,13 @@ Authors@R:
 Description: What the package does (one paragraph).
 License: MIT + file LICENSE
 Encoding: UTF-8
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+Roxygen: list(markdown = TRUE, packages="pkgtools")
+RoxygenNote: 7.3.3.9007
 Suggests: 
     knitr,
     rmarkdown,
-    ggplot2
+    ggplot2,
+    testthat
 VignetteBuilder: knitr
 Imports: 
     dplyr,
@@ -24,10 +25,19 @@ Imports:
     stringr,
     tibble,
     httr2,
-    curl
+    curl,
+    whisker,
+    fs,
+    purrr,
+    tidyr,
+    cli,
+    locfit,
+    rlang,
+    sf
 Depends: 
-    R (>= 2.10)
+    R (>= 3.5)
 LazyData: true
-URL: https://bristol-vaccine-centre.github.io/rsurvstat/index.html,
-	https://github.com/bristol-vaccine-centre/rsurvstat
+LazyDataCompression: xz
+URL: https://bristol-vaccine-centre.github.io/rsurvstat/index.html, https://github.com/bristol-vaccine-centre/rsurvstat, https://bristol-vaccine-centre.github.io/rsurvstat/
 BugReports: https://github.com/bristol-vaccine-centre/rsurvstat/issues
+Config/Needs/build: terminological/pkgtools, robchallen/roxygen2
