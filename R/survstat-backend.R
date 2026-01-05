@@ -284,7 +284,8 @@ set_cache_settings = function(
 
   # httr alternative
 
-  cert = system.file("tools.rki.de.pem", package = "rsurvstat")
+  # cert = system.file("tools.rki.de.pem", package = "rsurvstat")
+  cert = system.file(package = "rsurvstat")
 
   resp = tryCatch(
     httr::POST(
@@ -294,7 +295,8 @@ set_cache_settings = function(
         httr::content_type("application/soap+xml;charset=utf-8"),
         httr::accept("multipart/*"),
         httr::config("proxy" = ""), # disable proxy
-        httr::config("capath" = cert)
+        httr::config("capath" = cert),
+        httr::config("verbose" = 3)
       ),
       body = request
     ),
