@@ -1,4 +1,4 @@
-#' SurvStat disease list
+#' `SurvStat` disease list
 #'
 #' @name diseases
 #' @docType data
@@ -258,7 +258,7 @@ diseases = list(
 #   `Zika` = "Zikavirus-Erkrankung"
 # )
 
-#' SurvStat age group list
+#' `SurvStat` age group list
 #'
 #' * single_year
 #' * children_coarse: from 0, 15, 20, 25, 30, 40, 50, 60, 70, 80 years
@@ -286,7 +286,7 @@ age_groups = list(
 )
 
 
-#' Data sources in the SurvStat service
+#' Data sources in the `SurvStat` service
 #'
 #' @name cubes
 #' @docType data
@@ -298,7 +298,7 @@ cubes = list(
   evstat = "EvStat"
 )
 
-#' Languages supported by the SurvStat service
+#' Languages supported by the `SurvStat` service
 #'
 #' @name languages
 #' @docType data
@@ -309,7 +309,7 @@ languages = list(
   english = "English"
 )
 
-#' Commands supported by the SurvStat service
+#' Commands supported by the `SurvStat` service
 #'
 #' @name commands
 #' @docType data
@@ -326,7 +326,7 @@ commands = list(
   olap_result_data = "GetOlapResultData"
 )
 
-#' Return measures supported by the SurvStat service
+#' Return measures supported by the `SurvStat` service
 #'
 #' Not all services support all 3 methods.
 #'
@@ -376,9 +376,9 @@ NULL
 
 ## FedStateKey71Map definition ----
 
-#' The FedStateKey71Map dataset.
+#' The `FedStateKey71Map` dataset.
 #'
-#' This matches the `FedStateKey71` dimension in SurvStat. This is the 16
+#' This matches the `FedStateKey71` dimension in `SurvStat`. This is the 16
 #' federal states in Germany.
 #'
 #' @usage data(FedStateKey71Map)
@@ -386,10 +386,12 @@ NULL
 #' @format
 #' A `sf` dataframe containing the following columns:
 #'
-#' * Id - the full hierarchical value Id column
-#' * ComponentId - the ComponentId column
-#' * HierarchyId - the Id of the Hierarchy that this value applies to
-#' * Name - A description of the item
+#' * `Id` - the full `SurvStat` identifier for this region (includes
+#'   hierarchical information)
+#' * `ComponentId` - the id of the most granular geographical unit (which can be
+#'   used to link out to other data sets)
+#' * `HierarchyId` - the id of the geographical unit type
+#' * `Name` - the name of the region
 #'
 #' 16 rows
 #'
@@ -401,9 +403,9 @@ NULL
 ## FedStateKey71Map definition ends
 ## NutsKey71Map definition ----
 
-#' The NutsKey71Map dataset
+#' The `NutsKey71Map` dataset
 #'
-#' This matches the `NutsKey71` dimension in SurvStat. This is the 38 NUTS2
+#' This matches the `NutsKey71` dimension in `SurvStat`. This is the 38 `NUTS2`
 #' level administrative regions in Germany.
 #'
 #' @usage data(NutsKey71Map)
@@ -411,10 +413,12 @@ NULL
 #' @format
 #' A `sf` dataframe containing the following columns:
 #'
-#' * Id - the full hierarchical value Id column
-#' * ComponentId - the ComponentId column
-#' * HierarchyId - the Id of the Hierarchy that this value applies to
-#' * Name - A description of the item
+#' * `Id` - the full `SurvStat` identifier for this region (includes
+#'   hierarchical information)
+#' * `ComponentId` - the id of the most granular geographical unit (which can be
+#'   used to link out to other data sets)
+#' * `HierarchyId` - the id of the geographical unit type
+#' * `Name` - the name of the region
 #'
 #' 38 rows
 #'
@@ -426,11 +430,11 @@ NULL
 ## NutsKey71Map definition ends
 ## CountyKey71Map definition ----
 
-#' The CountyKey71Map dataset
+#' The `CountyKey71Map` dataset
 #'
-#' This matches the `CountyKey71` dimension in SurvStat. This is the 400
-#' "Stadtkreis" or "Landkreise" administrative regions in Germany, plus 12
-#' Berlin boroughs ("Bezirke") which replace the Berlin Kriese (Id: `11000`).
+#' This matches the `CountyKey71` dimension in `SurvStat`. This is the 400
+#' `Stadtkreis` and `Landkreise` administrative regions in Germany, plus 12
+#' Berlin boroughs (`Bezirke`) which replace the Berlin `Kriese` (Id: `11000`).
 #' The boroughs have sequential `Id`s from `[11001]` to `[11012]`
 #'
 #' @usage data(CountyKey71Map)
@@ -438,10 +442,12 @@ NULL
 #' @format
 #' A `sf` dataframe containing the following columns:
 #'
-#' * Id - the full hierarchical value Id column
-#' * ComponentId - the ComponentId column
-#' * HierarchyId - the Id of the Hierarchy that this value applies to
-#' * Name - A description of the item
+#' * `Id` - the full `SurvStat` identifier for this region (includes
+#'   hierarchical information)
+#' * `ComponentId` - the id of the most granular geographical unit (which can be
+#'   used to link out to other data sets)
+#' * `HierarchyId` - the id of the geographical unit type
+#' * `Name` - the name of the region
 #'
 #' Any grouping allowed.
 #'

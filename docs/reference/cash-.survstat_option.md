@@ -1,6 +1,6 @@
-# Survstat option accessor
+# `Survstat` option accessor
 
-Survstat options are values that may have children.
+`Survstat` options are values that may have children.
 
 ## Usage
 

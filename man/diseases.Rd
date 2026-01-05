@@ -3,7 +3,7 @@
 \docType{data}
 \name{diseases}
 \alias{diseases}
-\title{SurvStat disease list}
+\title{\code{SurvStat} disease list}
 \format{
 An object of class \code{list} of length 121.
 }
@@ -11,7 +11,7 @@ An object of class \code{list} of length 121.
 diseases
 }
 \description{
-SurvStat disease list
+\code{SurvStat} disease list
 }
 \references{
 \url{https://survstat.rki.de/Content/Query/Create.aspx}

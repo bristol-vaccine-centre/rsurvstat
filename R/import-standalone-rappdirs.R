@@ -59,12 +59,12 @@
 #' @param appname is the name of application. If NULL, just the system
 #'     directory is returned.
 #' @param appauthor (only required and used on Windows) is the name of the
-#'     appauthor or distributing body for this application. Typically
-#'     it is the owning company name. This falls back to appname.
+#'     app author or distributing body for this application. Typically
+#'     it is the owning company name. This falls back to app name.
 #' @param version is an optional version path element to append to the
 #'     path. You might want to use this if you want multiple versions
 #'     of your app to be able to run independently. If used, this
-#'     would typically be `"<major>.<minor>"`. Only applied when appname
+#'     would typically be `"<major>.<minor>"`. Only applied when app name
 #'     is not NULL.
 #' @param os Operating system whose conventions are used to construct the
 #'     requested directory. Possible values are "win", "mac", "unix". If `NULL`

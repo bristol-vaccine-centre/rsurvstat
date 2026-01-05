@@ -75,18 +75,19 @@
 #   return(df2)
 # }
 
-#' Retrieve time series data from the RKI SurvStat api.
+#' Retrieve time series data from the `SurvStat` web service.
 #'
 #' This function gets a weekly timeseries of disease count or incidence data
-#' from the RKI `SurvStat` web API. The timeseries can be stratified by any
-#' combination of age, geography, disease, disease subtype. Queries to the
-#' API are cached and paged, but obviously multidimensional extracts have the
-#' potential to need a lot of downloading.
+#' from the  Robert Koch Institute `SurvStat` web service. The timeseries can be
+#' stratified by any combination of age, geography, disease, disease subtype.
+#' Queries to `SurvStat` are cached and paged, but obviously multidimensional
+#' extracts have the potential to need a lot of downloading.
 #'
 #' @param disease the disease of interest, see `rsurvstat::diseases`. This is
 #'   technically optional, and if omitted the counts of all diseases will be
 #'   returned.
-#' @param measure one of `"Count"` (default) or `"Incidence"`
+#' @param measure one of `"Count"` (default) or `"Incidence"` per 100,000 per
+#'   week or year depending on the context.
 #' @param ... not used, must be empty.
 #' @param age_group (optional) the age group of interest, see `rsurvstat::age_groups`
 #' @param age_range (optional) a length 2 vector with the minimum and maximum ages to consider
@@ -109,7 +110,7 @@
 #'   `disease_code` columns, and some of `age_name`, `age_code`, `age_low`,
 #'   `age_high`, `geo_code`, `geo_name`, `disease_subtype_code`,
 #'   `disease_subtype_name` depending on options. The dataframe will be grouped
-#'   to make sure each group is a unique timeseries.
+#'   to make sure each group contains a single timeseries.
 #' @export
 #' @concept survstat
 #'
@@ -120,12 +121,15 @@
 #'   age_group = age_groups$children_coarse
 #' )
 #'
-#' get_timeseries(
-#'   diseases$`COVID-19`,
-#'   measure = "Count",
-#'   age_group = age_groups$children_coarse,
-#'   geography = rsurvstat::FedStateKey71Map[1:10,]
-#' )
+#' if (interactive()) {
+#'   # Long running example
+#'   get_timeseries(
+#'     diseases$`COVID-19`,
+#'     measure = "Count",
+#'     age_group = age_groups$children_coarse,
+#'     geography = rsurvstat::FedStateKey71Map[1:10,]
+#'   )
+#' }
 #'
 #' get_timeseries(
 #'   measure = "Count",
@@ -341,6 +345,258 @@ get_timeseries = function(
 }
 
 
+#' Retrieve data from the `SurvStat` web service relating to a single time period.
+#'
+#' This function gets a snapshot of disease count or incidence data
+#' from the  Robert Koch Institute `SurvStat` web service, based on either whole
+#' epidemiological season or an individual week within a season. Seasons are
+#' whole years starting either at the beginning of the calendar year, at week 27
+#' or at week 40.
+#'
+#' The snapshot can be stratified by any combination of age, geography, disease,
+#' disease subtype. Queries to `SurvStat` are cached and paged, but obviously
+#' multidimensional extracts have the potential to need a lot of downloading.
+#'
+#' @inheritParams get_timeseries
+#' @param season the start year of the season in which the snapshot is taken
+#' @param season_week the start week within the season of the snapshot. If missing
+#'   then the whole season is used
+#' @param season_start the week of the calendar year in which the season starts
+#'   this can be one of `1`, `27` or `40`.
+#'
+#' @return a data frame with at least `year` (the start of the epidemiological
+#'   season) and `start_week` (the calendar week in which the epidemioloigcal
+#'   season starts), and one of `count` or `incidence` columns. Most likely it
+#'   will also have `disease_name` and `disease_code` columns, and some of
+#'   `age_name`, `age_code`, `age_low`, `age_high`, `geo_code`, `geo_name`,
+#'   `disease_subtype_code`, `disease_subtype_name` depending on options.
+#' @export
+#' @concept survstat
+#'
+#' @examples
+#' get_snapshot(
+#'   diseases$`COVID-19`,
+#'   measure = "Count",
+#'   season = 2024,
+#'   age_group = age_groups$children_coarse
+#' )
+#'
+#' get_snapshot(
+#'   diseases$`COVID-19`,
+#'   measure = "Count",
+#'   age_group = age_groups$children_coarse,
+#'   season = 2024,
+#'   geography = rsurvstat::FedStateKey71Map[1:10,]
+#' )
+get_snapshot = function(
+  disease = NULL,
+  measure = c("Count", "Incidence"),
+  ...,
+  season,
+  season_week = NULL,
+  season_start = 1,
+  age_group = NULL,
+  age_range = c(0, Inf),
+  disease_subtype = FALSE,
+  geography = NULL,
+  .progress = TRUE
+) {
+  rlang::check_dots_empty()
+  measure = match.arg(measure)
+
+  # The API can handle 2 dimensions per page.
+  # Any additional dimensions are page filters
+
+  # The first dimension is decided here. Usually it will be disease / disease_subtype
+  # if > 1 of these, or geography or age category.
+  # decide which dimension is going to be queried for as a column
+  if (is.null(disease)) {
+    coltype = "disease"
+    colhier = as.character(
+      hierarchy_list$notification_category$disease_pathogen$disease
+    )
+  } else if (isTRUE(disease_subtype)) {
+    coltype = "disease_subtype"
+    colhier = as.character(
+      hierarchy_list$notification_category$disease_pathogen$disease$pathogenlevel_1
+    )
+  } else if (is.character(geography)) {
+    coltype = "geo"
+    if (geography %in% names(geography_resolution)) {
+      geography = geography_resolution[[geography]]
+    }
+    colhier = geography
+  } else if (is.character(age_group) && identical(age_range, c(0, Inf))) {
+    coltype = "age"
+    colhier = if (age_group %in% names(age_groups)) {
+      age_groups[[age_group]]
+    } else {
+      age_group
+    }
+  }
+
+  # The second dimension is decided here. Usually it will be disease / disease_subtype
+  # if > 1 of these, or geography or age category.
+  # decide which dimension is going to be queried for as a row
+  if (is.null(disease) && coltype != "disease") {
+    rowtype = "disease"
+    rowhier = as.character(
+      hierarchy_list$notification_category$disease_pathogen$disease
+    )
+  } else if (isTRUE(disease_subtype) && coltype != "disease_subtype") {
+    rowtype = "disease_subtype"
+    rowhier = as.character(
+      hierarchy_list$notification_category$disease_pathogen$disease$pathogenlevel_1
+    )
+  } else if (is.character(geography) && coltype != "geo") {
+    rowtype = "geo"
+    if (geography %in% names(geography_resolution)) {
+      geography = geography_resolution[[geography]]
+    }
+    rowhier = geography
+  } else if (
+    is.character(age_group) &&
+      identical(age_range, c(0, Inf)) &&
+      coltype != "age"
+  ) {
+    rowtype = "age"
+    rowhier = if (age_group %in% names(age_groups)) {
+      age_groups[[age_group]]
+    } else {
+      age_group
+    }
+  } else {
+    rowtype = NA
+    rowhier = NULL
+  }
+
+  # Anything that is not the row dimension or the column dimension (as
+  # decided above), Has to be retrieved as a set of pages. There will be one
+  # query for each of the pages.
+
+  # The base page filter is the year and possibly week of interest
+  page_filters = c(
+    list(.epiyear_filter(start_year = season, epiweek = season_start)),
+    if (!is.null(season_week)) {
+      list(.epiweek_filter(start_week = season_week, epiweek = season_start))
+    } else {
+      NULL
+    }
+  )
+
+  if (!isTRUE(coltype == "disease" || rowtype == "disease")) {
+    page_filters = .cross_join_filters(page_filters, .disease_filter(disease))
+  }
+  if (!isTRUE(coltype == "geo" || rowtype == "geo")) {
+    page_filters = .cross_join_filters(page_filters, .place_filter(geography))
+  }
+  if (!isTRUE(coltype == "age" || rowtype == "age")) {
+    page_filters = .cross_join_filters(
+      page_filters,
+      .age_filter(age_group, age_range)
+    )
+  }
+
+  # This is the output dataframe:
+  collect = NULL
+
+  if (.progress) {
+    cli::cli_progress_bar(total = length(page_filters))
+  }
+  if (is.null(page_filters)) {
+    page_filters = list(NULL)
+  }
+  for (page in page_filters) {
+    # Each item in the page filters list is itself a list of filters
+    # that are added to the request for one `page` of results.
+    # The page filters depend on options but might be a selection of
+    # geography, age categories, or similar.
+
+    tmp2 = .get_request(
+      commands$olap_data,
+      cube = cubes$survstat,
+      language = languages$german,
+      column_hierarchy = as.character(colhier),
+      measure = measure,
+      filters = page,
+      row_hierarchy = as.character(rowhier)
+    )
+
+    tmp = try(tmp2 %>% .do_survstat_command(quiet = TRUE), silent = TRUE)
+
+    # Do query and halt on error
+    if (inherits(tmp, "try-error")) {
+      cat(as.character(tmp2))
+      stop(
+        "Aborting as the SurvStat query returned an error.\n",
+        "It may be because too much data was requested in one go.\n",
+        "you can try chunking the data by year (using `years`)\n",
+        "The error was:\n",
+        tmp
+      )
+      break
+    }
+
+    if (.progress) {
+      cli::cli_progress_update()
+    }
+
+    # Basically extract the XML into a dataframe
+    tmp = tmp %>% .process_olap_data_result()
+
+    # Extract the values from the filters used to get this page of results
+    # add add them into the dataframe before combining with other pages.
+
+    if (!is.null(names(page))) {
+      # Somehow this gets flattened when only one option. I cannot find out where
+      # so I;ve put in an explicit check for it.
+      page = list(page)
+    }
+    values = unlist(lapply(page, function(dim) dim$values), recursive = FALSE)
+    tmp = tmp %>% dplyr::mutate(!!!values)
+
+    collect = if (is.null(collect)) tmp else dplyr::bind_rows(tmp, collect)
+  }
+
+  # The column data will be different depending on the configuration maybe age,
+  # maybe geography
+  # Here we rename columns to whatever it was we set as the column dimension.
+  colnames(collect) = gsub("col", coltype, colnames(collect), fixed = TRUE)
+  if (is.na(rowtype)) {
+    collect = collect %>% dplyr::select(-dplyr::starts_with("row"))
+  } else {
+    colnames(collect) = gsub("row", rowtype, colnames(collect), fixed = TRUE)
+  }
+
+  # Fix age codes and break into age_name, age_low and age_high
+  if ("age_code" %in% colnames(collect)) {
+    tmp = .fmt_range(collect$age_code)
+    collect = collect %>% dplyr::mutate(!!!tmp)
+  }
+
+  # Fix age codes and break into age_name, age_low and age_high
+  if ("disease_name" %in% colnames(collect)) {
+    collect = collect %>%
+      dplyr::mutate(
+        disease_name = ifelse(
+          disease_name %in% diseases,
+          names(diseases)[match(disease_name, diseases)],
+          disease_name
+        )
+      )
+  }
+
+  # rename "value" column to "count" or "incidence"
+  collect = collect %>% dplyr::rename(!!(tolower(measure)) := value)
+
+  if (.progress) {
+    cli::cli_progress_done()
+  }
+
+  return(collect)
+}
+
+
 # Utility functions ----
 
 # Take the output from the olap data quesies and extracts rows and columns
@@ -415,6 +671,7 @@ get_timeseries = function(
   l = as.numeric(stringr::str_extract(v, "\\[A([0-9]+)", 1))
   h = as.numeric(stringr::str_extract(v, "([0-9]+)\\]$", 1)) + 1
   f = dplyr::case_when(
+    is.na(l) & is.na(h) ~ NA,
     is.na(h) ~ sprintf("%d+", l),
     l == h - 1 ~ sprintf("%d", l),
     TRUE ~ sprintf("%d\u2013%d", l, h - 1)
@@ -464,6 +721,45 @@ get_timeseries = function(
       hierarchy_value = sprintf("[ReportingDate].[WeekYear].&[%d]", v)
     )
   })
+}
+
+
+# .match_values(hierarchy_list$time$seasonweek_27_)
+.epiyear_filter = function(start_year, epiweek = 1) {
+  stopifnot(epiweek %in% c(1, 27, 40))
+  if (length(start_year) != 1) {
+    stop("`start_year` must be of length one")
+  }
+  hier = if (epiweek == 1) "WeekYear" else sprintf("Season%d Year", epiweek)
+
+  hier = list(
+    values = list(year = start_year, start_week = epiweek),
+    dimension_id = "[ReportingDate]",
+    hierarchy_id = sprintf("[ReportingDate].[%s]", hier),
+    hierarchy_value = sprintf("[ReportingDate].[%s].&[%d]", hier, start_year)
+  )
+
+  return(hier)
+}
+
+
+# .match_values(hierarchy_list$time$seasonweek_27_)
+.epiweek_filter = function(start_week, epiweek = 1) {
+  stopifnot(epiweek %in% c(1, 27, 40))
+  stopifnot(start_week %in% 1:53)
+  if (!is.null(start_week) && length(start_week) != 1) {
+    stop("`start_week` must be of length one")
+  }
+
+  hier2 = if (epiweek == 1) "Week" else sprintf("Season%d Week", epiweek)
+  hier2 = list(
+    values = list(week = start_week),
+    dimension_id = "[ReportingDate]",
+    hierarchy_id = sprintf("[ReportingDate].[%s]", hier2),
+    hierarchy_value = sprintf("[ReportingDate].[%s].&[%d]", hier2, start_week)
+  )
+
+  return(hier2)
 }
 
 # Create a filter for a set of ages where the standard grop is being

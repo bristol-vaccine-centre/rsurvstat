@@ -1,8 +1,8 @@
 ## Hierarchy list ----
 
-#' Survstat option accessor
+#' `Survstat` option accessor
 #'
-#' Survstat options are values that may have children.
+#' `Survstat` options are values that may have children.
 #'
 #' @param x the options
 #' @param y the item
@@ -10,6 +10,7 @@
 #' @return the value of the list item or an error if it does not exist
 #' @export
 #' @concept transpose
+#' @keywords internal
 `$.survstat_option` <- function(x, y) {
   if (is.character(y)) {
     ylab = y
@@ -31,6 +32,7 @@
 #' @param pattern a matching pattern
 #' @returns the names of the children
 #' @exportS3Method utils::.DollarNames
+#' @keywords internal
 .DollarNames.survstat_option <- function(x, pattern) {
   sublist = attr(x, "children")
   if (is.null(sublist) || length(sublist) == 0) {

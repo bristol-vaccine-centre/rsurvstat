@@ -3,7 +3,7 @@
 \docType{data}
 \name{age_groups}
 \alias{age_groups}
-\title{SurvStat age group list}
+\title{\code{SurvStat} age group list}
 \format{
 An object of class \code{list} of length 8.
 }

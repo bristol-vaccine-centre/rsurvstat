@@ -14,7 +14,7 @@ set_cache_settings(..., active = NULL, dir = NULL, stale = NULL)
 \item{dir}{file path (optional), the location of the cache}
 
 \item{stale}{numeric (optional), the number of days before a cached item is
-considered out of daye}
+considered out of date}
 }
 \value{
 the old cache settings as a list

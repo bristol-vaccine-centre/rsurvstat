@@ -5,7 +5,7 @@
 \alias{commands}
 \alias{return_measures}
 \alias{geography_resolution}
-\title{Commands supported by the SurvStat service}
+\title{Commands supported by the \code{SurvStat} service}
 \format{
 An object of class \code{list} of length 8.
 

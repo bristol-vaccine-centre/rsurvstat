@@ -1,6 +1,6 @@
-# SurvStat disease list
+# `SurvStat` disease list
 
-SurvStat disease list
+`SurvStat` disease list
 
 ## Usage
 

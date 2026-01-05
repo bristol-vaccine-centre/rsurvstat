@@ -17,3 +17,4 @@ the names of the children
 \description{
 Support for auto suggests on \code{survstat_option}s
 }
+\keyword{internal}

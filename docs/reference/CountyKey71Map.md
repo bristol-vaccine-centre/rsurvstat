@@ -1,8 +1,8 @@
-# The CountyKey71Map dataset
+# The `CountyKey71Map` dataset
 
-This matches the `CountyKey71` dimension in SurvStat. This is the 400
-"Stadtkreis" or "Landkreise" administrative regions in Germany, plus 12
-Berlin boroughs ("Bezirke") which replace the Berlin Kriese (Id:
+This matches the `CountyKey71` dimension in `SurvStat`. This is the 400
+`Stadtkreis` and `Landkreise` administrative regions in Germany, plus 12
+Berlin boroughs (`Bezirke`) which replace the Berlin `Kriese` (Id:
 `11000`). The boroughs have sequential `Id`s from `[11001]` to `[11012]`
 
 ## Usage
@@ -15,13 +15,15 @@ data(CountyKey71Map)
 
 A `sf` dataframe containing the following columns:
 
-- Id - the full hierarchical value Id column
+- `Id` - the full `SurvStat` identifier for this region (includes
+  hierarchical information)
 
-- ComponentId - the ComponentId column
+- `ComponentId` - the id of the most granular geographical unit (which
+  can be used to link out to other data sets)
 
-- HierarchyId - the Id of the Hierarchy that this value applies to
+- `HierarchyId` - the id of the geographical unit type
 
-- Name - A description of the item
+- `Name` - the name of the region
 
 Any grouping allowed.
 

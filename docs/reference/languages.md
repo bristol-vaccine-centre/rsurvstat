@@ -1,6 +1,6 @@
-# Languages supported by the SurvStat service
+# Languages supported by the `SurvStat` service
 
-Languages supported by the SurvStat service
+Languages supported by the `SurvStat` service
 
 ## Usage
 

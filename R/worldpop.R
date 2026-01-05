@@ -31,10 +31,12 @@
 #'
 #' @examples
 #'
-#' get_timeseries(
+#' get_snapshot(
 #'   disease = diseases$`COVID-19`,
-#'   geography = "state"
+#'   geography = "state",
+#'   season=2024
 #' ) %>%
+#' dplyr::glimpse() %>%
 #' fit_population() %>%
 #' dplyr::glimpse()
 #'
@@ -51,7 +53,11 @@ fit_population = function(count_df, .progress = TRUE) {
     NULL
   }
 
-  years = unique(as.numeric(format(count_df$date, "%Y")))
+  if ("year" %in% colnames(count_df)) {
+    years = unique(count_df$year)
+  } else {
+    years = unique(as.numeric(format(count_df$date, "%Y")))
+  }
   pop_df = infer_population(
     age_group = age_group,
     geography = geography,
@@ -59,6 +65,13 @@ fit_population = function(count_df, .progress = TRUE) {
     .progress = .progress
   )
   by = intersect(colnames(pop_df), colnames(count_df))
+
+  if (!"date" %in% colnames(count_df)) {
+    return(
+      count_df %>%
+        dplyr::inner_join(pop_df, by = by)
+    )
+  }
 
   if (length(years) == 1) {
     return(

@@ -3,14 +3,16 @@
 \docType{data}
 \name{CountyKey71Map}
 \alias{CountyKey71Map}
-\title{The CountyKey71Map dataset}
+\title{The \code{CountyKey71Map} dataset}
 \format{
 A \code{sf} dataframe containing the following columns:
 \itemize{
-\item Id - the full hierarchical value Id column
-\item ComponentId - the ComponentId column
-\item HierarchyId - the Id of the Hierarchy that this value applies to
-\item Name - A description of the item
+\item \code{Id} - the full \code{SurvStat} identifier for this region (includes
+hierarchical information)
+\item \code{ComponentId} - the id of the most granular geographical unit (which can be
+used to link out to other data sets)
+\item \code{HierarchyId} - the id of the geographical unit type
+\item \code{Name} - the name of the region
 }
 
 Any grouping allowed.
@@ -21,9 +23,9 @@ Any grouping allowed.
 data(CountyKey71Map)
 }
 \description{
-This matches the \code{CountyKey71} dimension in SurvStat. This is the 400
-"Stadtkreis" or "Landkreise" administrative regions in Germany, plus 12
-Berlin boroughs ("Bezirke") which replace the Berlin Kriese (Id: \code{11000}).
+This matches the \code{CountyKey71} dimension in \code{SurvStat}. This is the 400
+\code{Stadtkreis} and \code{Landkreise} administrative regions in Germany, plus 12
+Berlin boroughs (\code{Bezirke}) which replace the Berlin \code{Kriese} (Id: \code{11000}).
 The boroughs have sequential \code{Id}s from \verb{[11001]} to \verb{[11012]}
 }
 \keyword{datasets}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/survstat-options.R
 \name{$.survstat_option}
 \alias{$.survstat_option}
-\title{Survstat option accessor}
+\title{\code{Survstat} option accessor}
 \usage{
 \method{$}{survstat_option}(x, y)
 }
@@ -15,6 +15,7 @@
 the value of the list item or an error if it does not exist
 }
 \description{
-Survstat options are values that may have children.
+\code{Survstat} options are values that may have children.
 }
 \concept{transpose}
+\keyword{internal}

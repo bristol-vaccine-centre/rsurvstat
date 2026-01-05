@@ -1,6 +1,6 @@
-# Data sources in the SurvStat service
+# Data sources in the `SurvStat` service
 
-Data sources in the SurvStat service
+Data sources in the `SurvStat` service
 
 ## Usage
 

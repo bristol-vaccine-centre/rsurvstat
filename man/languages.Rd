@@ -3,7 +3,7 @@
 \docType{data}
 \name{languages}
 \alias{languages}
-\title{Languages supported by the SurvStat service}
+\title{Languages supported by the \code{SurvStat} service}
 \format{
 An object of class \code{list} of length 2.
 }
@@ -11,7 +11,7 @@ An object of class \code{list} of length 2.
 languages
 }
 \description{
-Languages supported by the SurvStat service
+Languages supported by the \code{SurvStat} service
 }
 \references{
 \url{https://survstat.rki.de/Content/Query/Create.aspx}

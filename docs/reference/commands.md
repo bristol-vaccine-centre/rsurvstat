@@ -1,4 +1,4 @@
-# Commands supported by the SurvStat service
+# Commands supported by the `SurvStat` service
 
 Not all services support all 3 methods.
 

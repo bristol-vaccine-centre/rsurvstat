@@ -3,14 +3,16 @@
 \docType{data}
 \name{NutsKey71Map}
 \alias{NutsKey71Map}
-\title{The NutsKey71Map dataset}
+\title{The \code{NutsKey71Map} dataset}
 \format{
 A \code{sf} dataframe containing the following columns:
 \itemize{
-\item Id - the full hierarchical value Id column
-\item ComponentId - the ComponentId column
-\item HierarchyId - the Id of the Hierarchy that this value applies to
-\item Name - A description of the item
+\item \code{Id} - the full \code{SurvStat} identifier for this region (includes
+hierarchical information)
+\item \code{ComponentId} - the id of the most granular geographical unit (which can be
+used to link out to other data sets)
+\item \code{HierarchyId} - the id of the geographical unit type
+\item \code{Name} - the name of the region
 }
 
 38 rows
@@ -19,7 +21,7 @@ A \code{sf} dataframe containing the following columns:
 data(NutsKey71Map)
 }
 \description{
-This matches the \code{NutsKey71} dimension in SurvStat. This is the 38 NUTS2
+This matches the \code{NutsKey71} dimension in \code{SurvStat}. This is the 38 \code{NUTS2}
 level administrative regions in Germany.
 }
 \keyword{datasets}

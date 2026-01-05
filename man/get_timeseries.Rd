@@ -2,7 +2,7 @@
 % Please edit documentation in R/survstat-loader.R
 \name{get_timeseries}
 \alias{get_timeseries}
-\title{Retrieve time series data from the RKI SurvStat api.}
+\title{Retrieve time series data from the \code{SurvStat} web service.}
 \usage{
 get_timeseries(
   disease = NULL,
@@ -22,7 +22,8 @@ get_timeseries(
 technically optional, and if omitted the counts of all diseases will be
 returned.}
 
-\item{measure}{one of \code{"Count"} (default) or \code{"Incidence"}}
+\item{measure}{one of \code{"Count"} (default) or \code{"Incidence"} per 100,000 per
+week or year depending on the context.}
 
 \item{...}{not used, must be empty.}
 
@@ -54,14 +55,14 @@ a data frame with at least \code{date} (weekly), and one of \code{count} or
 \code{disease_code} columns, and some of \code{age_name}, \code{age_code}, \code{age_low},
 \code{age_high}, \code{geo_code}, \code{geo_name}, \code{disease_subtype_code},
 \code{disease_subtype_name} depending on options. The dataframe will be grouped
-to make sure each group is a unique timeseries.
+to make sure each group contains a single timeseries.
 }
 \description{
 This function gets a weekly timeseries of disease count or incidence data
-from the RKI \code{SurvStat} web API. The timeseries can be stratified by any
-combination of age, geography, disease, disease subtype. Queries to the
-API are cached and paged, but obviously multidimensional extracts have the
-potential to need a lot of downloading.
+from the  Robert Koch Institute \code{SurvStat} web service. The timeseries can be
+stratified by any combination of age, geography, disease, disease subtype.
+Queries to \code{SurvStat} are cached and paged, but obviously multidimensional
+extracts have the potential to need a lot of downloading.
 }
 \examples{
 get_timeseries(
@@ -70,12 +71,15 @@ get_timeseries(
   age_group = age_groups$children_coarse
 )
 
-get_timeseries(
-  diseases$`COVID-19`,
-  measure = "Count",
-  age_group = age_groups$children_coarse,
-  geography = rsurvstat::FedStateKey71Map[1:10,]
-)
+if (interactive()) {
+  # Long running example
+  get_timeseries(
+    diseases$`COVID-19`,
+    measure = "Count",
+    age_group = age_groups$children_coarse,
+    geography = rsurvstat::FedStateKey71Map[1:10,]
+  )
+}
 
 get_timeseries(
   measure = "Count",

@@ -101,6 +101,22 @@
 
 .cache_settings = new.env(parent = environment())
 
+#' Delete all cached `SurvStat` requests
+#'
+#' The cache can be controlled with `set_cache_settings()`
+#'
+#' @returns nothing. called for side effects
+#' @export
+#'
+#' @examples
+#' if (interactive()) cache_clear()
+cache_clear = function() {
+  dir = .get_cache_dir()
+  fs::file_delete(dir)
+  fs::dir_create(dir)
+  invisible(NULL)
+}
+
 #' Set options for the `rsurvstat` cache
 #'
 #' By default successful requests to `SurvStat` are cached for 7 days to prevent
@@ -112,7 +128,7 @@
 #' @param active boolean (optional), set to FALSE to disable caching
 #' @param dir file path (optional), the location of the cache
 #' @param stale numeric (optional), the number of days before a cached item is
-#'   considered out of daye
+#'   considered out of date
 #'
 #' @returns the old cache settings as a list
 #' @export
@@ -201,7 +217,7 @@ set_cache_settings = function(
   file = fs::path(dir, req_hash, ext = "xml")
   if (fs::file_exists(file)) {
     if (!quiet) {
-      message("Using cached survstat data.")
+      message("Using cached SurvStat data.")
     }
     return(readLines(file))
   }
@@ -215,13 +231,14 @@ set_cache_settings = function(
   writeLines(res, file)
 }
 
+#
 .do_survstat_command = function(request, command = NULL, quiet = FALSE) {
   if (!.check_curl()) {
     return(NULL)
   }
 
   if (!quiet) {
-    message("Making survstat request... ", appendLF = FALSE)
+    message("Making SurvStat request... ", appendLF = FALSE)
   }
 
   req_hash = rlang::hash(request)
@@ -231,28 +248,53 @@ set_cache_settings = function(
     return(cached_res)
   }
 
-  req = httr2::request(
-    "https://tools.rki.de/SurvStat/SurvStatWebService.svc"
-  ) %>%
-    httr2::req_headers(
-      Accept = "text/xml",
-      Accept = "multipart/*"
-      # if (is.null(command)) {
-      #   NULL
-      # } else {
-      #   Action = sprintf(
-      #     '"http://tools.rki.de/SurvStat/SurvStatWebService/%s"',
-      #     command
-      #   )
-      # }
-    ) %>%
-    httr2::req_body_raw(
-      body = request,
-      type = "application/soap+xml;charset=utf-8"
-    )
+  # httr2 version
+
+  # req = httr2::request(
+  #   "https://tools.rki.de/SurvStat/SurvStatWebService.svc"
+  # ) %>%
+  #   httr2::req_headers(
+  #     Accept = "text/xml",
+  #     Accept = "multipart/*"
+  #     # if (is.null(command)) {
+  #     #   NULL
+  #     # } else {
+  #     #   Action = sprintf(
+  #     #     '"http://tools.rki.de/SurvStat/SurvStatWebService/%s"',
+  #     #     command
+  #     #   )
+  #     # }
+  #   ) %>%
+  #   httr2::req_body_raw(
+  #     body = request,
+  #     type = "application/soap+xml;charset=utf-8"
+  #   )
+  #
+  # resp = tryCatch(
+  #   req %>% httr2::req_perform(),
+  #   error = function(e) {
+  #     stop("SSL version: ", curl::curl_version()$version, "\n", e)
+  #   }
+  # )
+  #
+  # if (!quiet) {
+  #   message("Data downloaded.")
+  # }
+  # res = resp %>% httr2::resp_body_string()
+
+  # httr alternative
 
   resp = tryCatch(
-    req %>% httr2::req_perform(),
+    httr::POST(
+      "https://tools.rki.de/SurvStat/SurvStatWebService.svc",
+      config = c(
+        httr::accept_xml(),
+        httr::content_type("application/soap+xml;charset=utf-8"),
+        httr::accept("multipart/*"),
+        httr::config("proxy" = "") # disable proxy
+      ),
+      body = request
+    ),
     error = function(e) {
       stop("SSL version: ", curl::curl_version()$version, "\n", e)
     }
@@ -261,7 +303,10 @@ set_cache_settings = function(
   if (!quiet) {
     message("Data downloaded.")
   }
-  res = resp %>% httr2::resp_body_string()
+  res = resp %>% httr::content(as = "text")
+
+  # process result
+
   .set_cache(req_hash, res)
   res = xml2::read_xml(res)
   return(res)

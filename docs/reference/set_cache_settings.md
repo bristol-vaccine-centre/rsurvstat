@@ -28,7 +28,7 @@ set_cache_settings(..., active = NULL, dir = NULL, stale = NULL)
 - stale:
 
   numeric (optional), the number of days before a cached item is
-  considered out of daye
+  considered out of date
 
 ## Value
 

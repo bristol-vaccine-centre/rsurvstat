@@ -47,10 +47,12 @@ over time to allow us to fill in weekly population denominators.
 }}
 \examples{
 
-get_timeseries(
+get_snapshot(
   disease = diseases$`COVID-19`,
-  geography = "state"
+  geography = "state",
+  season=2024
 ) \%>\%
+dplyr::glimpse() \%>\%
 fit_population() \%>\%
 dplyr::glimpse()
 
