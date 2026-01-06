@@ -299,8 +299,8 @@ set_cache_settings = function(
           ssl_verifyhost = 2,
           sslversion = 6,
           http_version = 1
-        ),
-        httr::config("verbose" = 3)
+        )
+        # httr::config("verbose" = 3)
       ),
       body = request
     ),
