@@ -32,4 +32,6 @@ The 3 different resolution levels of the geospatial data
 
 \url{https://survstat.rki.de/Content/Query/Create.aspx}
 }
-\keyword{data}
+\concept{data}
+\keyword{datasets}
+\keyword{internal}

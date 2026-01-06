@@ -22,7 +22,7 @@
 #' to calculate it's incidence. This is simply modelled with a local polynomial
 #' over time to allow us to fill in weekly population denominators.
 #'
-#' @param count_df a dataframe from the output of `get_timeseries()`
+#' @param count_df a dataframe from the output of `get_timeseries()` or `get_snapshot()`
 #' @inheritParams get_timeseries
 #'
 #' @returns the `count_df` dataframe with an additional `population` column
@@ -31,24 +31,42 @@
 #'
 #' @examples
 #'
+#' # snapshot:
 #' get_snapshot(
 #'   disease = diseases$`COVID-19`,
 #'   geography = "state",
 #'   season=2024
 #' ) %>%
-#' dplyr::glimpse() %>%
+#' fit_population() %>%
+#' dplyr::glimpse()
+#'
+#' # timeseries
+#' # A weekly population estimate is inferred from the yearly data:
+#' get_timeseries(
+#'   diseases$`COVID-19`,
+#'   measure = "Count",
+#'   age_group = age_groups$children_coarse
+#' ) %>%
 #' fit_population() %>%
 #' dplyr::glimpse()
 #'
 fit_population = function(count_df, .progress = TRUE) {
   age_group = if ("age_code" %in% colnames(count_df)) {
-    unique(stringr::str_extract(count_df$age_code, "^(.*)\\.&\\[.+\\]$", 1))
+    unique(na.omit(stringr::str_extract(
+      count_df$age_code,
+      "^(.*)\\.&\\[.+\\]$",
+      1
+    )))
   } else {
     NULL
   }
 
   geography = if ("geo_code" %in% colnames(count_df)) {
-    unique(stringr::str_extract(count_df$geo_code, "^(.*)\\.&\\[.+\\]$", 1))
+    unique(na.omit(stringr::str_extract(
+      count_df$geo_code,
+      "^(.*)\\.&\\[.+\\]$",
+      1
+    )))
   } else {
     NULL
   }

@@ -29,3 +29,4 @@ be switched off altogether.
 old_settings = set_cache_settings(active = FALSE)
 set_cache_settings(old_settings)
 }
+\concept{cache}

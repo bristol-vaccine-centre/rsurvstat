@@ -64,12 +64,10 @@ devtools::install_github("bristol-vaccine-centre/rsurvstat")
 
 ## Data
 
-## Caching
-
-## Others
-
 - [`BerlinMap`](https://bristol-vaccine-centre.github.io/rsurvstat/reference/BerlinMap.md)
-  : A Berlin outline map dataset
+  :
+
+  A Berlin outline `sf` map
 
 - [`CountyKey71Map`](https://bristol-vaccine-centre.github.io/rsurvstat/reference/CountyKey71Map.md)
   :
@@ -91,40 +89,24 @@ devtools::install_github("bristol-vaccine-centre/rsurvstat")
 
   `SurvStat` age group list
 
-- [`cache_clear()`](https://bristol-vaccine-centre.github.io/rsurvstat/reference/cache_clear.md)
-  :
-
-  Delete all cached `SurvStat` requests
-
-- [`commands`](https://bristol-vaccine-centre.github.io/rsurvstat/reference/commands.md)
-  [`return_measures`](https://bristol-vaccine-centre.github.io/rsurvstat/reference/commands.md)
-  [`geography_resolution`](https://bristol-vaccine-centre.github.io/rsurvstat/reference/commands.md)
-  :
-
-  Commands supported by the `SurvStat` service
-
-- [`cubes`](https://bristol-vaccine-centre.github.io/rsurvstat/reference/cubes.md)
-  :
-
-  Data sources in the `SurvStat` service
-
 - [`diseases`](https://bristol-vaccine-centre.github.io/rsurvstat/reference/diseases.md)
   :
 
   `SurvStat` disease list
 
-- [`.tree()`](https://bristol-vaccine-centre.github.io/rsurvstat/reference/dot-tree.md)
-  : Tree printing method for list objects
+## Caching
 
-- [`languages`](https://bristol-vaccine-centre.github.io/rsurvstat/reference/languages.md)
+- [`cache_clear()`](https://bristol-vaccine-centre.github.io/rsurvstat/reference/cache_clear.md)
   :
 
-  Languages supported by the `SurvStat` service
+  Delete all cached `SurvStat` requests
 
 - [`set_cache_settings()`](https://bristol-vaccine-centre.github.io/rsurvstat/reference/set_cache_settings.md)
   :
 
   Set options for the `rsurvstat` cache
+
+## Others
 
 # Articles
 

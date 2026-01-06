@@ -15,3 +15,4 @@ The cache can be controlled with \code{set_cache_settings()}
 \examples{
 if (interactive()) cache_clear()
 }
+\concept{cache}

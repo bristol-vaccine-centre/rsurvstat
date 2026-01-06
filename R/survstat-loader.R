@@ -83,27 +83,36 @@
 #' Queries to `SurvStat` are cached and paged, but obviously multidimensional
 #' extracts have the potential to need a lot of downloading.
 #'
-#' @param disease the disease of interest, see `rsurvstat::diseases`. This is
-#'   technically optional, and if omitted the counts of all diseases will be
-#'   returned.
+#' @param disease the disease of interest as a `SurvStat` key, see
+#'   `rsurvstat::diseases` for a current list of these. This is technically
+#'   optional, and if omitted the counts of all diseases will be returned. Keys
+#'   are the same as the options in the `SurvStat` user interface found
+#'   [here](https://survstat.rki.de/Content/Query/Main.aspx#CreateQuery). `IfSG`
+#'   and `state` variants of diseases are counts that are reported directly to
+#'   the Robert Koch Institute or indirectly via state departments.
 #' @param measure one of `"Count"` (default) or `"Incidence"` per 100,000 per
 #'   week or year depending on the context.
 #' @param ... not used, must be empty.
-#' @param age_group (optional) the age group of interest, see `rsurvstat::age_groups`
-#' @param age_range (optional) a length 2 vector with the minimum and maximum ages to consider
+#' @param age_group (optional) the age group of interest as a `SurvStat` key,
+#'   see `rsurvstat::age_groups` for a list of valid options.
+#' @param age_range (optional) a length 2 vector with the minimum and maximum
+#'   ages to consider
 #' @param disease_subtype if `TRUE` the returned count will be broken down by
 #'   disease or pathogen subtype (assuming `disease` was provided).
-#' @param years (optional) a vector of years to limit the response to.
-#' @param geography (optional) a geographical breakdown can be given as a
-#'   character where it must be one of `state`, `nuts`, or `county` which
-#'   align to the 16 region `FedStateKey71Map`, 38 region `NutsKey71Map`,
-#'   or 411 region `CountyKey71Map` data respectively. Alternatively it can be
-#'   given as a subset of one of these maps, as a `sf` dataframe in which case
-#'   only that subset of regions will be returned.
+#' @param years (optional) a vector of years to limit the response to. This may
+#'   be useful to limit the size of returned pages in the event the `SurvStat`
+#'   service hits a data transfer limit.
+#' @param geography (optional) a geographical breakdown. This can be given as a
+#'   character where it must be one of `state`, `nuts`, or `county` specifying
+#'   the 16 region `FedStateKey71Map`, 38 region `NutsKey71Map`, or 411 region
+#'   `CountyKey71Map` data respectively. Alternatively it can be given as a
+#'   as a `sf` dataframe, subsetting one of these maps, in which case only that
+#'   subset of regions will be returned.
 #' @param trim_zeros get rid of zero counts. Either "both" (from start and end),
 #'   "leading" (from start only - the default) or "none".
 #' @param .progress by default a progress bar is shown, which may be important
-#'   if many downloads are needed to fulfil the request. It can be disabled here.
+#'   if many downloads are needed to fulfil the request. It can be disabled
+#'   by setting this to `FALSE` here.
 #'
 #' @return a data frame with at least `date` (weekly), and one of `count` or
 #'   `incidence` columns. Most likely it will also have `disease_name` and
@@ -365,7 +374,7 @@ get_timeseries = function(
 #'   this can be one of `1`, `27` or `40`.
 #'
 #' @return a data frame with at least `year` (the start of the epidemiological
-#'   season) and `start_week` (the calendar week in which the epidemioloigcal
+#'   season) and `start_week` (the calendar week in which the epidemiological
 #'   season starts), and one of `count` or `incidence` columns. Most likely it
 #'   will also have `disease_name` and `disease_code` columns, and some of
 #'   `age_name`, `age_code`, `age_low`, `age_high`, `geo_code`, `geo_name`,

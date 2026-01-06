@@ -26,16 +26,20 @@ infer_population(
 
   a dataframe from the output of
   [`get_timeseries()`](https://bristol-vaccine-centre.github.io/rsurvstat/reference/get_timeseries.md)
+  or
+  [`get_snapshot()`](https://bristol-vaccine-centre.github.io/rsurvstat/reference/get_snapshot.md)
 
 - .progress:
 
   by default a progress bar is shown, which may be important if many
-  downloads are needed to fulfil the request. It can be disabled here.
+  downloads are needed to fulfil the request. It can be disabled by
+  setting this to `FALSE` here.
 
 - age_group:
 
-  (optional) the age group of interest, see
+  (optional) the age group of interest as a `SurvStat` key, see
   [`rsurvstat::age_groups`](https://bristol-vaccine-centre.github.io/rsurvstat/reference/age_groups.md)
+  for a list of valid options.
 
 - geography:
 
@@ -46,7 +50,9 @@ infer_population(
 
 - years:
 
-  (optional) a vector of years to limit the response to.
+  (optional) a vector of years to limit the response to. This may be
+  useful to limit the size of returned pages in the event the `SurvStat`
+  service hits a data transfer limit.
 
 ## Value
 
@@ -62,23 +68,14 @@ a dataframe with geography, age grouping, year and population columns
 ## Examples
 
 ``` r
+# snapshot:
 get_snapshot(
   disease = diseases$`COVID-19`,
   geography = "state",
   season=2024
 ) %>%
-dplyr::glimpse() %>%
 fit_population() %>%
 dplyr::glimpse()
-#> Rows: 17
-#> Columns: 7
-#> $ count        <dbl> 35131, 55905, 11793, 14524, 2034, 7622, 22942, 8962, 2856…
-#> $ geo_name     <chr> "Baden-Württemberg", "Bayern", "Berlin", "Brandenburg", "…
-#> $ geo_code     <chr> "[DeutschlandNodes].[Kreise71Web].[FedStateKey71].&[08]",…
-#> $ year         <dbl> 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024, 202…
-#> $ start_week   <dbl> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
-#> $ disease_name <chr> "COVID-19", "COVID-19", "COVID-19", "COVID-19", "COVID-19…
-#> $ disease_code <chr> "[KategorieNz].[Krankheit DE].&[COVID-19]", "[KategorieNz…
 #> Rows: 16
 #> Columns: 8
 #> $ count        <dbl> 35131, 55905, 11793, 14524, 2034, 7622, 22942, 8962, 2856…
@@ -89,6 +86,28 @@ dplyr::glimpse()
 #> $ disease_name <chr> "COVID-19", "COVID-19", "COVID-19", "COVID-19", "COVID-19…
 #> $ disease_code <chr> "[KategorieNz].[Krankheit DE].&[COVID-19]", "[KategorieNz…
 #> $ population   <dbl> 11245936.7, 13248905.8, 3685269.6, 2556744.0, 704877.2, 1…
+
+# timeseries
+# A weekly population estimate is inferred from the yearly data:
+get_timeseries(
+  diseases$`COVID-19`,
+  measure = "Count",
+  age_group = age_groups$children_coarse
+) %>%
+fit_population() %>%
+dplyr::glimpse()
+#> Rows: 3,594
+#> Columns: 9
+#> Groups: age_name, age_code, disease_name, disease_code, age_low, age_high [10]
+#> $ age_name     <chr> "0–14", "0–14", "0–14", "0–14", "0–14", "0–14", "0–14", "…
+#> $ age_code     <chr> "[AlterPerson80].[AgeGroupName3].&[A00..14]", "[AlterPers…
+#> $ disease_name <chr> "COVID-19", "COVID-19", "COVID-19", "COVID-19", "COVID-19…
+#> $ disease_code <chr> "[KategorieNz].[Krankheit DE].&[COVID-19]", "[KategorieNz…
+#> $ age_low      <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+#> $ age_high     <dbl> 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 1…
+#> $ date         <date> 2020-02-03, 2020-02-10, 2020-02-17, 2020-02-24, 2020-03-…
+#> $ count        <dbl> 1, 2, 1, 4, 39, 197, 580, 910, 1018, 813, 575, 531, 401, …
+#> $ population   <dbl> 11458700, 11459855, 11460984, 11462088, 11463167, 1146422…
 
 
 infer_population(years=2020:2025) %>% dplyr::glimpse()

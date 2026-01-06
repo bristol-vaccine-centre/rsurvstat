@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">rsurvstat</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -60,83 +60,139 @@
     
     
 <div class="section level2">
+<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</h2>
+<p><code>rsurvstat</code> provides access to the <code>SurvStat</code>
+web service provided by the Robert Koch Institute. This collects
+infectious disease data in accordance with the German Infection
+Protection Act on the occurrence of numerous infectious diseases in
+Germany. The data is provided by a SOAP based web service as an OLAP
+cube. This package provides a convenient wrapper around the service,
+which allows relatively simple extraction of time series data faceted by
+age, disease, disease subtype, and geography at 3 levels of resolution.
+Query results are cached for speed.</p>
+<p>More details on <code>SurvStat</code> are available <a href="https://survstat.rki.de/Content/Query/Main.aspx#CreateQuery" class="external-link">here</a></p>
+</div>
+<div class="section level2">
 <h2 id="age-stratification-example">Age stratification example<a class="anchor" aria-label="anchor" href="#age-stratification-example"></a>
 </h2>
-<p>Get some data stratified by age:</p>
+<p>This example shows how to get some disease count data stratified by
+age. valid age groupings are defined in the
+<code><a href="../reference/age_groups.html">rsurvstat::age_groups</a></code> list ( 8 items). Supported diseases
+are in the <code><a href="../reference/diseases.html">rsurvstat::diseases</a></code> list (121 items).</p>
+<p>The data demonstrates left and right truncation due to ascertainment
+bias and reporting delays. Zero counts are not made explicit in the data
+and it is not possible to differentiate between zeros and missing
+values. The count data is not normalised by population size, so on first
+glance it seems there is not much difference between the age groups:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">tmp</span> <span class="op">=</span> <span class="fu">rsurvstat</span><span class="fu">::</span><span class="fu"><a href="../reference/get_timeseries.html">get_timeseries</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">entero</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_timeseries.html">get_timeseries</a></span><span class="op">(</span></span>
 <span>  <span class="va">diseases</span><span class="op">$</span><span class="va">Enterovirus</span>, </span>
-<span>  <span class="st">"Count"</span>, </span>
-<span>  age_group <span class="op">=</span> <span class="va">age_groups</span><span class="op">$</span><span class="va">zero_fifteen</span><span class="op">)</span></span></code></pre></div>
-<p>Re-band age groups and plot:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="va">tmp2</span> <span class="op">=</span> <span class="va">tmp</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu">ggplot</span><span class="op">(</span><span class="va">tmp2</span>, <span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">date</span>, y<span class="op">=</span><span class="va">count</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu">facet_wrap</span><span class="op">(</span><span class="op">~</span><span class="va">age_name</span><span class="op">)</span></span></code></pre></div>
-<p><img src="rsurvstat_files/figure-html/unnamed-chunk-2-1.png" class="r-plt" width="700"></p>
-<p>Recover population denominator:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">tmp3</span> <span class="op">=</span> <span class="va">tmp</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/fit_population.html">fit_population</a></span><span class="op">(</span><span class="op">)</span> </span>
+<span>  <span class="st">"Count"</span>,</span>
+<span>  age_group <span class="op">=</span> <span class="va">age_groups</span><span class="op">$</span><span class="va">zero_fifteen</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span></span>
-<span>  <span class="va">tmp3</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu">mutate</span><span class="op">(</span>weekly_incidence_per_100K <span class="op">=</span> <span class="va">count</span><span class="op">/</span><span class="va">population</span><span class="op">*</span><span class="fl">100000</span><span class="op">)</span>,</span>
-<span>  <span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">date</span>, y<span class="op">=</span><span class="va">weekly_incidence_per_100K</span>, colour<span class="op">=</span><span class="va">age_name</span><span class="op">)</span></span>
-<span><span class="op">)</span> <span class="op">+</span> <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="rsurvstat_files/figure-html/unnamed-chunk-3-1.png" class="r-plt" width="700"></p>
+<span>    <span class="va">entero</span>, </span>
+<span>    <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">date</span>, y<span class="op">=</span><span class="va">count</span>, colour <span class="op">=</span> <span class="va">age_name</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><img src="rsurvstat_files/figure-html/unnamed-chunk-1-1.png" class="r-plt" width="672"></p>
+<p>We can infer an estimate of the time varying population denominator
+from SurvStat and normalise the count, which highlights the difference
+between the age groups:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">entero2</span> <span class="op">=</span> <span class="va">entero</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="../reference/fit_population.html">fit_population</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>weekly_incidence_per_100K <span class="op">=</span> <span class="va">count</span><span class="op">/</span><span class="va">population</span><span class="op">*</span><span class="fl">100000</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span></span>
+<span>    <span class="va">entero2</span>,</span>
+<span>    <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">date</span>, y<span class="op">=</span><span class="va">weekly_incidence_per_100K</span>, colour<span class="op">=</span><span class="va">age_name</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><img src="rsurvstat_files/figure-html/unnamed-chunk-2-1.png" class="r-plt" width="672"></p>
 </div>
 <div class="section level2">
 <h2 id="geography">Geography<a class="anchor" aria-label="anchor" href="#geography"></a>
 </h2>
 <p>Data can be retrieved by region. There are 3 levels of detail,
 <code>state</code>, <code>nuts</code> and the most granular
-<code>county</code>. This is an example of the incidence at NUTS2 level
-(legend hidden):</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code>county</code>. This is an example of the incidence of COVID-19
+between 2020 and 2022 at NUTS2 level (legend hidden for clarity).</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
-<span><span class="va">covid_by_nuts</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_timeseries.html">get_timeseries</a></span><span class="op">(</span>disease <span class="op">=</span> <span class="va">diseases</span><span class="op">$</span><span class="va">`COVID-19`</span>, </span>
-<span>               measure<span class="op">=</span><span class="st">"Incidence"</span>, </span>
-<span>               years <span class="op">=</span> <span class="fl">2020</span><span class="op">:</span><span class="fl">2022</span>,</span>
-<span>               geography <span class="op">=</span> <span class="st">"nuts"</span></span>
-<span>               <span class="op">)</span></span>
+<span><span class="va">covid_by_nuts</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_timeseries.html">get_timeseries</a></span><span class="op">(</span></span>
+<span>  disease <span class="op">=</span> <span class="va">diseases</span><span class="op">$</span><span class="va">`COVID-19`</span>, </span>
+<span>  measure<span class="op">=</span><span class="st">"Incidence"</span>, </span>
+<span>  years <span class="op">=</span> <span class="fl">2020</span><span class="op">:</span><span class="fl">2022</span>,</span>
+<span>  geography <span class="op">=</span> <span class="st">"nuts"</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span></span>
-<span>  <span class="va">covid_by_nuts</span>,</span>
-<span>  <span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">date</span>, y<span class="op">=</span><span class="va">incidence</span>, colour<span class="op">=</span><span class="va">geo_name</span><span class="op">)</span></span>
-<span><span class="op">)</span> <span class="op">+</span> <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu">guides</span><span class="op">(</span>colour <span class="op">=</span> <span class="fu">guide_none</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="rsurvstat_files/figure-html/unnamed-chunk-4-1.png" class="r-plt" width="700"></p>
-<p>Matching <code>sf</code> maps are supplied as data, that can be
-joined to the <code>SurvStat</code> output:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<span>    <span class="va">covid_by_nuts</span>,</span>
+<span>    <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">date</span>, y<span class="op">=</span><span class="va">incidence</span>, colour<span class="op">=</span><span class="va">geo_name</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html" class="external-link">guides</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guide_none.html" class="external-link">guide_none</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="rsurvstat_files/figure-html/unnamed-chunk-3-1.png" class="r-plt" width="672"></p>
+<p>For geographic data matching <code>sf</code> maps are supplied in the
+package, that can be joined to the <code>SurvStat</code> output. We pick
+3 interesting times in the lead up to the peak:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># Pick a set of dates around the peak:</span></span>
 <span><span class="va">peak_date</span> <span class="op">=</span> <span class="va">covid_by_nuts</span><span class="op">$</span><span class="va">date</span><span class="op">[</span><span class="va">covid_by_nuts</span><span class="op">$</span><span class="va">incidence</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">covid_by_nuts</span><span class="op">$</span><span class="va">incidence</span><span class="op">)</span><span class="op">]</span></span>
-<span><span class="va">peak_date</span> <span class="op">=</span> <span class="va">peak_date</span><span class="op">+</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">14</span>,<span class="op">-</span><span class="fl">7</span>, <span class="fl">0</span>, <span class="fl">7</span><span class="op">)</span></span>
-<span><span class="va">peak</span> <span class="op">=</span> <span class="va">covid_by_nuts</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">date</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">peak_date</span><span class="op">)</span></span>
+<span><span class="va">peak_date</span> <span class="op">=</span> <span class="va">peak_date</span><span class="op">+</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">14</span>,<span class="op">-</span><span class="fl">7</span>, <span class="fl">0</span><span class="op">)</span></span>
+<span><span class="va">peak</span> <span class="op">=</span> <span class="va">covid_by_nuts</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">date</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">peak_date</span><span class="op">)</span></span>
 <span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span></span>
-<span><span class="fu">ggplot</span><span class="op">(</span></span>
-<span>  <span class="va">NutsKey71Map</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu">inner_join</span><span class="op">(</span><span class="va">peak</span>, by<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Id"</span> <span class="op">=</span> <span class="st">"geo_code"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>  <span class="fu">aes</span><span class="op">(</span>fill <span class="op">=</span> <span class="va">incidence</span><span class="op">)</span></span>
-<span><span class="op">)</span><span class="op">+</span><span class="fu">geom_sf</span><span class="op">(</span><span class="op">)</span><span class="op">+</span><span class="fu">facet_wrap</span><span class="op">(</span><span class="op">~</span><span class="va">date</span><span class="op">)</span></span></code></pre></div>
-<p><img src="rsurvstat_files/figure-html/unnamed-chunk-5-1.png" class="r-plt" width="700"></p>
+<span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span></span>
+<span>    <span class="va">NutsKey71Map</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">inner_join</a></span><span class="op">(</span><span class="va">peak</span>, by<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Id"</span> <span class="op">=</span> <span class="st">"geo_code"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">incidence</span><span class="op">)</span></span>
+<span>  <span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">date</span>,nrow <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html" class="external-link">scale_fill_viridis_c</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><img src="rsurvstat_files/figure-html/unnamed-chunk-4-1.png" class="r-plt" width="672"></p>
 </div>
 <div class="section level2">
-<h2 id="disease-subtype">Disease subtype:<a class="anchor" aria-label="anchor" href="#disease-subtype"></a>
+<h2 id="disease-subtype">Disease subtype<a class="anchor" aria-label="anchor" href="#disease-subtype"></a>
 </h2>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<p>Data can also be retrieved as snapshots in time, either at a yearly
+or weekly resolution. The periods are defined in terms of infectious
+disease seasons starting at calendar week 1, 27 or 40. In this example
+we get the pneumococcal serotypes for a single winter season (2024 week
+27 to 2025 week 27). This does not extract the whole timeseries but just
+the cases for that single time period.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
-<span><span class="va">pneumo_by_serotype</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_timeseries.html">get_timeseries</a></span><span class="op">(</span></span>
+<span><span class="va">pneumo_by_serotype</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_snapshot.html">get_snapshot</a></span><span class="op">(</span></span>
 <span>  disease <span class="op">=</span> <span class="va">diseases</span><span class="op">$</span><span class="va">`Pneumococcus (IfSG`</span>, </span>
 <span>  disease_subtype <span class="op">=</span> <span class="cn">TRUE</span>, </span>
-<span>  years <span class="op">=</span> <span class="fl">2024</span> </span>
+<span>  season <span class="op">=</span> <span class="fl">2024</span>,</span>
+<span>  season_start <span class="op">=</span> <span class="fl">27</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">ggplot</span><span class="op">(</span></span>
-<span>  <span class="va">pneumo_by_serotype</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu">group_by</span><span class="op">(</span><span class="va">disease_subtype_name</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
-<span>    <span class="fu">summarise</span><span class="op">(</span>count<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">count</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/startsWith.html" class="external-link">startsWith</a></span><span class="op">(</span><span class="va">disease_subtype_name</span>,<span class="st">"Sero"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>  <span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">disease_subtype_name</span>, y<span class="op">=</span><span class="va">count</span><span class="op">)</span></span>
-<span><span class="op">)</span><span class="op">+</span><span class="fu">geom_bar</span><span class="op">(</span>stat<span class="op">=</span><span class="st">"identity"</span><span class="op">)</span><span class="op">+</span><span class="fu">theme</span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">45</span>,hjust<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="rsurvstat_files/figure-html/unnamed-chunk-6-1.png" class="r-plt" width="700"></p>
+<span><span class="va">pneumo_by_serotype</span> <span class="op">=</span> <span class="va">pneumo_by_serotype</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co"># remove non typed and unknowns:</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/startsWith.html" class="external-link">startsWith</a></span><span class="op">(</span><span class="va">disease_subtype_name</span>,<span class="st">"Sero"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="co"># removed serotypes with no detected cases:</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">count</span><span class="op">)</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span></span>
+<span>  <span class="va">pneumo_by_serotype</span>,</span>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">disease_subtype_name</span>, y<span class="op">=</span><span class="va">count</span><span class="op">)</span></span>
+<span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_bar</a></span><span class="op">(</span>stat<span class="op">=</span><span class="st">"identity"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">8</span>, angle <span class="op">=</span> <span class="fl">90</span>,hjust<span class="op">=</span><span class="fl">1</span>,vjust<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="rsurvstat_files/figure-html/unnamed-chunk-5-1.png" class="r-plt" width="672"></p>
+</div>
+<div class="section level2">
+<h2 id="conclusion">Conclusion<a class="anchor" aria-label="anchor" href="#conclusion"></a>
+</h2>
+<p>The <code>rsurvstat</code> package provides access to a rich data set
+for downstream epidemiological analysis, covering a broad set of
+diseases, at weekly resolution. There are potentially ascertainment
+biases and reporting delays in the data, which must be adjusted for.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

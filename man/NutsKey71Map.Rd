@@ -24,4 +24,4 @@ data(NutsKey71Map)
 This matches the \code{NutsKey71} dimension in \code{SurvStat}. This is the 38 \code{NUTS2}
 level administrative regions in Germany.
 }
-\keyword{datasets}
+\concept{data}

@@ -16,4 +16,5 @@ Languages supported by the \code{SurvStat} service
 \references{
 \url{https://survstat.rki.de/Content/Query/Create.aspx}
 }
-\keyword{data}
+\concept{data}
+\keyword{internal}

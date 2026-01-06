@@ -24,4 +24,4 @@ data(FedStateKey71Map)
 This matches the \code{FedStateKey71} dimension in \code{SurvStat}. This is the 16
 federal states in Germany.
 }
-\keyword{datasets}
+\concept{data}

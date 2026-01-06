@@ -28,4 +28,4 @@ This matches the \code{CountyKey71} dimension in \code{SurvStat}. This is the 40
 Berlin boroughs (\code{Bezirke}) which replace the Berlin \code{Kriese} (Id: \code{11000}).
 The boroughs have sequential \code{Id}s from \verb{[11001]} to \verb{[11012]}
 }
-\keyword{datasets}
+\concept{data}

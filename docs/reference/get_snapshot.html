@@ -15,7 +15,7 @@ or at week 40."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">rsurvstat</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -71,9 +71,13 @@ or at week 40.</p>
 
 
 <dl><dt id="arg-disease">disease<a class="anchor" aria-label="anchor" href="#arg-disease"></a></dt>
-<dd><p>the disease of interest, see <code><a href="diseases.html">rsurvstat::diseases</a></code>. This is
-technically optional, and if omitted the counts of all diseases will be
-returned.</p></dd>
+<dd><p>the disease of interest as a <code>SurvStat</code> key, see
+<code><a href="diseases.html">rsurvstat::diseases</a></code> for a current list of these. This is technically
+optional, and if omitted the counts of all diseases will be returned. Keys
+are the same as the options in the <code>SurvStat</code> user interface found
+<a href="https://survstat.rki.de/Content/Query/Main.aspx#CreateQuery" class="external-link">here</a>. <code>IfSG</code>
+and <code>state</code> variants of diseases are counts that are reported directly to
+the Robert Koch Institute or indirectly via state departments.</p></dd>
 
 
 <dt id="arg-measure">measure<a class="anchor" aria-label="anchor" href="#arg-measure"></a></dt>
@@ -100,11 +104,13 @@ this can be one of <code>1</code>, <code>27</code> or <code>40</code>.</p></dd>
 
 
 <dt id="arg-age-group">age_group<a class="anchor" aria-label="anchor" href="#arg-age-group"></a></dt>
-<dd><p>(optional) the age group of interest, see <code><a href="age_groups.html">rsurvstat::age_groups</a></code></p></dd>
+<dd><p>(optional) the age group of interest as a <code>SurvStat</code> key,
+see <code><a href="age_groups.html">rsurvstat::age_groups</a></code> for a list of valid options.</p></dd>
 
 
 <dt id="arg-age-range">age_range<a class="anchor" aria-label="anchor" href="#arg-age-range"></a></dt>
-<dd><p>(optional) a length 2 vector with the minimum and maximum ages to consider</p></dd>
+<dd><p>(optional) a length 2 vector with the minimum and maximum
+ages to consider</p></dd>
 
 
 <dt id="arg-disease-subtype">disease_subtype<a class="anchor" aria-label="anchor" href="#arg-disease-subtype"></a></dt>
@@ -113,23 +119,24 @@ disease or pathogen subtype (assuming <code>disease</code> was provided).</p></d
 
 
 <dt id="arg-geography">geography<a class="anchor" aria-label="anchor" href="#arg-geography"></a></dt>
-<dd><p>(optional) a geographical breakdown can be given as a
-character where it must be one of <code>state</code>, <code>nuts</code>, or <code>county</code> which
-align to the 16 region <code>FedStateKey71Map</code>, 38 region <code>NutsKey71Map</code>,
-or 411 region <code>CountyKey71Map</code> data respectively. Alternatively it can be
-given as a subset of one of these maps, as a <code>sf</code> dataframe in which case
-only that subset of regions will be returned.</p></dd>
+<dd><p>(optional) a geographical breakdown. This can be given as a
+character where it must be one of <code>state</code>, <code>nuts</code>, or <code>county</code> specifying
+the 16 region <code>FedStateKey71Map</code>, 38 region <code>NutsKey71Map</code>, or 411 region
+<code>CountyKey71Map</code> data respectively. Alternatively it can be given as a
+as a <code>sf</code> dataframe, subsetting one of these maps, in which case only that
+subset of regions will be returned.</p></dd>
 
 
 <dt id="arg--progress">.progress<a class="anchor" aria-label="anchor" href="#arg--progress"></a></dt>
 <dd><p>by default a progress bar is shown, which may be important
-if many downloads are needed to fulfil the request. It can be disabled here.</p></dd>
+if many downloads are needed to fulfil the request. It can be disabled
+by setting this to <code>FALSE</code> here.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>a data frame with at least <code>year</code> (the start of the epidemiological
-season) and <code>start_week</code> (the calendar week in which the epidemioloigcal
+season) and <code>start_week</code> (the calendar week in which the epidemiological
 season starts), and one of <code>count</code> or <code>incidence</code> columns. Most likely it
 will also have <code>disease_name</code> and <code>disease_code</code> columns, and some of
 <code>age_name</code>, <code>age_code</code>, <code>age_low</code>, <code>age_high</code>, <code>geo_code</code>, <code>geo_name</code>,

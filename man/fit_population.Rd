@@ -15,18 +15,22 @@ infer_population(
 )
 }
 \arguments{
-\item{count_df}{a dataframe from the output of \code{get_timeseries()}}
+\item{count_df}{a dataframe from the output of \code{get_timeseries()} or \code{get_snapshot()}}
 
 \item{.progress}{by default a progress bar is shown, which may be important
-if many downloads are needed to fulfil the request. It can be disabled here.}
+if many downloads are needed to fulfil the request. It can be disabled
+by setting this to \code{FALSE} here.}
 
-\item{age_group}{(optional) the age group of interest, see \code{rsurvstat::age_groups}}
+\item{age_group}{(optional) the age group of interest as a \code{SurvStat} key,
+see \code{rsurvstat::age_groups} for a list of valid options.}
 
 \item{geography}{(optional) one of \code{"state"}, \code{"nuts"}, or \code{"county"} to define the
 resolution of the query. Does not accept a \code{sf} map or subset of
 (unlike \code{get_timeseries()}).}
 
-\item{years}{(optional) a vector of years to limit the response to.}
+\item{years}{(optional) a vector of years to limit the response to. This may
+be useful to limit the size of returned pages in the event the \code{SurvStat}
+service hits a data transfer limit.}
 }
 \value{
 the \code{count_df} dataframe with an additional \code{population} column
@@ -47,12 +51,22 @@ over time to allow us to fill in weekly population denominators.
 }}
 \examples{
 
+# snapshot:
 get_snapshot(
   disease = diseases$`COVID-19`,
   geography = "state",
   season=2024
 ) \%>\%
-dplyr::glimpse() \%>\%
+fit_population() \%>\%
+dplyr::glimpse()
+
+# timeseries
+# A weekly population estimate is inferred from the yearly data:
+get_timeseries(
+  diseases$`COVID-19`,
+  measure = "Count",
+  age_group = age_groups$children_coarse
+) \%>\%
 fit_population() \%>\%
 dplyr::glimpse()
 

@@ -361,7 +361,7 @@
 #' - others are passed to `format(...)`
 #' @export
 #' @concept transpose
-#'
+#' @keywords internal
 .tree <- function(
   x,
   max_levels = 6,

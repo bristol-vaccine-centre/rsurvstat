@@ -19,9 +19,13 @@ get_snapshot(
 )
 }
 \arguments{
-\item{disease}{the disease of interest, see \code{rsurvstat::diseases}. This is
-technically optional, and if omitted the counts of all diseases will be
-returned.}
+\item{disease}{the disease of interest as a \code{SurvStat} key, see
+\code{rsurvstat::diseases} for a current list of these. This is technically
+optional, and if omitted the counts of all diseases will be returned. Keys
+are the same as the options in the \code{SurvStat} user interface found
+\href{https://survstat.rki.de/Content/Query/Main.aspx#CreateQuery}{here}. \code{IfSG}
+and \code{state} variants of diseases are counts that are reported directly to
+the Robert Koch Institute or indirectly via state departments.}
 
 \item{measure}{one of \code{"Count"} (default) or \code{"Incidence"} per 100,000 per
 week or year depending on the context.}
@@ -36,26 +40,29 @@ then the whole season is used}
 \item{season_start}{the week of the calendar year in which the season starts
 this can be one of \code{1}, \code{27} or \code{40}.}
 
-\item{age_group}{(optional) the age group of interest, see \code{rsurvstat::age_groups}}
+\item{age_group}{(optional) the age group of interest as a \code{SurvStat} key,
+see \code{rsurvstat::age_groups} for a list of valid options.}
 
-\item{age_range}{(optional) a length 2 vector with the minimum and maximum ages to consider}
+\item{age_range}{(optional) a length 2 vector with the minimum and maximum
+ages to consider}
 
 \item{disease_subtype}{if \code{TRUE} the returned count will be broken down by
 disease or pathogen subtype (assuming \code{disease} was provided).}
 
-\item{geography}{(optional) a geographical breakdown can be given as a
-character where it must be one of \code{state}, \code{nuts}, or \code{county} which
-align to the 16 region \code{FedStateKey71Map}, 38 region \code{NutsKey71Map},
-or 411 region \code{CountyKey71Map} data respectively. Alternatively it can be
-given as a subset of one of these maps, as a \code{sf} dataframe in which case
-only that subset of regions will be returned.}
+\item{geography}{(optional) a geographical breakdown. This can be given as a
+character where it must be one of \code{state}, \code{nuts}, or \code{county} specifying
+the 16 region \code{FedStateKey71Map}, 38 region \code{NutsKey71Map}, or 411 region
+\code{CountyKey71Map} data respectively. Alternatively it can be given as a
+as a \code{sf} dataframe, subsetting one of these maps, in which case only that
+subset of regions will be returned.}
 
 \item{.progress}{by default a progress bar is shown, which may be important
-if many downloads are needed to fulfil the request. It can be disabled here.}
+if many downloads are needed to fulfil the request. It can be disabled
+by setting this to \code{FALSE} here.}
 }
 \value{
 a data frame with at least \code{year} (the start of the epidemiological
-season) and \code{start_week} (the calendar week in which the epidemioloigcal
+season) and \code{start_week} (the calendar week in which the epidemiological
 season starts), and one of \code{count} or \code{incidence} columns. Most likely it
 will also have \code{disease_name} and \code{disease_code} columns, and some of
 \code{age_name}, \code{age_code}, \code{age_low}, \code{age_high}, \code{geo_code}, \code{geo_name},

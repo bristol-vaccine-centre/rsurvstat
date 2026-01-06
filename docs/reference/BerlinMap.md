@@ -1,6 +1,6 @@
-# A Berlin outline map dataset
+# A Berlin outline `sf` map
 
-A Berlin outline map dataset
+A Berlin outline `sf` map
 
 ## Usage
 

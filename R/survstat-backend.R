@@ -107,6 +107,7 @@
 #'
 #' @returns nothing. called for side effects
 #' @export
+#' @concept cache
 #'
 #' @examples
 #' if (interactive()) cache_clear()
@@ -132,6 +133,7 @@ cache_clear = function() {
 #'
 #' @returns the old cache settings as a list
 #' @export
+#' @concept cache
 #'
 #' @examples
 #' old_settings = set_cache_settings(active = FALSE)

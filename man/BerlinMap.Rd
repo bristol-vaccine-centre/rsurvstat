@@ -3,7 +3,7 @@
 \docType{data}
 \name{BerlinMap}
 \alias{BerlinMap}
-\title{A Berlin outline map dataset}
+\title{A Berlin outline \code{sf} map}
 \format{
 A \code{sf} dataframe containing the following columns:
 \itemize{
@@ -16,6 +16,6 @@ A \code{sf} dataframe containing the following columns:
 data(BerlinMap)
 }
 \description{
-A Berlin outline map dataset
+A Berlin outline \code{sf} map
 }
-\keyword{datasets}
+\concept{data}

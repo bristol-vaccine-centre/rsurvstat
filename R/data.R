@@ -1,9 +1,12 @@
 #' `SurvStat` disease list
 #'
+#' Supported diseases:
+#' `r paste0(lapply(sort(names(diseases)), function(nm) sprintf("* %s (key: %s)", nm, diseases[[nm]])), collapse = "\n\n")`
+#'
 #' @name diseases
 #' @docType data
 #' @references \url{https://survstat.rki.de/Content/Query/Create.aspx}
-#' @keywords data
+#' @concept data
 #' @export
 diseases = list(
   Acinetobacter = "Acinetobacter-Infektion oder \u2013Kolonisation",
@@ -118,8 +121,8 @@ diseases = list(
   "Chickenpox (state)" = "Windpocken (Meldepflicht gem\u00e4\u00df Landesmeldeverordnung)",
   Yersinia = "Yersiniose",
   Zika = "Zikavirus-Erkrankung",
-  "Malaria (IfSG)" = "Malaria (\\u00a77(3) IfSG)",
-  "Malaria (state)" = "Malaria, L\\u00e4nderverordnung",
+  "Malaria (IfSG)" = "Malaria (\u00a77(3) IfSG)",
+  "Malaria (state)" = "Malaria, L\u00e4nderverordnung",
   "MERS" = "Middle East Respiratory Syndrome",
   "Mpox" = "Mpox",
   "Orthopox" = "Orthopocken",
@@ -272,7 +275,7 @@ diseases = list(
 #' @name age_groups
 #' @docType data
 #' @references \url{https://survstat.rki.de/Content/Query/Create.aspx}
-#' @keywords data
+#' @concept data
 #' @export
 age_groups = list(
   single_year = "[AlterPerson80].[AgeGroupName8]",
@@ -291,7 +294,8 @@ age_groups = list(
 #' @name cubes
 #' @docType data
 #' @references \url{https://survstat.rki.de/Content/Query/Create.aspx}
-#' @keywords data
+#' @concept data
+#' @keywords internal
 cubes = list(
   survstat = "SurvStat",
   survstat73 = "SurvStat73",
@@ -303,7 +307,8 @@ cubes = list(
 #' @name languages
 #' @docType data
 #' @references \url{https://survstat.rki.de/Content/Query/Create.aspx}
-#' @keywords data
+#' @concept data
+#' @keywords internal
 languages = list(
   german = "German",
   english = "English"
@@ -314,7 +319,8 @@ languages = list(
 #' @name commands
 #' @docType data
 #' @references \url{https://survstat.rki.de/Content/Query/Create.aspx}
-#' @keywords data
+#' @concept data
+#' @keywords internal
 commands = list(
   dimensions = "GetAllDimensions",
   hierarchies = "GetAllHierarchies",
@@ -333,7 +339,8 @@ commands = list(
 #' @name commands
 #' @docType data
 #' @references \url{https://survstat.rki.de/Content/Query/Create.aspx}
-#' @keywords data
+#' @concept data
+#' @keywords internal
 return_measures = list(
   count = "Count",
   incidence = "Incidence",
@@ -347,7 +354,7 @@ return_measures = list(
 #' @name commands
 #' @docType data
 #' @references \url{https://survstat.rki.de/Content/Query/Create.aspx}
-#' @keywords data
+#' @concept data
 geography_resolution = list(
   state = "[DeutschlandNodes].[Kreise71Web].[FedStateKey71]",
   nuts = "[DeutschlandNodes].[Kreise71Web].[NutsKey71]",
@@ -356,7 +363,7 @@ geography_resolution = list(
 
 ## BerlinMap definition ----
 
-#' A Berlin outline map dataset
+#' A Berlin outline `sf` map
 #'
 #' @usage data(BerlinMap)
 #'
@@ -368,7 +375,7 @@ geography_resolution = list(
 #' 1 rows
 #'
 #' @docType data
-#' @keywords datasets
+#' @concept data
 #' @name BerlinMap
 NULL
 
@@ -396,7 +403,7 @@ NULL
 #' 16 rows
 #'
 #' @docType data
-#' @keywords datasets
+#' @concept data
 #' @name FedStateKey71Map
 NULL
 
@@ -423,7 +430,7 @@ NULL
 #' 38 rows
 #'
 #' @docType data
-#' @keywords datasets
+#' @concept data
 #' @name NutsKey71Map
 NULL
 
@@ -454,7 +461,7 @@ NULL
 #' 411 rows
 #'
 #' @docType data
-#' @keywords datasets
+#' @concept data
 #' @name CountyKey71Map
 NULL
 

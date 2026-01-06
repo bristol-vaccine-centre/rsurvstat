@@ -1,95 +1,152 @@
 # Getting started
 
+## Introduction
+
+`rsurvstat` provides access to the `SurvStat` web service provided by
+the Robert Koch Institute. This collects infectious disease data in
+accordance with the German Infection Protection Act on the occurrence of
+numerous infectious diseases in Germany. The data is provided by a SOAP
+based web service as an OLAP cube. This package provides a convenient
+wrapper around the service, which allows relatively simple extraction of
+time series data faceted by age, disease, disease subtype, and geography
+at 3 levels of resolution. Query results are cached for speed.
+
+More details on `SurvStat` are available
+[here](https://survstat.rki.de/Content/Query/Main.aspx#CreateQuery)
+
 ## Age stratification example
 
-Get some data stratified by age:
+This example shows how to get some disease count data stratified by age.
+valid age groupings are defined in the
+[`rsurvstat::age_groups`](https://bristol-vaccine-centre.github.io/rsurvstat/reference/age_groups.md)
+list ( 8 items). Supported diseases are in the
+[`rsurvstat::diseases`](https://bristol-vaccine-centre.github.io/rsurvstat/reference/diseases.md)
+list (121 items).
+
+The data demonstrates left and right truncation due to ascertainment
+bias and reporting delays. Zero counts are not made explicit in the data
+and it is not possible to differentiate between zeros and missing
+values. The count data is not normalised by population size, so on first
+glance it seems there is not much difference between the age groups:
 
 ``` r
-tmp = rsurvstat::get_timeseries(
+entero = get_timeseries(
   diseases$Enterovirus, 
-  "Count", 
+  "Count",
   age_group = age_groups$zero_fifteen)
+
+ggplot2::ggplot(
+    entero, 
+    ggplot2::aes(x=date, y=count, colour = age_name)
+  ) + 
+  ggplot2::geom_line()
 ```
 
-Re-band age groups and plot:
+![](rsurvstat_files/figure-html/unnamed-chunk-1-1.png)
+
+We can infer an estimate of the time varying population denominator from
+SurvStat and normalise the count, which highlights the difference
+between the age groups:
 
 ``` r
+entero2 = entero %>% 
+  fit_population() %>% 
+  dplyr::mutate(weekly_incidence_per_100K = count/population*100000)
 
-tmp2 = tmp %>% dplyr::filter(!is.na(date))
-ggplot(tmp2, aes(x=date, y=count)) + geom_line() + facet_wrap(~age_name)
+ggplot2::ggplot(
+    entero2,
+    ggplot2::aes(x=date, y=weekly_incidence_per_100K, colour=age_name)
+  ) + 
+  ggplot2::geom_line()
 ```
 
 ![](rsurvstat_files/figure-html/unnamed-chunk-2-1.png)
-
-Recover population denominator:
-
-``` r
-tmp3 = tmp %>% fit_population() 
-
-ggplot2::ggplot(
-  tmp3 %>% mutate(weekly_incidence_per_100K = count/population*100000),
-  aes(x=date, y=weekly_incidence_per_100K, colour=age_name)
-) + geom_line()
-```
-
-![](rsurvstat_files/figure-html/unnamed-chunk-3-1.png)
 
 ## Geography
 
 Data can be retrieved by region. There are 3 levels of detail, `state`,
 `nuts` and the most granular `county`. This is an example of the
-incidence at NUTS2 level (legend hidden):
+incidence of COVID-19 between 2020 and 2022 at NUTS2 level (legend
+hidden for clarity).
 
 ``` r
 
-covid_by_nuts = get_timeseries(disease = diseases$`COVID-19`, 
-               measure="Incidence", 
-               years = 2020:2022,
-               geography = "nuts"
-               )
+covid_by_nuts = get_timeseries(
+  disease = diseases$`COVID-19`, 
+  measure="Incidence", 
+  years = 2020:2022,
+  geography = "nuts"
+)
 
 ggplot2::ggplot(
-  covid_by_nuts,
-  aes(x=date, y=incidence, colour=geo_name)
-) + geom_line() + guides(colour = guide_none())
+    covid_by_nuts,
+    ggplot2::aes(x=date, y=incidence, colour=geo_name)
+  ) + 
+  ggplot2::geom_line() + 
+  ggplot2::guides(colour = ggplot2::guide_none())
 ```
 
-![](rsurvstat_files/figure-html/unnamed-chunk-4-1.png)
+![](rsurvstat_files/figure-html/unnamed-chunk-3-1.png)
 
-Matching `sf` maps are supplied as data, that can be joined to the
-`SurvStat` output:
+For geographic data matching `sf` maps are supplied in the package, that
+can be joined to the `SurvStat` output. We pick 3 interesting times in
+the lead up to the peak:
 
 ``` r
 
 # Pick a set of dates around the peak:
 peak_date = covid_by_nuts$date[covid_by_nuts$incidence == max(covid_by_nuts$incidence)]
-peak_date = peak_date+c(-14,-7, 0, 7)
-peak = covid_by_nuts %>% filter(date %in% peak_date)
+peak_date = peak_date+c(-14,-7, 0)
+peak = covid_by_nuts %>% dplyr::filter(date %in% peak_date)
 
-library(sf)
-ggplot(
-  NutsKey71Map %>% inner_join(peak, by=c("Id" = "geo_code")),
-  aes(fill = incidence)
-)+geom_sf()+facet_wrap(~date)
+ggplot2::ggplot(
+    NutsKey71Map %>% dplyr::inner_join(peak, by=c("Id" = "geo_code")),
+    ggplot2::aes(fill = incidence)
+  )+
+  ggplot2::geom_sf()+
+  ggplot2::facet_wrap(~date,nrow = 1)+
+  ggplot2::scale_fill_viridis_c()
+```
+
+![](rsurvstat_files/figure-html/unnamed-chunk-4-1.png)
+
+## Disease subtype
+
+Data can also be retrieved as snapshots in time, either at a yearly or
+weekly resolution. The periods are defined in terms of infectious
+disease seasons starting at calendar week 1, 27 or 40. In this example
+we get the pneumococcal serotypes for a single winter season (2024 week
+27 to 2025 week 27). This does not extract the whole timeseries but just
+the cases for that single time period.
+
+``` r
+
+pneumo_by_serotype = get_snapshot(
+  disease = diseases$`Pneumococcus (IfSG`, 
+  disease_subtype = TRUE, 
+  season = 2024,
+  season_start = 27
+)
+
+pneumo_by_serotype = pneumo_by_serotype %>% 
+  # remove non typed and unknowns:
+  dplyr::filter(startsWith(disease_subtype_name,"Sero")) %>%
+  # removed serotypes with no detected cases:
+  dplyr::filter(!is.na(count)) 
+
+ggplot2::ggplot(
+  pneumo_by_serotype,
+  ggplot2::aes(x=disease_subtype_name, y=count)
+)+
+  ggplot2::geom_bar(stat="identity")+
+  ggplot2::theme(axis.text.x = ggplot2::element_text(size = 8, angle = 90,hjust=1,vjust=0.5))
 ```
 
 ![](rsurvstat_files/figure-html/unnamed-chunk-5-1.png)
 
-## Disease subtype:
+## Conclusion
 
-``` r
-
-pneumo_by_serotype = get_timeseries(
-  disease = diseases$`Pneumococcus (IfSG`, 
-  disease_subtype = TRUE, 
-  years = 2024 
-)
-
-ggplot(
-  pneumo_by_serotype %>% group_by(disease_subtype_name) %>% 
-    summarise(count=sum(count)) %>% filter(startsWith(disease_subtype_name,"Sero")),
-  aes(x=disease_subtype_name, y=count)
-)+geom_bar(stat="identity")+theme(axis.text.x = element_text(angle = 45,hjust=1))
-```
-
-![](rsurvstat_files/figure-html/unnamed-chunk-6-1.png)
+The `rsurvstat` package provides access to a rich data set for
+downstream epidemiological analysis, covering a broad set of diseases,
+at weekly resolution. There are potentially ascertainment biases and
+reporting delays in the data, which must be adjusted for.

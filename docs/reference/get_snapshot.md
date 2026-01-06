@@ -28,10 +28,15 @@ get_snapshot(
 
 - disease:
 
-  the disease of interest, see
-  [`rsurvstat::diseases`](https://bristol-vaccine-centre.github.io/rsurvstat/reference/diseases.md).
-  This is technically optional, and if omitted the counts of all
-  diseases will be returned.
+  the disease of interest as a `SurvStat` key, see
+  [`rsurvstat::diseases`](https://bristol-vaccine-centre.github.io/rsurvstat/reference/diseases.md)
+  for a current list of these. This is technically optional, and if
+  omitted the counts of all diseases will be returned. Keys are the same
+  as the options in the `SurvStat` user interface found
+  [here](https://survstat.rki.de/Content/Query/Main.aspx#CreateQuery).
+  `IfSG` and `state` variants of diseases are counts that are reported
+  directly to the Robert Koch Institute or indirectly via state
+  departments.
 
 - measure:
 
@@ -58,8 +63,9 @@ get_snapshot(
 
 - age_group:
 
-  (optional) the age group of interest, see
+  (optional) the age group of interest as a `SurvStat` key, see
   [`rsurvstat::age_groups`](https://bristol-vaccine-centre.github.io/rsurvstat/reference/age_groups.md)
+  for a list of valid options.
 
 - age_range:
 
@@ -73,22 +79,23 @@ get_snapshot(
 
 - geography:
 
-  (optional) a geographical breakdown can be given as a character where
-  it must be one of `state`, `nuts`, or `county` which align to the 16
+  (optional) a geographical breakdown. This can be given as a character
+  where it must be one of `state`, `nuts`, or `county` specifying the 16
   region `FedStateKey71Map`, 38 region `NutsKey71Map`, or 411 region
   `CountyKey71Map` data respectively. Alternatively it can be given as a
-  subset of one of these maps, as a `sf` dataframe in which case only
+  as a `sf` dataframe, subsetting one of these maps, in which case only
   that subset of regions will be returned.
 
 - .progress:
 
   by default a progress bar is shown, which may be important if many
-  downloads are needed to fulfil the request. It can be disabled here.
+  downloads are needed to fulfil the request. It can be disabled by
+  setting this to `FALSE` here.
 
 ## Value
 
 a data frame with at least `year` (the start of the epidemiological
-season) and `start_week` (the calendar week in which the epidemioloigcal
+season) and `start_week` (the calendar week in which the epidemiological
 season starts), and one of `count` or `incidence` columns. Most likely
 it will also have `disease_name` and `disease_code` columns, and some of
 `age_name`, `age_code`, `age_low`, `age_high`, `geo_code`, `geo_name`,
