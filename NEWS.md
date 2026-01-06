@@ -1,3 +1,12 @@
 # rsurvstat 0.1.1
 
-* Added a `NEWS.md` file to track changes to the package.
+* Initial CRAN candidate version with the following functionality
+  + Download data from Robert Koch Institute `SurvStat` service 
+  + Paging and controllable caching of downloads
+  + Weekly timeseries or snapshots of data from a single disease season
+  + Stratification and filtering by disease (121 options), age group (8 options), geography 
+    (3+1 options)
+  + Stratification by disease subtype given parent disease
+  + Time varying population denominator inference based on geography and age 
+    group stratification.
+  + Linked map data included.
