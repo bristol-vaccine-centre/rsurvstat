@@ -52,7 +52,7 @@
 #'
 fit_population = function(count_df, .progress = TRUE) {
   age_group = if ("age_code" %in% colnames(count_df)) {
-    unique(na.omit(stringr::str_extract(
+    unique(stats::na.omit(stringr::str_extract(
       count_df$age_code,
       "^(.*)\\.&\\[.+\\]$",
       1
@@ -62,7 +62,7 @@ fit_population = function(count_df, .progress = TRUE) {
   }
 
   geography = if ("geo_code" %in% colnames(count_df)) {
-    unique(na.omit(stringr::str_extract(
+    unique(stats::na.omit(stringr::str_extract(
       count_df$geo_code,
       "^(.*)\\.&\\[.+\\]$",
       1
