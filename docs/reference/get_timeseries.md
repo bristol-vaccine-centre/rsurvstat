@@ -101,55 +101,53 @@ grouped to make sure each group contains a single timeseries.
 ## Examples
 
 ``` r
+# \donttest{
+# age stratified
 get_timeseries(
   diseases$`COVID-19`,
   measure = "Count",
   age_group = age_groups$children_coarse
-)
-#> # A tibble: 3,948 × 8
-#> # Groups:   age_name, age_code, disease_name, disease_code, age_low, age_high
-#> #   [11]
-#>    age_name age_code count date       disease_name disease_code age_low age_high
-#>    <chr>    <chr>    <dbl> <date>     <chr>        <chr>          <dbl>    <dbl>
-#>  1 0–14     [AlterP…     1 2020-02-03 COVID-19     [KategorieN…       0       15
-#>  2 0–14     [AlterP…     2 2020-02-10 COVID-19     [KategorieN…       0       15
-#>  3 0–14     [AlterP…     1 2020-02-17 COVID-19     [KategorieN…       0       15
-#>  4 0–14     [AlterP…     4 2020-02-24 COVID-19     [KategorieN…       0       15
-#>  5 0–14     [AlterP…    39 2020-03-02 COVID-19     [KategorieN…       0       15
-#>  6 0–14     [AlterP…   197 2020-03-09 COVID-19     [KategorieN…       0       15
-#>  7 0–14     [AlterP…   580 2020-03-16 COVID-19     [KategorieN…       0       15
-#>  8 0–14     [AlterP…   910 2020-03-23 COVID-19     [KategorieN…       0       15
-#>  9 0–14     [AlterP…  1018 2020-03-30 COVID-19     [KategorieN…       0       15
-#> 10 0–14     [AlterP…   813 2020-04-06 COVID-19     [KategorieN…       0       15
-#> # ℹ 3,938 more rows
+) %>% dplyr::glimpse()
+#> Rows: 3,948
+#> Columns: 8
+#> Groups: age_name, age_code, disease_name, disease_code, age_low, age_high [11]
+#> $ age_name     <chr> "0–14", "0–14", "0–14", "0–14", "0–14", "0–14", "0–14", "…
+#> $ age_code     <chr> "[AlterPerson80].[AgeGroupName3].&[A00..14]", "[AlterPers…
+#> $ count        <dbl> 1, 2, 1, 4, 39, 197, 580, 910, 1018, 813, 575, 531, 401, …
+#> $ date         <date> 2020-02-03, 2020-02-10, 2020-02-17, 2020-02-24, 2020-03-…
+#> $ disease_name <chr> "COVID-19", "COVID-19", "COVID-19", "COVID-19", "COVID-19…
+#> $ disease_code <chr> "[KategorieNz].[Krankheit DE].&[COVID-19]", "[KategorieNz…
+#> $ age_low      <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+#> $ age_high     <dbl> 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 1…
 
-if (interactive()) {
-  # Long running example
-  get_timeseries(
-    diseases$`COVID-19`,
-    measure = "Count",
-    age_group = age_groups$children_coarse,
-    geography = rsurvstat::FedStateKey71Map[1:10,]
-  )
-}
+# geographic
+get_timeseries(
+  diseases$`COVID-19`,
+  measure = "Count",
+  geography = "state"
+) %>% dplyr::glimpse()
+#> Rows: 5,715
+#> Columns: 6
+#> Groups: geo_name, geo_code, disease_name, disease_code [16]
+#> $ geo_name     <chr> "Baden-Württemberg", "Baden-Württemberg", "Baden-Württemb…
+#> $ geo_code     <chr> "[DeutschlandNodes].[Kreise71Web].[FedStateKey71].&[08]",…
+#> $ count        <dbl> 21, 213, 1337, 4467, 7238, 7523, 5305, 3210, 2438, 1229, …
+#> $ date         <date> 2020-02-24, 2020-03-02, 2020-03-09, 2020-03-16, 2020-03-…
+#> $ disease_name <chr> "COVID-19", "COVID-19", "COVID-19", "COVID-19", "COVID-19…
+#> $ disease_code <chr> "[KategorieNz].[Krankheit DE].&[COVID-19]", "[KategorieNz…
 
+# disease stratified, subset of years:
 get_timeseries(
   measure = "Count",
   years = 2024
-)
-#> # A tibble: 3,861 × 5
-#> # Groups:   disease_name, disease_code [80]
-#>    disease_name  disease_code                             count date        year
-#>    <chr>         <chr>                                    <dbl> <date>     <dbl>
-#>  1 Acinetobacter [PathogenOut].[KategorieNz].[Krankheit …    16 2024-01-08  2024
-#>  2 Acinetobacter [PathogenOut].[KategorieNz].[Krankheit …    22 2024-01-15  2024
-#>  3 Acinetobacter [PathogenOut].[KategorieNz].[Krankheit …    26 2024-01-22  2024
-#>  4 Acinetobacter [PathogenOut].[KategorieNz].[Krankheit …    16 2024-01-29  2024
-#>  5 Acinetobacter [PathogenOut].[KategorieNz].[Krankheit …    14 2024-02-05  2024
-#>  6 Acinetobacter [PathogenOut].[KategorieNz].[Krankheit …    14 2024-02-12  2024
-#>  7 Acinetobacter [PathogenOut].[KategorieNz].[Krankheit …    16 2024-02-19  2024
-#>  8 Acinetobacter [PathogenOut].[KategorieNz].[Krankheit …     9 2024-02-26  2024
-#>  9 Acinetobacter [PathogenOut].[KategorieNz].[Krankheit …    14 2024-03-04  2024
-#> 10 Acinetobacter [PathogenOut].[KategorieNz].[Krankheit …    11 2024-03-11  2024
-#> # ℹ 3,851 more rows
+) %>% dplyr::glimpse()
+#> Rows: 3,861
+#> Columns: 5
+#> Groups: disease_name, disease_code [80]
+#> $ disease_name <chr> "Acinetobacter", "Acinetobacter", "Acinetobacter", "Acine…
+#> $ disease_code <chr> "[PathogenOut].[KategorieNz].[Krankheit DE].&[Acinetobact…
+#> $ count        <dbl> 16, 22, 26, 16, 14, 14, 16, 9, 14, 11, 18, 9, 13, 13, 14,…
+#> $ date         <date> 2024-01-08, 2024-01-15, 2024-01-22, 2024-01-29, 2024-02-…
+#> $ year         <dbl> 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024, 202…
+# }
 ```

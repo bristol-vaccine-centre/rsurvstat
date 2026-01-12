@@ -15,7 +15,7 @@ extracts have the potential to need a lot of downloading."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">rsurvstat</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -142,57 +142,55 @@ to make sure each group contains a single timeseries.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">get_timeseries</span><span class="op">(</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span><span class="co"># age stratified</span></span></span>
+<span class="r-in"><span><span class="fu">get_timeseries</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="va">diseases</span><span class="op">$</span><span class="va">`COVID-19`</span>,</span></span>
 <span class="r-in"><span>  measure <span class="op">=</span> <span class="st">"Count"</span>,</span></span>
 <span class="r-in"><span>  age_group <span class="op">=</span> <span class="va">age_groups</span><span class="op">$</span><span class="va">children_coarse</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3,948 × 8</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Groups:   age_name, age_code, disease_name, disease_code, age_low, age_high</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   [11]</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    age_name age_code count date       disease_name disease_code age_low age_high</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 0–14     [AlterP…     1 2020-02-03 COVID-19     [KategorieN…       0       15</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 0–14     [AlterP…     2 2020-02-10 COVID-19     [KategorieN…       0       15</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 0–14     [AlterP…     1 2020-02-17 COVID-19     [KategorieN…       0       15</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 0–14     [AlterP…     4 2020-02-24 COVID-19     [KategorieN…       0       15</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 0–14     [AlterP…    39 2020-03-02 COVID-19     [KategorieN…       0       15</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 0–14     [AlterP…   197 2020-03-09 COVID-19     [KategorieN…       0       15</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 0–14     [AlterP…   580 2020-03-16 COVID-19     [KategorieN…       0       15</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 0–14     [AlterP…   910 2020-03-23 COVID-19     [KategorieN…       0       15</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 0–14     [AlterP…  <span style="text-decoration: underline;">1</span>018 2020-03-30 COVID-19     [KategorieN…       0       15</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 0–14     [AlterP…   813 2020-04-06 COVID-19     [KategorieN…       0       15</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 3,938 more rows</span></span>
+<span class="r-in"><span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Rows: 3,948</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Columns: 8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Groups: age_name, age_code, disease_name, disease_code, age_low, age_high [11]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ age_name     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "0–14"<span style="color: #949494;">, </span>"0–14"<span style="color: #949494;">, </span>"0–14"<span style="color: #949494;">, </span>"0–14"<span style="color: #949494;">, </span>"0–14"<span style="color: #949494;">, </span>"0–14"<span style="color: #949494;">, </span>"0–14"<span style="color: #949494;">, </span>"…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ age_code     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "[AlterPerson80].[AgeGroupName3].&amp;[A00..14]"<span style="color: #949494;">, </span>"[AlterPers…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ count        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1<span style="color: #949494;">, </span>2<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>4<span style="color: #949494;">, </span>39<span style="color: #949494;">, </span>197<span style="color: #949494;">, </span>580<span style="color: #949494;">, </span>910<span style="color: #949494;">, </span>1018<span style="color: #949494;">, </span>813<span style="color: #949494;">, </span>575<span style="color: #949494;">, </span>531<span style="color: #949494;">, </span>401<span style="color: #949494;">, </span>…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ date         <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 2020-02-03<span style="color: #949494;">, </span>2020-02-10<span style="color: #949494;">, </span>2020-02-17<span style="color: #949494;">, </span>2020-02-24<span style="color: #949494;">, </span>2020-03-…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ disease_name <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "COVID-19"<span style="color: #949494;">, </span>"COVID-19"<span style="color: #949494;">, </span>"COVID-19"<span style="color: #949494;">, </span>"COVID-19"<span style="color: #949494;">, </span>"COVID-19…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ disease_code <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "[KategorieNz].[Krankheit DE].&amp;[COVID-19]"<span style="color: #949494;">, </span>"[KategorieNz…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ age_low      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ age_high     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 15<span style="color: #949494;">, </span>15<span style="color: #949494;">, </span>15<span style="color: #949494;">, </span>15<span style="color: #949494;">, </span>15<span style="color: #949494;">, </span>15<span style="color: #949494;">, </span>15<span style="color: #949494;">, </span>15<span style="color: #949494;">, </span>15<span style="color: #949494;">, </span>15<span style="color: #949494;">, </span>15<span style="color: #949494;">, </span>15<span style="color: #949494;">, </span>15<span style="color: #949494;">, </span>15<span style="color: #949494;">, </span>1…</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>  <span class="co"># Long running example</span></span></span>
-<span class="r-in"><span>  <span class="fu">get_timeseries</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="va">diseases</span><span class="op">$</span><span class="va">`COVID-19`</span>,</span></span>
-<span class="r-in"><span>    measure <span class="op">=</span> <span class="st">"Count"</span>,</span></span>
-<span class="r-in"><span>    age_group <span class="op">=</span> <span class="va">age_groups</span><span class="op">$</span><span class="va">children_coarse</span>,</span></span>
-<span class="r-in"><span>    geography <span class="op">=</span> <span class="fu">rsurvstat</span><span class="fu">::</span><span class="va"><a href="FedStateKey71Map.html">FedStateKey71Map</a></span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,<span class="op">]</span></span></span>
-<span class="r-in"><span>  <span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="co"># geographic</span></span></span>
+<span class="r-in"><span><span class="fu">get_timeseries</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">diseases</span><span class="op">$</span><span class="va">`COVID-19`</span>,</span></span>
+<span class="r-in"><span>  measure <span class="op">=</span> <span class="st">"Count"</span>,</span></span>
+<span class="r-in"><span>  geography <span class="op">=</span> <span class="st">"state"</span></span></span>
+<span class="r-in"><span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Rows: 5,715</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Columns: 6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Groups: geo_name, geo_code, disease_name, disease_code [16]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ geo_name     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Baden-Württemberg"<span style="color: #949494;">, </span>"Baden-Württemberg"<span style="color: #949494;">, </span>"Baden-Württemb…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ geo_code     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "[DeutschlandNodes].[Kreise71Web].[FedStateKey71].&amp;[08]"<span style="color: #949494;">,</span>…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ count        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 21<span style="color: #949494;">, </span>213<span style="color: #949494;">, </span>1337<span style="color: #949494;">, </span>4467<span style="color: #949494;">, </span>7238<span style="color: #949494;">, </span>7523<span style="color: #949494;">, </span>5305<span style="color: #949494;">, </span>3210<span style="color: #949494;">, </span>2438<span style="color: #949494;">, </span>1229<span style="color: #949494;">, </span>…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ date         <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 2020-02-24<span style="color: #949494;">, </span>2020-03-02<span style="color: #949494;">, </span>2020-03-09<span style="color: #949494;">, </span>2020-03-16<span style="color: #949494;">, </span>2020-03-…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ disease_name <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "COVID-19"<span style="color: #949494;">, </span>"COVID-19"<span style="color: #949494;">, </span>"COVID-19"<span style="color: #949494;">, </span>"COVID-19"<span style="color: #949494;">, </span>"COVID-19…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ disease_code <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "[KategorieNz].[Krankheit DE].&amp;[COVID-19]"<span style="color: #949494;">, </span>"[KategorieNz…</span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># disease stratified, subset of years:</span></span></span>
 <span class="r-in"><span><span class="fu">get_timeseries</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  measure <span class="op">=</span> <span class="st">"Count"</span>,</span></span>
 <span class="r-in"><span>  years <span class="op">=</span> <span class="fl">2024</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3,861 × 5</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Groups:   disease_name, disease_code [80]</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    disease_name  disease_code                             count date        year</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Acinetobacter [PathogenOut].[KategorieNz].[Krankheit …    16 2024-01-08  <span style="text-decoration: underline;">2</span>024</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Acinetobacter [PathogenOut].[KategorieNz].[Krankheit …    22 2024-01-15  <span style="text-decoration: underline;">2</span>024</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Acinetobacter [PathogenOut].[KategorieNz].[Krankheit …    26 2024-01-22  <span style="text-decoration: underline;">2</span>024</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Acinetobacter [PathogenOut].[KategorieNz].[Krankheit …    16 2024-01-29  <span style="text-decoration: underline;">2</span>024</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Acinetobacter [PathogenOut].[KategorieNz].[Krankheit …    14 2024-02-05  <span style="text-decoration: underline;">2</span>024</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Acinetobacter [PathogenOut].[KategorieNz].[Krankheit …    14 2024-02-12  <span style="text-decoration: underline;">2</span>024</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Acinetobacter [PathogenOut].[KategorieNz].[Krankheit …    16 2024-02-19  <span style="text-decoration: underline;">2</span>024</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Acinetobacter [PathogenOut].[KategorieNz].[Krankheit …     9 2024-02-26  <span style="text-decoration: underline;">2</span>024</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Acinetobacter [PathogenOut].[KategorieNz].[Krankheit …    14 2024-03-04  <span style="text-decoration: underline;">2</span>024</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Acinetobacter [PathogenOut].[KategorieNz].[Krankheit …    11 2024-03-11  <span style="text-decoration: underline;">2</span>024</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 3,851 more rows</span></span>
+<span class="r-in"><span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Rows: 3,861</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Columns: 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Groups: disease_name, disease_code [80]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ disease_name <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Acinetobacter"<span style="color: #949494;">, </span>"Acinetobacter"<span style="color: #949494;">, </span>"Acinetobacter"<span style="color: #949494;">, </span>"Acine…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ disease_code <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "[PathogenOut].[KategorieNz].[Krankheit DE].&amp;[Acinetobact…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ count        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 16<span style="color: #949494;">, </span>22<span style="color: #949494;">, </span>26<span style="color: #949494;">, </span>16<span style="color: #949494;">, </span>14<span style="color: #949494;">, </span>14<span style="color: #949494;">, </span>16<span style="color: #949494;">, </span>9<span style="color: #949494;">, </span>14<span style="color: #949494;">, </span>11<span style="color: #949494;">, </span>18<span style="color: #949494;">, </span>9<span style="color: #949494;">, </span>13<span style="color: #949494;">, </span>13<span style="color: #949494;">, </span>14<span style="color: #949494;">,</span>…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ date         <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 2024-01-08<span style="color: #949494;">, </span>2024-01-15<span style="color: #949494;">, </span>2024-01-22<span style="color: #949494;">, </span>2024-01-29<span style="color: #949494;">, </span>2024-02-…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ year         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 2024<span style="color: #949494;">, </span>2024<span style="color: #949494;">, </span>2024<span style="color: #949494;">, </span>2024<span style="color: #949494;">, </span>2024<span style="color: #949494;">, </span>2024<span style="color: #949494;">, </span>2024<span style="color: #949494;">, </span>2024<span style="color: #949494;">, </span>2024<span style="color: #949494;">, </span>202…</span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -200,7 +198,7 @@ to make sure each group contains a single timeseries.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Robert Challen.</p>
+  <p>Developed by Robert Challen, Bristol Vaccine Centre.</p>
 </div>
 
 <div class="pkgdown-footer-right">

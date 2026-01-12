@@ -15,7 +15,7 @@ test_that("rappdirs_user_cache_dir unit test", {
 
   testthat::expect_no_error(withCallingHandlers(
     {
-      rappdirs_cache_dir("rappdirs")
+      rappdirs_user_cache_dir("rappdirs")
     },
     warning = function(e) {
       message("Warning issued: ", e$message)

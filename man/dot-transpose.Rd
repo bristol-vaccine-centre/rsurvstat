@@ -15,6 +15,10 @@
 Either \code{FALSE} or a string to join or split the names of the multi-level
 list by}
 }
+\value{
+either a dataframe or a list of class \code{row_list} representing the
+dataframe as a list of named lists.
+}
 \description{
 Data frames are column lists, which may have nested dataframes. This function
 transforms a data frame to row based list with named sub lists with one entry

@@ -64,7 +64,7 @@ cache data somewhere \emph{under} this directory so \code{rappdirs_user_cache_di
 \section{Unit tests}{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{
 
-rappdirs_cache_dir("rappdirs")
+rappdirs_user_cache_dir("rappdirs")
 }\if{html}{\out{</div>}}
 }
 

@@ -30,6 +30,7 @@
 #' @concept survstat
 #'
 #' @examples
+#' \donttest{
 #'
 #' # snapshot:
 #' get_snapshot(
@@ -50,6 +51,7 @@
 #' fit_population() %>%
 #' dplyr::glimpse()
 #'
+#' }
 fit_population = function(count_df, .progress = TRUE) {
   age_group = if ("age_code" %in% colnames(count_df)) {
     unique(stats::na.omit(stringr::str_extract(
@@ -143,9 +145,9 @@ fit_population = function(count_df, .progress = TRUE) {
 #' @export
 #'
 #' @examples
-#'
+#' \donttest{
 #' infer_population(years=2020:2025) %>% dplyr::glimpse()
-#'
+#' }
 infer_population = function(
   age_group = NULL,
   geography = NULL,

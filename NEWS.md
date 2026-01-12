@@ -1,3 +1,9 @@
+# rsurvstat 0.1.2
+
+* Bug fixes
+* CRAN Submission changes.
+* Removed internal function `.tree()` from exports
+
 # rsurvstat 0.1.1
 
 * Initial CRAN candidate version with the following functionality

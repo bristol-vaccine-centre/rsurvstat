@@ -74,25 +74,26 @@ Queries to \code{SurvStat} are cached and paged, but obviously multidimensional
 extracts have the potential to need a lot of downloading.
 }
 \examples{
+\donttest{
+# age stratified
 get_timeseries(
   diseases$`COVID-19`,
   measure = "Count",
   age_group = age_groups$children_coarse
-)
+) \%>\% dplyr::glimpse()
 
-if (interactive()) {
-  # Long running example
-  get_timeseries(
-    diseases$`COVID-19`,
-    measure = "Count",
-    age_group = age_groups$children_coarse,
-    geography = rsurvstat::FedStateKey71Map[1:10,]
-  )
-}
+# geographic
+get_timeseries(
+  diseases$`COVID-19`,
+  measure = "Count",
+  geography = "state"
+) \%>\% dplyr::glimpse()
 
+# disease stratified, subset of years:
 get_timeseries(
   measure = "Count",
   years = 2024
-)
+) \%>\% dplyr::glimpse()
+}
 }
 \concept{survstat}

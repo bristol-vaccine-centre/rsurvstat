@@ -2,9 +2,9 @@
 % Please edit documentation in R/import-standalone-df-list-df.R
 \name{.tree}
 \alias{.tree}
-\title{Tree printing method for list objects}
+\title{Tree printing method for list objects. This is an interactive function.}
 \usage{
-.tree(x, max_levels = 6, ...)
+.tree(x, max_levels = 6, ..., verbose = TRUE)
 }
 \arguments{
 \item{x}{A list}
@@ -17,9 +17,14 @@
 \item \code{max_length} the number of items vertically to show before truncating.
 \item others are passed to \code{format(...)}
 }}
+
+\item{verbose}{print output to the console (the default)}
+}
+\value{
+The hierarchy as a string, called for side effects
 }
 \description{
-Tree printing method for list objects
+Tree printing method for list objects. This is an interactive function.
 }
 \concept{transpose}
 \keyword{internal}

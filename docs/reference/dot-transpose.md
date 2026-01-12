@@ -27,6 +27,11 @@ converts a `row_list` back to a nested data frame
   `FALSE` or a string to join or split the names of the multi-level list
   by
 
+## Value
+
+either a dataframe or a list of class `row_list` representing the
+dataframe as a list of named lists.
+
 ## Unit tests
 
 

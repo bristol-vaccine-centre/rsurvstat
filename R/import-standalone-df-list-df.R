@@ -111,7 +111,8 @@
 #' @param ... not used
 #' @keywords internal
 #' @concept transpose
-#'
+#' @returns either a dataframe or a list of class `row_list` representing the
+#'   dataframe as a list of named lists.
 #' @unit
 #'
 #' # create a test nested data frame:
@@ -351,7 +352,7 @@
 
 ## Tree formatting ----
 
-#' Tree printing method for list objects
+#' Tree printing method for list objects. This is an interactive function.
 #'
 #' @param x A list
 #' @param max_levels The maximum number of levels to show
@@ -359,13 +360,15 @@
 #' - `max_width` the number of items horizontally to show before truncating.
 #' - `max_length` the number of items vertically to show before truncating.
 #' - others are passed to `format(...)`
-#' @export
+#' @param verbose print output to the console (the default)
 #' @concept transpose
+#' @return The hierarchy as a string, called for side effects
 #' @keywords internal
-.tree <- function(
+.tree = function(
   x,
   max_levels = 6,
-  ...
+  ...,
+  verbose = TRUE
 ) {
   tmp = ..df2_format_tree(x, level = max_levels, ...)
   tmp = c(
@@ -373,7 +376,10 @@
     unlist(tmp)
   )
   tmp = paste0(tmp, collapse = "\n")
-  cat(tmp)
+  if (verbose) {
+    cat(tmp)
+  }
+  return(invisible(tmp))
 }
 
 # values = list("1","2",list("3.1","3.2"),"4")

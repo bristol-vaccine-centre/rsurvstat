@@ -79,4 +79,4 @@ temporary directory.
 ## Unit tests
 
 
-    rappdirs_cache_dir("rappdirs")
+    rappdirs_user_cache_dir("rappdirs")

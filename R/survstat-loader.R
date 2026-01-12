@@ -1,80 +1,3 @@
-# .process_result = function(response) {
-#   tmp = response
-#   rows = as.character(xml2::xml_find_all(
-#     tmp,
-#     "//b:QueryResultRow/b:Caption/text()"
-#   ))
-#   cols = as.character(xml2::xml_find_all(tmp, "//b:Columns//b:Caption/text()"))
-#   values = xml2::xml_find_all(tmp, "//b:QueryResultRow/b:Values/*") %>%
-#     xml2::xml_text()
-#   values = values %>%
-#     stringr::str_remove_all("\\.") %>%
-#     stringr::str_replace(",", ".") %>%
-#     as.numeric()
-#   if (length(values) != length(rows) * length(cols)) {
-#     stop("SurvStat response is not an expected format")
-#   }
-#
-#   df = tibble::tibble(
-#     value = values,
-#     col = rep(cols, times = length(rows)),
-#     row = rep(rows, each = length(cols))
-#   )
-#
-#   df2 = df %>%
-#     # Exclude total columns
-#     dplyr::filter(col != "Gesamt" & row != "Gesamt") %>%
-#     dplyr::mutate(
-#       age_start = col %>%
-#         stringr::str_remove(stringr::fixed("A")) %>%
-#         stringr::str_extract("^[0-9]+") %>%
-#         as.numeric(),
-#       age_end = col %>%
-#         stringr::str_remove(stringr::fixed("A")) %>%
-#         stringr::str_extract("[0-9]+$") %>%
-#         as.numeric(),
-#       age_cat = dplyr::case_when(
-#         is.na(age_start) ~ "Unknown",
-#         is.na(age_end) ~ sprintf("%d+", age_start),
-#         age_end == age_start ~ sprintf("%d", age_start),
-#         TRUE ~ sprintf("%d\u2013%d", age_start, age_end)
-#       ),
-#       year = row %>% stringr::str_extract("^[0-9]+") %>% as.numeric(),
-#       week = row %>% stringr::str_extract("[0-9]+$") %>% as.numeric()
-#     ) %>%
-#     dplyr::mutate(
-#       elapsed_week = (year - 2001) * 52 + week + (year - 2001) %/% 7
-#     ) %>%
-#     dplyr::group_by(
-#       elapsed_week,
-#       age_start,
-#       age_end,
-#       age_cat
-#     ) %>%
-#     dplyr::summarise(
-#       value = sum(value, na.rm = TRUE),
-#       .groups = "drop"
-#     ) %>%
-#     dplyr::mutate(
-#       date = as.Date("2001-01-01") + elapsed_week * 7
-#     ) %>%
-#     dplyr::filter(
-#       # Get rid of extra zeros at end
-#       is.na(date) | date < Sys.Date()
-#     )
-#
-#   levels = df2 %>%
-#     dplyr::select(age_start, age_cat) %>%
-#     dplyr::distinct() %>%
-#     dplyr::arrange(age_start) %>%
-#     dplyr::pull(age_cat) %>%
-#     unique()
-#
-#   df2 = df2 %>% dplyr::mutate(age_cat = factor(age_cat, levels, ordered = TRUE))
-#
-#   return(df2)
-# }
-
 #' Retrieve time series data from the `SurvStat` web service.
 #'
 #' This function gets a weekly timeseries of disease count or incidence data
@@ -124,26 +47,27 @@
 #' @concept survstat
 #'
 #' @examples
+#' \donttest{
+#' # age stratified
 #' get_timeseries(
 #'   diseases$`COVID-19`,
 #'   measure = "Count",
 #'   age_group = age_groups$children_coarse
-#' )
+#' ) %>% dplyr::glimpse()
 #'
-#' if (interactive()) {
-#'   # Long running example
-#'   get_timeseries(
-#'     diseases$`COVID-19`,
-#'     measure = "Count",
-#'     age_group = age_groups$children_coarse,
-#'     geography = rsurvstat::FedStateKey71Map[1:10,]
-#'   )
-#' }
+#' # geographic
+#' get_timeseries(
+#'   diseases$`COVID-19`,
+#'   measure = "Count",
+#'   geography = "state"
+#' ) %>% dplyr::glimpse()
 #'
+#' # disease stratified, subset of years:
 #' get_timeseries(
 #'   measure = "Count",
 #'   years = 2024
-#' )
+#' ) %>% dplyr::glimpse()
+#' }
 get_timeseries = function(
   disease = NULL,
   measure = c("Count", "Incidence"),
@@ -178,6 +102,8 @@ get_timeseries = function(
     coltype = "geo"
     if (geography %in% names(geography_resolution)) {
       geography = geography_resolution[[geography]]
+    } else {
+      stop("geography parameter must be one of `state`, `nuts` or `county`")
     }
     colhier = geography
   } else if (is.character(age_group) && identical(age_range, c(0, Inf))) {
@@ -187,19 +113,22 @@ get_timeseries = function(
     } else {
       age_group
     }
+  } else {
+    coltype = NA
+    colhier = NULL
   }
 
   # Anything that is not the row dimension (time) or the column dimension (as
   # decided above), Has to be retrieved as a set of pages. There will be one
   # query for each of the pages.
   page_filters = NULL
-  if (coltype != "disease") {
+  if (!isTRUE(coltype == "disease")) {
     page_filters = .cross_join_filters(page_filters, .disease_filter(disease))
   }
-  if (coltype != "geo") {
+  if (!isTRUE(coltype == "geo")) {
     page_filters = .cross_join_filters(page_filters, .place_filter(geography))
   }
-  if (coltype != "age") {
+  if (!isTRUE(coltype == "age")) {
     page_filters = .cross_join_filters(
       page_filters,
       .age_filter(age_group, age_range)
@@ -241,7 +170,7 @@ get_timeseries = function(
 
     # Do query and halt on error
     if (inherits(tmp, "try-error")) {
-      cat(as.character(tmp2))
+      message(as.character(tmp2))
       stop(
         "Aborting as the SurvStat query returned an error.\n",
         "It may be because too much data was requested in one go.\n",
@@ -274,7 +203,11 @@ get_timeseries = function(
         elapsed_week = (year - 2001) * 52 + week + (year - 2001) %/% 7,
         value = ifelse(is.na(value), 0, value),
       ) %>%
-      dplyr::group_by(col_name, col_code, elapsed_week) %>%
+      dplyr::group_by(dplyr::across(dplyr::any_of(c(
+        "col_name",
+        "col_code",
+        "elapsed_week"
+      )))) %>%
       dplyr::summarise(
         value = sum(value)
       ) %>%
@@ -300,7 +233,11 @@ get_timeseries = function(
   # The column data will be different depending on the configuration maybe age,
   # maybe geography
   # Here we rename columns to whatever it was we set as the column dimension.
-  colnames(collect) = gsub("col", coltype, colnames(collect), fixed = TRUE)
+  if (is.na(coltype)) {
+    collect = collect %>% dplyr::select(-dplyr::starts_with("col"))
+  } else {
+    colnames(collect) = gsub("col", coltype, colnames(collect), fixed = TRUE)
+  }
 
   # Fix age codes and break into age_name, age_low and age_high
   if ("age_code" %in% colnames(collect)) {
@@ -383,6 +320,7 @@ get_timeseries = function(
 #' @concept survstat
 #'
 #' @examples
+#' \donttest{
 #' get_snapshot(
 #'   diseases$`COVID-19`,
 #'   measure = "Count",
@@ -397,6 +335,7 @@ get_timeseries = function(
 #'   season = 2024,
 #'   geography = rsurvstat::FedStateKey71Map[1:10,]
 #' )
+#' }
 get_snapshot = function(
   disease = NULL,
   measure = c("Count", "Incidence"),
@@ -535,7 +474,7 @@ get_snapshot = function(
 
     # Do query and halt on error
     if (inherits(tmp, "try-error")) {
-      cat(as.character(tmp2))
+      message(as.character(tmp2))
       stop(
         "Aborting as the SurvStat query returned an error.\n",
         "It may be because too much data was requested in one go.\n",

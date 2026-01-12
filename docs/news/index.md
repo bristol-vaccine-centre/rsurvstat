@@ -1,5 +1,13 @@
 # Changelog
 
+## rsurvstat 0.1.2
+
+- Big fixes
+- CRAN Submission changes.
+- Removed internal function
+  [`.tree()`](https://bristol-vaccine-centre.github.io/rsurvstat/reference/dot-tree.md)
+  from exports
+
 ## rsurvstat 0.1.1
 
 - Initial CRAN candidate version with the following functionality

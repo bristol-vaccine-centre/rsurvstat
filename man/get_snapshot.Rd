@@ -81,6 +81,7 @@ disease subtype. Queries to \code{SurvStat} are cached and paged, but obviously
 multidimensional extracts have the potential to need a lot of downloading.
 }
 \examples{
+\donttest{
 get_snapshot(
   diseases$`COVID-19`,
   measure = "Count",
@@ -95,5 +96,6 @@ get_snapshot(
   season = 2024,
   geography = rsurvstat::FedStateKey71Map[1:10,]
 )
+}
 }
 \concept{survstat}

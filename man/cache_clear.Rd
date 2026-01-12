@@ -4,15 +4,19 @@
 \alias{cache_clear}
 \title{Delete all cached \code{SurvStat} requests}
 \usage{
-cache_clear()
+cache_clear(confirm = utils::askYesNo("Are you sure?"))
+}
+\arguments{
+\item{confirm}{can be set to TRUE to make function non interactive.}
 }
 \value{
 nothing. called for side effects
 }
 \description{
-The cache can be controlled with \code{set_cache_settings()}
+This function is only intended to be used interactively. The cache can be
+controlled with \code{set_cache_settings()}
 }
 \examples{
-if (interactive()) cache_clear()
+cache_clear( confirm = interactive() )
 }
 \concept{cache}

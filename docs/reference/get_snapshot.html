@@ -15,7 +15,7 @@ or at week 40."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">rsurvstat</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -152,7 +152,8 @@ multidimensional extracts have the potential to need a lot of downloading.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">get_snapshot</span><span class="op">(</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span><span class="fu">get_snapshot</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="va">diseases</span><span class="op">$</span><span class="va">`COVID-19`</span>,</span></span>
 <span class="r-in"><span>  measure <span class="op">=</span> <span class="st">"Count"</span>,</span></span>
 <span class="r-in"><span>  season <span class="op">=</span> <span class="fl">2024</span>,</span></span>
@@ -168,7 +169,7 @@ multidimensional extracts have the potential to need a lot of downloading.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">25</span>431 30–39    [AlterPer…  <span style="text-decoration: underline;">2</span>024          1 COVID-19     [KategorieN…      30</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">25</span>824 40–49    [AlterPer…  <span style="text-decoration: underline;">2</span>024          1 COVID-19     [KategorieN…      40</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">36</span>957 50–59    [AlterPer…  <span style="text-decoration: underline;">2</span>024          1 COVID-19     [KategorieN…      50</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">45</span>251 60–69    [AlterPer…  <span style="text-decoration: underline;">2</span>024          1 COVID-19     [KategorieN…      60</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">45</span>250 60–69    [AlterPer…  <span style="text-decoration: underline;">2</span>024          1 COVID-19     [KategorieN…      60</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">54</span>930 70–79    [AlterPer…  <span style="text-decoration: underline;">2</span>024          1 COVID-19     [KategorieN…      70</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> <span style="text-decoration: underline;">104</span>859 80+      [AlterPer…  <span style="text-decoration: underline;">2</span>024          1 COVID-19     [KategorieN…      80</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span>   <span style="text-decoration: underline;">1</span>136 <span style="color: #BB0000;">NA</span>       [AlterPer…  <span style="text-decoration: underline;">2</span>024          1 COVID-19     [KategorieN…      <span style="color: #BB0000;">NA</span></span>
@@ -196,6 +197,7 @@ multidimensional extracts have the potential to need a lot of downloading.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> <span style="text-decoration: underline;">19</span>696 80+      [AlterPer…  <span style="text-decoration: underline;">2</span>024          1 COVID-19     [KategorieN… Nordrhe…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 100 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 3 more variables: geo_code &lt;chr&gt;, age_low &lt;dbl&gt;, age_high &lt;dbl&gt;</span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -203,7 +205,7 @@ multidimensional extracts have the potential to need a lot of downloading.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Robert Challen.</p>
+  <p>Developed by Robert Challen, Bristol Vaccine Centre.</p>
 </div>
 
 <div class="pkgdown-footer-right">

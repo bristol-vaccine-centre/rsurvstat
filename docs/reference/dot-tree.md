@@ -1,11 +1,11 @@
-# Tree printing method for list objects
+# Tree printing method for list objects. This is an interactive function.
 
-Tree printing method for list objects
+Tree printing method for list objects. This is an interactive function.
 
 ## Usage
 
 ``` r
-.tree(x, max_levels = 6, ...)
+.tree(x, max_levels = 6, ..., verbose = TRUE)
 ```
 
 ## Arguments
@@ -29,3 +29,11 @@ Tree printing method for list objects
     truncating.
 
   - others are passed to `format(...)`
+
+- verbose:
+
+  print output to the console (the default)
+
+## Value
+
+The hierarchy as a string, called for side effects

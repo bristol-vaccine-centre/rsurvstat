@@ -50,6 +50,7 @@ over time to allow us to fill in weekly population denominators.
 
 }}
 \examples{
+\donttest{
 
 # snapshot:
 get_snapshot(
@@ -70,8 +71,9 @@ get_timeseries(
 fit_population() \%>\%
 dplyr::glimpse()
 
-
+}
+\donttest{
 infer_population(years=2020:2025) \%>\% dplyr::glimpse()
-
+}
 }
 \concept{survstat}

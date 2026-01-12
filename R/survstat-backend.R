@@ -103,18 +103,23 @@
 
 #' Delete all cached `SurvStat` requests
 #'
-#' The cache can be controlled with `set_cache_settings()`
+#' This function is only intended to be used interactively. The cache can be
+#' controlled with `set_cache_settings()`
 #'
+#' @param confirm can be set to TRUE to make function non interactive.
 #' @returns nothing. called for side effects
 #' @export
 #' @concept cache
 #'
 #' @examples
-#' if (interactive()) cache_clear()
-cache_clear = function() {
-  dir = .get_cache_dir()
-  fs::file_delete(dir)
-  fs::dir_create(dir)
+#' cache_clear( confirm = interactive() )
+cache_clear = function(confirm = utils::askYesNo("Are you sure?")) {
+  if (isTRUE(confirm)) {
+    dir = .get_cache_dir()
+    fs::file_delete(dir)
+    fs::dir_create(dir)
+    message("rsurvstat results cache cleared.")
+  }
   invisible(NULL)
 }
 

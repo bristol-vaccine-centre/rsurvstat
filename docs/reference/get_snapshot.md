@@ -111,6 +111,7 @@ of downloading.
 ## Examples
 
 ``` r
+# \donttest{
 get_snapshot(
   diseases$`COVID-19`,
   measure = "Count",
@@ -127,7 +128,7 @@ get_snapshot(
 #>  5  25431 30–39    [AlterPer…  2024          1 COVID-19     [KategorieN…      30
 #>  6  25824 40–49    [AlterPer…  2024          1 COVID-19     [KategorieN…      40
 #>  7  36957 50–59    [AlterPer…  2024          1 COVID-19     [KategorieN…      50
-#>  8  45251 60–69    [AlterPer…  2024          1 COVID-19     [KategorieN…      60
+#>  8  45250 60–69    [AlterPer…  2024          1 COVID-19     [KategorieN…      60
 #>  9  54930 70–79    [AlterPer…  2024          1 COVID-19     [KategorieN…      70
 #> 10 104859 80+      [AlterPer…  2024          1 COVID-19     [KategorieN…      80
 #> 11   1136 NA       [AlterPer…  2024          1 COVID-19     [KategorieN…      NA
@@ -155,4 +156,5 @@ get_snapshot(
 #> 10 19696 80+      [AlterPer…  2024          1 COVID-19     [KategorieN… Nordrhe…
 #> # ℹ 100 more rows
 #> # ℹ 3 more variables: geo_code <chr>, age_low <dbl>, age_high <dbl>
+# }
 ```
