@@ -42,7 +42,8 @@ berlin = arear::downloadGeojson(
   "https://raw.githubusercontent.com/m-hoerz/berlin-shapes/refs/heads/master/berliner-bezirke.geojson"
 )
 l3kreis = arear::downloadGeojson(
-  "https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/georef-germany-kreis/exports/geojson/?lang=en&timezone=Europe%2FLondon"
+  "https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/georef-germany-kreis/exports/geojson/?lang=en&timezone=Europe%2FLondon",
+  simplify = TRUE
 )
 
 ## Federal States:
@@ -135,6 +136,8 @@ BerlinMap = l3kreis %>%
   transmute(Name = unlist(krs_name_short)) %>%
   glimpse()
 
+
+CountyKey71Map = CountyKey71Map %>% rmapshaper::ms_simplify(keep = 0.1)
 
 usethis::use_data(BerlinMap, overwrite = TRUE, compress = "xz")
 usethis::use_data(FedStateKey71Map, overwrite = TRUE, compress = "xz")

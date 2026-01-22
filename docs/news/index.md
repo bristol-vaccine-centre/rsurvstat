@@ -1,8 +1,15 @@
 # Changelog
 
+## rsurvstat 0.1.3
+
+- Change resolution of `CountyKey71Map` to address CRAN old release Mac
+  specific issue.
+
 ## rsurvstat 0.1.2
 
-- Big fixes
+CRAN release: 2026-01-17
+
+- Bug fixes
 - CRAN Submission changes.
 - Removed internal function
   [`.tree()`](https://bristol-vaccine-centre.github.io/rsurvstat/reference/dot-tree.md)

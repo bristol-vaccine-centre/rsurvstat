@@ -1,3 +1,8 @@
+# rsurvstat 0.1.3
+
+* Change resolution of `CountyKey71Map` to address CRAN old release Mac specific
+  issue.
+
 # rsurvstat 0.1.2
 
 * Bug fixes
