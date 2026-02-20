@@ -1,3 +1,7 @@
+# rsurvstat 0.1.4
+
+* change imported function for R CMD check from sf due to reverse dependency.
+
 # rsurvstat 0.1.3
 
 * Change resolution of `CountyKey71Map` to address CRAN old release Mac specific

@@ -24,5 +24,5 @@ utils::globalVariables(c(
 ))
 
 
-#' @importFrom sf vec_ptype2.sfc
+#' @importFrom sf st_as_sf
 NULL

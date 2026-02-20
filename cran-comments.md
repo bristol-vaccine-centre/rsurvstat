@@ -14,16 +14,7 @@ Github actions environments
 
 ## Other info
 
-* This is a minor bug fix submission to address the following issue raise by the 
-  web checks service. The data set (a map) provided has been resampled to a 
-  lower resolution:
-
-Version: 0.1.2
-Check: installed package size
-Result: NOTE 
-    installed size is  5.1Mb
-    sub-directories of 1Mb or more:
-      data   4.4Mb
-Flavors: r-oldrel-macos-arm64, r-oldrel-macos-x86_64
+* Fixing a minor reverse dependency issue from `sf` reorganisation of `vcts` methods
+* No functional changes
 
 
