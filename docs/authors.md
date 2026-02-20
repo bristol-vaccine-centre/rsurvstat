@@ -13,13 +13,13 @@ Source:
 [`DESCRIPTION`](https://github.com/bristol-vaccine-centre/rsurvstat/blob/HEAD/DESCRIPTION)
 
 Challen R (2026). *rsurvstat: Download Infectious Disease Data from
-'SurvStat' (Robert Koch Institute)*. R package version 0.1.3,
+'SurvStat' (Robert Koch Institute)*. R package version 0.1.4,
 <https://bristol-vaccine-centre.github.io/rsurvstat/index.html>.
 
     @Manual{,
       title = {rsurvstat: Download Infectious Disease Data from 'SurvStat' (Robert Koch Institute)},
       author = {Robert Challen},
       year = {2026},
-      note = {R package version 0.1.3},
+      note = {R package version 0.1.4},
       url = {https://bristol-vaccine-centre.github.io/rsurvstat/index.html},
     }

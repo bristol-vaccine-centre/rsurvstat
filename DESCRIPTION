@@ -1,6 +1,6 @@
 Package: rsurvstat
 Title: Download Infectious Disease Data from 'SurvStat' (Robert Koch Institute)
-Version: 0.1.3
+Version: 0.1.4
 Authors@R: 
     c(person(given = "Robert",
            family = "Challen",
