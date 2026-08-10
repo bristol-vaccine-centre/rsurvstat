@@ -10,13 +10,13 @@
 \item{df}{a nested dataframe}
 
 \item{...}{
-  Named arguments passed on to \code{\link[=.transpose]{.transpose}}\describe{
+  Arguments passed on to \code{\link{.transpose}}
+  \describe{
     \item{\code{x}}{a \code{data.frame} or \code{row_list}}
-\item{\code{.fix}}{collapse or expand names in redundant multi-level \code{row_list}s.
+    \item{\code{.fix}}{collapse or expand names in redundant multi-level \code{row_list}s.
 Either \code{FALSE} or a string to join or split the names of the multi-level
 list by}
-\item{\code{...}}{not used}
-}}
+  }}
 }
 \value{
 a list of lists

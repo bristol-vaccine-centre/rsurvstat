@@ -24,10 +24,6 @@
 age_groups
 ```
 
-## Format
-
-An object of class `list` of length 8.
-
 ## References
 
 <https://survstat.rki.de/Content/Query/Create.aspx>

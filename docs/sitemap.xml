@@ -1,5 +1,6 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url><loc>https://bristol-vaccine-centre.github.io/rsurvstat/404.html</loc></url>
+<url><loc>https://bristol-vaccine-centre.github.io/rsurvstat/AGENTS.html</loc></url>
 <url><loc>https://bristol-vaccine-centre.github.io/rsurvstat/LICENSE-text.html</loc></url>
 <url><loc>https://bristol-vaccine-centre.github.io/rsurvstat/LICENSE.html</loc></url>
 <url><loc>https://bristol-vaccine-centre.github.io/rsurvstat/articles/index.html</loc></url>
@@ -16,6 +17,7 @@
 <url><loc>https://bristol-vaccine-centre.github.io/rsurvstat/reference/cash-.survstat_option.html</loc></url>
 <url><loc>https://bristol-vaccine-centre.github.io/rsurvstat/reference/commands.html</loc></url>
 <url><loc>https://bristol-vaccine-centre.github.io/rsurvstat/reference/cubes.html</loc></url>
+<url><loc>https://bristol-vaccine-centre.github.io/rsurvstat/reference/date_from_iso.html</loc></url>
 <url><loc>https://bristol-vaccine-centre.github.io/rsurvstat/reference/diseases.html</loc></url>
 <url><loc>https://bristol-vaccine-centre.github.io/rsurvstat/reference/dot-DollarNames.survstat_option.html</loc></url>
 <url><loc>https://bristol-vaccine-centre.github.io/rsurvstat/reference/dot-check_curl.html</loc></url>

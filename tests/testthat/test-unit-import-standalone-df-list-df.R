@@ -13,7 +13,7 @@ test_that(".df_to_list_of_lists unit test", {
   F2 = .df_to_list_of_lists
   
 
-  iris_list <- .df_to_list_of_lists(datasets::iris)
+  iris_list = .df_to_list_of_lists(datasets::iris)
   # TODO: iris_list has lost Petal.Length as it is interpreting Petal.Width as
   # nested item and it overwrites Petal.Length rather than merging with it.
   
@@ -22,13 +22,13 @@ test_that(".df_to_list_of_lists unit test", {
     iris$Species[[1]]
   )
   
-  mtcars_nest <- datasets::mtcars %>%
+  mtcars_nest = datasets::mtcars %>%
     dplyr::mutate(name = rownames(.)) %>%
     tidyr::nest(details = -c(cyl, gear))
   
-  mtcars_list <- mtcars_nest %>% .df_to_list_of_lists()
+  mtcars_list = mtcars_nest %>% .df_to_list_of_lists()
   
-  mtcars_unnest <- mtcars_list %>% .list_of_lists_to_df()
+  mtcars_unnest = mtcars_list %>% .list_of_lists_to_df()
   
   testthat::expect_equal(
     mtcars_list[[1]]$details[[1]]$name,
@@ -54,18 +54,18 @@ test_that(".list_of_lists_to_df unit test", {
   F2 = .list_of_lists_to_df
   
 
-  iris_list <- .df_to_list_of_lists(iris, .fix = FALSE)
-  iris2 <- .list_of_lists_to_df(iris_list, .fix = FALSE)
+  iris_list = .df_to_list_of_lists(iris, .fix = FALSE)
+  iris2 = .list_of_lists_to_df(iris_list, .fix = FALSE)
   
   testthat::expect_equal(datasets::iris, as.data.frame(iris2))
   
-  mtcars_nest <- datasets::mtcars %>%
+  mtcars_nest = datasets::mtcars %>%
     dplyr::mutate(name = rownames(.)) %>%
     tidyr::nest(details = -c(cyl, gear))
   
-  mtcars_list <- mtcars_nest %>% .df_to_list_of_lists()
+  mtcars_list = mtcars_nest %>% .df_to_list_of_lists()
   
-  mtcars_nest2 <- mtcars_list %>% .list_of_lists_to_df()
+  mtcars_nest2 = mtcars_list %>% .list_of_lists_to_df()
   
   testthat::expect_equal(
     mtcars_nest2$details[[2]],
@@ -74,12 +74,12 @@ test_that(".list_of_lists_to_df unit test", {
   
   # test unequal length vector column is mapped to list of vectors
   # and multiply named nests are treated as rows
-  testlist <- list(
+  testlist = list(
     row = list(a = 1:5, b = "x"),
     row = list(a = 2:4, b = "y"),
     row = list(a = 3, b = "z")
   )
-  testdf <- testlist %>% .list_of_lists_to_df()
+  testdf = testlist %>% .list_of_lists_to_df()
   testthat::expect_equal(testdf$b, c("x", "y", "z"))
   testthat::expect_equal(testdf$a[[2]], 2:4)
 
@@ -104,14 +104,14 @@ test_that(".transpose unit test", {
 
   # create a test nested data frame:
   
-  mtcars_nest <- datasets::mtcars %>%
+  mtcars_nest = datasets::mtcars %>%
     dplyr::mutate(name = rownames(.)) %>%
     tidyr::nest(by_carb = -c(cyl, gear, carb)) %>%
     tidyr::nest(by_cyl_and_gear = -c(cyl, gear))
   
-  mtcars_list <- mtcars_nest %>% .transpose()
+  mtcars_list = mtcars_nest %>% .transpose()
   
-  mtcars_nest2 <- mtcars_list %>% .transpose()
+  mtcars_nest2 = mtcars_list %>% .transpose()
   
   testthat::expect_equal(mtcars_nest, mtcars_nest2)
 

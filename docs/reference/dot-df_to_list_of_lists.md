@@ -16,7 +16,7 @@ Convert a nested dataframe to a multilevel list
 
 - ...:
 
-  Named arguments passed on to
+  Arguments passed on to
   [`.transpose`](https://bristol-vaccine-centre.github.io/rsurvstat/reference/dot-transpose.md)
 
   `x`
@@ -28,10 +28,6 @@ Convert a nested dataframe to a multilevel list
   :   collapse or expand names in redundant multi-level `row_list`s.
       Either `FALSE` or a string to join or split the names of the
       multi-level list by
-
-  `...`
-
-  :   not used
 
 ## Value
 

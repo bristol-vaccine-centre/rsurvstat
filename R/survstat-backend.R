@@ -112,12 +112,17 @@
 #' @concept cache
 #'
 #' @examples
-#' cache_clear( confirm = interactive() )
+#'
+#' #' # Disable the cache for CRAN
+#' set_cache_settings(active = FALSE)
+#'
+#' cache_clear(confirm = interactive())
+#'
 cache_clear = function(confirm = utils::askYesNo("Are you sure?")) {
   if (isTRUE(confirm)) {
     dir = .get_cache_dir()
-    fs::file_delete(dir)
-    fs::dir_create(dir)
+    if (fs::dir_exists(dir)) fs::file_delete(dir)
+    if (.get_cache_active()) fs::dir_create(dir)
     message("rsurvstat results cache cleared.")
   }
   invisible(NULL)
@@ -233,9 +238,12 @@ set_cache_settings = function(
 
 # Caches a response based on hash of request
 .set_cache = function(req_hash, res) {
-  dir = .get_cache_dir()
-  file = fs::path(dir, req_hash, ext = "xml")
-  writeLines(res, file)
+  if (.get_cache_active()) {
+    dir = .get_cache_dir()
+    fs::dir_create(dir)
+    file = fs::path(dir, req_hash, ext = "xml")
+    writeLines(res, file)
+  }
 }
 
 #

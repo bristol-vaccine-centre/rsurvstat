@@ -8,10 +8,6 @@ Languages supported by the `SurvStat` service
 languages
 ```
 
-## Format
-
-An object of class `list` of length 2.
-
 ## References
 
 <https://survstat.rki.de/Content/Query/Create.aspx>

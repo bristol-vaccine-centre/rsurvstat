@@ -23,5 +23,8 @@ nothing. called for side effects
 ## Examples
 
 ``` r
-cache_clear( confirm = interactive() )
+#' # Disable the cache for CRAN
+set_cache_settings(active = FALSE)
+
+cache_clear(confirm = interactive())
 ```

@@ -52,14 +52,17 @@ over time to allow us to fill in weekly population denominators.
 \examples{
 \donttest{
 
+# Disable the cache for CRAN
+rsurvstat::set_cache_settings(active = FALSE)
+
 # snapshot:
 get_snapshot(
   disease = diseases$`COVID-19`,
   geography = "state",
-  season=2024
+  season = 2024
 ) \%>\%
-fit_population() \%>\%
-dplyr::glimpse()
+  fit_population() \%>\%
+  dplyr::glimpse()
 
 # timeseries
 # A weekly population estimate is inferred from the yearly data:
@@ -68,12 +71,15 @@ get_timeseries(
   measure = "Count",
   age_group = age_groups$children_coarse
 ) \%>\%
-fit_population() \%>\%
-dplyr::glimpse()
-
+  fit_population() \%>\%
+  dplyr::glimpse()
 }
 \donttest{
-infer_population(years=2020:2025) \%>\% dplyr::glimpse()
+
+# Disable the cache for CRAN
+rsurvstat::set_cache_settings(active = FALSE)
+
+infer_population(years = 2020:2025) \%>\% dplyr::glimpse()
 }
 }
 \concept{survstat}

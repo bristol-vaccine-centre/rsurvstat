@@ -70,24 +70,27 @@ a dataframe with geography, age grouping, year and population columns
 ``` r
 # \donttest{
 
+# Disable the cache for CRAN
+rsurvstat::set_cache_settings(active = FALSE)
+
 # snapshot:
 get_snapshot(
   disease = diseases$`COVID-19`,
   geography = "state",
-  season=2024
+  season = 2024
 ) %>%
-fit_population() %>%
-dplyr::glimpse()
+  fit_population() %>%
+  dplyr::glimpse()
 #> Rows: 16
 #> Columns: 8
-#> $ count        <dbl> 35131, 55904, 11793, 14524, 2034, 7622, 22942, 8962, 2856…
+#> $ count        <dbl> 35131, 55907, 11789, 14524, 2034, 7606, 22941, 8962, 2856…
 #> $ geo_name     <chr> "Baden-Württemberg", "Bayern", "Berlin", "Brandenburg", "…
 #> $ geo_code     <chr> "[DeutschlandNodes].[Kreise71Web].[FedStateKey71].&[08]",…
 #> $ year         <dbl> 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024, 202…
 #> $ start_week   <dbl> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
 #> $ disease_name <chr> "COVID-19", "COVID-19", "COVID-19", "COVID-19", "COVID-19…
 #> $ disease_code <chr> "[KategorieNz].[Krankheit DE].&[COVID-19]", "[KategorieNz…
-#> $ population   <dbl> 11245936.7, 13248882.4, 3685260.2, 2556744.0, 704877.2, 1…
+#> $ population   <dbl> 11245925.9, 13248951.2, 3685255.4, 2556742.8, 704883.8, 1…
 
 # timeseries
 # A weekly population estimate is inferred from the yearly data:
@@ -96,9 +99,14 @@ get_timeseries(
   measure = "Count",
   age_group = age_groups$children_coarse
 ) %>%
-fit_population() %>%
-dplyr::glimpse()
-#> Rows: 3,594
+  fit_population() %>%
+  dplyr::glimpse()
+#> ■■■■■                             14% | ETA: 20s
+#> ■■■■■■■■■■                        29% | ETA: 16s
+#> ■■■■■■■■■■■■■■                    43% | ETA: 13s
+#> ■■■■■■■■■■■■■■■■■■                57% | ETA: 10s
+#> ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  100% | ETA:  0s
+#> Rows: 3,604
 #> Columns: 9
 #> Groups: age_name, age_code, disease_name, disease_code, age_low, age_high [10]
 #> $ age_name     <chr> "0–14", "0–14", "0–14", "0–14", "0–14", "0–14", "0–14", "…
@@ -109,14 +117,19 @@ dplyr::glimpse()
 #> $ age_high     <dbl> 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 1…
 #> $ date         <date> 2020-02-03, 2020-02-10, 2020-02-17, 2020-02-24, 2020-03-…
 #> $ count        <dbl> 1, 2, 1, 4, 39, 197, 580, 910, 1018, 813, 575, 531, 401, …
-#> $ population   <dbl> 11458705, 11459860, 11460989, 11462092, 11463170, 1146422…
-
+#> $ population   <dbl> 11458731, 11459884, 11461012, 11462115, 11463193, 1146424…
 # }
 # \donttest{
-infer_population(years=2020:2025) %>% dplyr::glimpse()
+
+# Disable the cache for CRAN
+rsurvstat::set_cache_settings(active = FALSE)
+
+infer_population(years = 2020:2025) %>% dplyr::glimpse()
+#> ■■■■■■■■■■■■■■■■■■■■■             67% | ETA:  2s
+#> ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  100% | ETA:  0s
 #> Rows: 6
 #> Columns: 2
-#> $ population <dbl> 83576914, 83577199, 84669145, 84358845, 83237155, 83155010
+#> $ population <dbl> 83576971, 83577433, 84669255, 84358852, 83237083, 83154881
 #> $ year       <int> 2025, 2024, 2023, 2022, 2021, 2020
 # }
 ```

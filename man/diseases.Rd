@@ -4,9 +4,6 @@
 \name{diseases}
 \alias{diseases}
 \title{\code{SurvStat} disease list}
-\format{
-An object of class \code{list} of length 121.
-}
 \usage{
 diseases
 }
@@ -140,4 +137,3 @@ Supported diseases:
 \url{https://survstat.rki.de/Content/Query/Create.aspx}
 }
 \concept{data}
-\keyword{datasets}

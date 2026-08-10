@@ -17,6 +17,11 @@ This function is only intended to be used interactively. The cache can be
 controlled with \code{set_cache_settings()}
 }
 \examples{
-cache_clear( confirm = interactive() )
+
+#' # Disable the cache for CRAN
+set_cache_settings(active = FALSE)
+
+cache_clear(confirm = interactive())
+
 }
 \concept{cache}

@@ -1,4 +1,4 @@
-# rsurvstat
+# rsurvstat  <a href="https://bristol-vaccine-centre.github.io/rsurvstat/"><img src="man/figures/logo.svg" align="right" height="139" alt="rsurvstat website" /></a>
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/bristol-vaccine-centre/rsurvstat/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/bristol-vaccine-centre/rsurvstat/actions/workflows/R-CMD-check.yaml)

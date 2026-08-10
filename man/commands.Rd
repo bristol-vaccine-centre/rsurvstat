@@ -6,13 +6,6 @@
 \alias{return_measures}
 \alias{geography_resolution}
 \title{Commands supported by the \code{SurvStat} service}
-\format{
-An object of class \code{list} of length 8.
-
-An object of class \code{list} of length 3.
-
-An object of class \code{list} of length 3.
-}
 \usage{
 commands
 
@@ -33,5 +26,4 @@ The 3 different resolution levels of the geospatial data
 \url{https://survstat.rki.de/Content/Query/Create.aspx}
 }
 \concept{data}
-\keyword{datasets}
 \keyword{internal}

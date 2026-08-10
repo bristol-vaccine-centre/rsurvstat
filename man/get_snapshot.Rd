@@ -82,6 +82,10 @@ multidimensional extracts have the potential to need a lot of downloading.
 }
 \examples{
 \donttest{
+
+# Disable the cache for CRAN
+rsurvstat::set_cache_settings(active=FALSE) 
+
 get_snapshot(
   diseases$`COVID-19`,
   measure = "Count",

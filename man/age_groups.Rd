@@ -4,9 +4,6 @@
 \name{age_groups}
 \alias{age_groups}
 \title{\code{SurvStat} age group list}
-\format{
-An object of class \code{list} of length 8.
-}
 \usage{
 age_groups
 }
@@ -26,4 +23,3 @@ age_groups
 \url{https://survstat.rki.de/Content/Query/Create.aspx}
 }
 \concept{data}
-\keyword{datasets}

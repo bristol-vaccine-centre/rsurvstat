@@ -1,6 +1,6 @@
 Package: rsurvstat
 Title: Download Infectious Disease Data from 'SurvStat' (Robert Koch Institute)
-Version: 0.1.4
+Version: 0.1.5
 Authors@R: 
     c(person(given = "Robert",
            family = "Challen",
@@ -18,7 +18,6 @@ Description: Provides an interface to the 'SurvStat' web service from the
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE, packages="pkgtools")
-RoxygenNote: 7.3.3.9007
 Suggests: 
     knitr,
     rmarkdown,
@@ -42,10 +41,11 @@ Imports:
     rlang,
     sf
 Depends: 
-    R (>= 3.5)
+    R (>= 4.0)
 LazyData: true
 Language: en-GB
 LazyDataCompression: xz
 URL: https://bristol-vaccine-centre.github.io/rsurvstat/index.html, https://github.com/bristol-vaccine-centre/rsurvstat, https://bristol-vaccine-centre.github.io/rsurvstat/
 BugReports: https://github.com/bristol-vaccine-centre/rsurvstat/issues
 Config/Needs/build: terminological/pkgtools, robchallen/roxygen2
+Config/roxygen2/version: 8.1.0

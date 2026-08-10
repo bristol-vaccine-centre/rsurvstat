@@ -4,9 +4,6 @@
 \name{languages}
 \alias{languages}
 \title{Languages supported by the \code{SurvStat} service}
-\format{
-An object of class \code{list} of length 2.
-}
 \usage{
 languages
 }

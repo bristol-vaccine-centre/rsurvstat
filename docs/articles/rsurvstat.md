@@ -52,6 +52,10 @@ between the age groups:
 entero2 = entero %>% 
   fit_population() %>% 
   dplyr::mutate(weekly_incidence_per_100K = count/population*100000)
+#> ■■■■■■                            17% | ETA: 18s
+#> ■■■■■■■■■■■                       33% | ETA:  8s
+#> ■■■■■■■■■■■■■■■■                  50% | ETA:  8s
+#> ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  100% | ETA:  0s
 
 ggplot2::ggplot(
     entero2,

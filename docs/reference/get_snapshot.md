@@ -112,6 +112,10 @@ of downloading.
 
 ``` r
 # \donttest{
+
+# Disable the cache for CRAN
+rsurvstat::set_cache_settings(active=FALSE) 
+
 get_snapshot(
   diseases$`COVID-19`,
   measure = "Count",
@@ -121,17 +125,17 @@ get_snapshot(
 #> # A tibble: 11 × 9
 #>     count age_name age_code    year start_week disease_name disease_code age_low
 #>     <dbl> <chr>    <chr>      <dbl>      <dbl> <chr>        <chr>          <dbl>
-#>  1  19636 0–14     [AlterPer…  2024          1 COVID-19     [KategorieN…       0
+#>  1  19635 0–14     [AlterPer…  2024          1 COVID-19     [KategorieN…       0
 #>  2   5836 15–19    [AlterPer…  2024          1 COVID-19     [KategorieN…      15
 #>  3   8463 20–24    [AlterPer…  2024          1 COVID-19     [KategorieN…      20
-#>  4  10344 25–29    [AlterPer…  2024          1 COVID-19     [KategorieN…      25
-#>  5  25431 30–39    [AlterPer…  2024          1 COVID-19     [KategorieN…      30
+#>  4  10345 25–29    [AlterPer…  2024          1 COVID-19     [KategorieN…      25
+#>  5  25433 30–39    [AlterPer…  2024          1 COVID-19     [KategorieN…      30
 #>  6  25824 40–49    [AlterPer…  2024          1 COVID-19     [KategorieN…      40
-#>  7  36957 50–59    [AlterPer…  2024          1 COVID-19     [KategorieN…      50
-#>  8  45250 60–69    [AlterPer…  2024          1 COVID-19     [KategorieN…      60
-#>  9  54930 70–79    [AlterPer…  2024          1 COVID-19     [KategorieN…      70
-#> 10 104859 80+      [AlterPer…  2024          1 COVID-19     [KategorieN…      80
-#> 11   1136 NA       [AlterPer…  2024          1 COVID-19     [KategorieN…      NA
+#>  7  36956 50–59    [AlterPer…  2024          1 COVID-19     [KategorieN…      50
+#>  8  45252 60–69    [AlterPer…  2024          1 COVID-19     [KategorieN…      60
+#>  9  54932 70–79    [AlterPer…  2024          1 COVID-19     [KategorieN…      70
+#> 10 104856 80+      [AlterPer…  2024          1 COVID-19     [KategorieN…      80
+#> 11   1134 NA       [AlterPer…  2024          1 COVID-19     [KategorieN…      NA
 #> # ℹ 1 more variable: age_high <dbl>
 
 get_snapshot(
@@ -151,8 +155,8 @@ get_snapshot(
 #>  5  4901 30–39    [AlterPer…  2024          1 COVID-19     [KategorieN… Nordrhe…
 #>  6  4815 40–49    [AlterPer…  2024          1 COVID-19     [KategorieN… Nordrhe…
 #>  7  7288 50–59    [AlterPer…  2024          1 COVID-19     [KategorieN… Nordrhe…
-#>  8  8846 60–69    [AlterPer…  2024          1 COVID-19     [KategorieN… Nordrhe…
-#>  9 10588 70–79    [AlterPer…  2024          1 COVID-19     [KategorieN… Nordrhe…
+#>  8  8847 60–69    [AlterPer…  2024          1 COVID-19     [KategorieN… Nordrhe…
+#>  9 10587 70–79    [AlterPer…  2024          1 COVID-19     [KategorieN… Nordrhe…
 #> 10 19696 80+      [AlterPer…  2024          1 COVID-19     [KategorieN… Nordrhe…
 #> # ℹ 100 more rows
 #> # ℹ 3 more variables: geo_code <chr>, age_low <dbl>, age_high <dbl>

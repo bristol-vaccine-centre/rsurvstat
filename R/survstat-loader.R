@@ -48,6 +48,9 @@
 #'
 #' @examples
 #' \donttest{
+#' # Disable the cache for CRAN
+#' rsurvstat::set_cache_settings(active=FALSE) 
+#' 
 #' # age stratified
 #' get_timeseries(
 #'   diseases$`COVID-19`,
@@ -191,30 +194,29 @@ get_timeseries = function(
     # Post process dates:
     # Firstly make sure weeks are unique:
     # because of the use of epidemic weeks the same week can be split across
-    # year ends, and count as week 53, and week 1. We convert epiweeks to weeks
-    # elapsed from "2021-01-01" and aggregate. We need to do this before being
-    # combined with other pages
+    # year ends, and count as week 53, and week 1. We determine the start date
+    # of the week as a date and aggregate by that. 
+    
+    years = tmp$row_name %>% stringr::str_extract("^[0-9]+") %>% as.numeric()
+    weeks = tmp$row_name %>% stringr::str_extract("[0-9]+$") %>% as.numeric()
+    dates = date_from_iso(years, weeks)
+    
+    # We need to do this before being combined with other pages
     tmp = tmp %>%
       dplyr::mutate(
-        year = row_name %>% stringr::str_extract("^[0-9]+") %>% as.numeric(),
-        week = row_name %>% stringr::str_extract("[0-9]+$") %>% as.numeric()
+        date = dates
       ) %>%
       dplyr::mutate(
-        elapsed_week = (year - 2001) * 52 + week + (year - 2001) %/% 7,
         value = ifelse(is.na(value), 0, value),
       ) %>%
       dplyr::group_by(dplyr::across(dplyr::any_of(c(
         "col_name",
         "col_code",
-        "elapsed_week"
+        "date"
       )))) %>%
       dplyr::summarise(
         value = sum(value)
-      ) %>%
-      dplyr::mutate(
-        date = as.Date("2001-01-01") + elapsed_week * 7 # This is a monday
-      ) %>%
-      dplyr::select(-elapsed_week)
+      )
 
     # Extract the values from the filters used to get this page of results
     # add add them into the dataframe before combining with other pages.
@@ -321,6 +323,10 @@ get_timeseries = function(
 #'
 #' @examples
 #' \donttest{
+#' 
+#' # Disable the cache for CRAN
+#' rsurvstat::set_cache_settings(active=FALSE) 
+#' 
 #' get_snapshot(
 #'   diseases$`COVID-19`,
 #'   measure = "Count",
@@ -841,4 +847,41 @@ get_snapshot = function(
       recursive = FALSE
     )
   )
+}
+
+
+
+# Date utils ----
+
+#' ISO 8601 weeks to date
+#'
+#' @param years the ears of an ISO week date
+#' @param weeks the week in the year of the ISO date
+#'
+#' @returns a vector of dates from the monday of the iso week
+#' @keywords internal
+#'
+#' @unit
+#' years = c(2001,2001,2004,2028)
+#' weeks = c(   1,  52,  53,  52)
+#' correct = c("2001-01-01","2001-12-24","2004-12-27","2028-12-25") %>% as.Date()
+#' # format(correct, "%Y-W%V")
+#' 
+#' testthat::expect_equal(
+#'   date_from_iso(years, weeks),
+#'   correct
+#' )
+#' 
+date_from_iso = function(years, weeks) {
+  # https://en.wikipedia.org/wiki/ISO_week_date:
+  # in ISO 4th Jan is always in week 1... If this is a monday it the start of week 1
+  # if a tuesday week 1 starts on the 3rd Jan etc.... The offset for the start
+  # of week 1 in any given year is the (1 - the 1 based weekday of the 4th Jan (M=1, T=2, ...))
+  jan4th = as.Date(sprintf("%d-01-04",years))
+  offsets = 1-as.numeric(format(jan4th,"%u")) # always <= 0
+  
+  # so taking 4th jan as the reference point, start of week 2 is 7 days on 
+  # from 4th jan adj by the offset:
+  dates = jan4th + offsets + (weeks-1) * 7
+  return(dates)
 }

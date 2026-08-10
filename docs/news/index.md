@@ -1,6 +1,14 @@
 # Changelog
 
+## rsurvstat 0.1.5
+
+- updated R version and disabled vignette caching & don’t test caches to
+  conform to automated checks.
+- fixed ISO 8601 date
+
 ## rsurvstat 0.1.4
+
+CRAN release: 2026-02-20
 
 - change imported function for R CMD check from sf due to reverse
   dependency.
