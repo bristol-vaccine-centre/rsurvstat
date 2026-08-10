@@ -14,7 +14,9 @@ Github actions environments
 
 ## Other info
 
-* Fixing a minor reverse dependency issue from `sf` reorganisation of `vcts` methods
+* fix issues raise by CRAN check for files remaining in ~/.cache/rsurvstat after
+building examples. Cache disabled in examples.
+* Fix for iso date calculation issues
 * No functional changes
 
 
