@@ -1,8 +1,9 @@
 # rsurvstat 0.1.5
 
-* updated R version and disabled vignette caching & don't test caches to conform 
+* updated R version to disabled vignette caching & don't test caches to conform 
 to automated checks.
-* fixed ISO 8601 date 
+* fixed ISO 8601 date issue.
+* Added logo.
 
 # rsurvstat 0.1.4
 
