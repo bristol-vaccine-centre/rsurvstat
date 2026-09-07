@@ -17,6 +17,7 @@ Github actions environments
 * fix issues raise by CRAN check for files remaining in ~/.cache/rsurvstat after
 building examples. Cache disabled in examples.
 * Fix for iso date calculation issues
+* Added logo
 * No functional changes
-
+* Delayed submission due to CRAN closure and holiday periods.
 
