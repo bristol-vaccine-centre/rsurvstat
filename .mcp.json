@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "r-btw": {
+      "command": "Rscript",
+      "args": [
+        "-e",
+        "btw::btw_mcp_server(tools=btw::btw_tools(c('cran','docs','pkg','env','run','sessioninfo','ide')))"
+      ],
+      "directTools": false
+    }
+  }
+}
